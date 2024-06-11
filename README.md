@@ -1,8 +1,4 @@
-# React + Vite
+# Sistema de Gestión de Cuentas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Resumen
+Este proyecto es una simulación de un sistema CRUD (Crear, Leer, Actualizar, Eliminar) utilizado por alumnos de administración de empresas de la Escuela Técnica N°24 de 17. Permite a los usuarios simular la gestión de una empresa y las operaciones con sus cuentas.
