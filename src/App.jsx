@@ -1,11 +1,10 @@
-import { Table } from "./components/Table";
-import { NavigationMenu } from "./components/NavigationMenu";
+import { Login } from "./components/Login";
 import "./App.css";
 
 function App() {
   return (
     <>
-      <main></main>
+      <Login />
     </>
   );
 }

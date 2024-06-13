@@ -1,25 +1,45 @@
 import "../styles/LogIn.css";
+import { useState } from "react";
+import { client } from "../backend/client";
 
-export function LogIn() {
+export function Login() {
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await client.auth.signInWithOtp({
+        email,
+      });
+
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <section className="login-container">
       <h1>Bienvenido!</h1>
-      <form action="/submit-login" method="post">
-        <label for="email">Correo electrónico</label>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Correo electrónico</label>
         <input
           className="input-data"
           type="email"
           id="email"
           name="email"
           required
+          onChange={(e) => setEmail(e.target.value)}
         />
-        <label for="password">Contraseña:</label>
+        <label htmlFor="password">Contraseña:</label>
         <input
           className="input-data"
           type="password"
           id="password"
           name="password"
           required
+          onChange={(e) => setPassword(e.target.value)}
         />
         <input type="submit" value="Ingresar" />
       </form>
