@@ -1,6 +1,6 @@
-import "../styles/LogIn.css";
+import "../styles/Login.css";
 import { useState } from "react";
-import { client } from "../backend/client";
+import { supabase } from "../backend/client";
 
 export function Login() {
   const [email, setEmail] = useState(null);
@@ -9,7 +9,7 @@ export function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await client.auth.signInWithOtp({
+      const result = await supabase.auth.signInWithOtp({
         email,
       });
 
