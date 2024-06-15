@@ -1,10 +1,29 @@
-import "../styles/LoginForm.css";
+import { useState } from "react";
 
 export function LoginForm() {
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { value, name } = e.target;
+
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formValues);
+  };
+
   return (
     <section className="login-container">
       <h1>Bienvenido!</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="email">Correo electrónico</label>
         <input
           className="input-data"
@@ -12,6 +31,7 @@ export function LoginForm() {
           id="email"
           name="email"
           required
+          onChange={handleInputChange}
         />
         <label htmlFor="password">Contraseña:</label>
         <input
@@ -20,6 +40,7 @@ export function LoginForm() {
           id="password"
           name="password"
           required
+          onChange={handleInputChange}
         />
         <input type="submit" value="Ingresar" />
       </form>
