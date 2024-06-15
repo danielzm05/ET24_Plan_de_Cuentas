@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "../backend/client";
 
 export function LoginForm() {
   const [formValues, setFormValues] = useState({
@@ -15,9 +16,17 @@ export function LoginForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formValues);
+
+    try {
+      await supabase.auth.signInWithPassword({
+        email: formValues.email,
+        password: formValues.password,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
