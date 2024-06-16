@@ -24,6 +24,7 @@
       grid-template-columns: var(--grid-columns);
       white-space: nowrap;
       transition: all 0.5s ease-in-out;
+      user-select: none;
 
       .show-item {
         overflow: hidden;

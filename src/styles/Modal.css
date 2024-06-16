@@ -13,7 +13,8 @@
 }
 
 .modal {
-  padding: 30px 20px;
+  min-width: 500px;
+  padding: 20px;
   background-color: var(--table);
   border-radius: 20px;
   position: relative;
@@ -39,6 +40,44 @@
 
   .close-button:hover {
     background-color: var(--hover);
+  }
+
+  .form {
+    display: flex;
+    padding: 20px 0 0 0;
+    flex-direction: column;
+    font-size: 14px;
+    gap: 5px;
+
+    label {
+      color: var(--text-4);
+    }
+
+    .input-data {
+      height: 32px;
+      border: 0.01em solid var(--text-4);
+      color: var(--text-4);
+      border-radius: 10px;
+      margin-bottom: 15px;
+      outline: none;
+      padding: 0 8px;
+    }
+
+    .submit-container {
+      display: flex;
+      justify-content: flex-end;
+
+      input[type="submit"] {
+        width: fit-content;
+        padding: 0 15px;
+        height: 32px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        color: var(--table);
+        background-color: var(--selection);
+      }
+    }
   }
 }
 

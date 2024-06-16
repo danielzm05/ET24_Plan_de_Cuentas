@@ -1,20 +1,20 @@
 import * as Icon from "react-feather";
 import "../styles/Table.css";
 
-export function Table() {
+export function Table({ modify, add, remove }) {
   return (
     <div className="table">
       <span className="table-name">Mis Cuentas</span>
       <ul className="table-options">
-        <li>
+        <li onClick={modify}>
           <Icon.Edit />
           Modificar
         </li>
-        <li>
+        <li onClick={add}>
           <Icon.PlusSquare />
           Agregar
         </li>
-        <li>
+        <li onClick={remove}>
           <Icon.XSquare />
           Eliminar
         </li>
