@@ -1,7 +1,12 @@
 import * as Icon from "react-feather";
+import { supabase } from "../backend/client";
 import "../styles/NavigationMenu.css";
 
 export function NavigationMenu() {
+  const handleLogOut = async () => {
+    await supabase.auth.signOut();
+  };
+
   return (
     <div className="navigation-menu">
       <ul>
@@ -20,7 +25,7 @@ export function NavigationMenu() {
           <span className="show-item">Cuentas</span>
         </li>
 
-        <li className="section-item">
+        <li className="section-item" onClick={handleLogOut}>
           <Icon.LogOut />
           <span className="show-item">Cerrar Sesión</span>
         </li>
