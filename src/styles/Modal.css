@@ -13,6 +13,9 @@
 }
 
 .modal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   min-width: 500px;
   padding: 20px;
   background-color: var(--table);
@@ -62,21 +65,31 @@
       outline: none;
       padding: 0 8px;
     }
+  }
 
-    .submit-container {
-      display: flex;
-      justify-content: flex-end;
+  .buttons-container {
+    display: flex;
+    justify-content: flex-end;
 
-      input[type="submit"] {
-        width: fit-content;
-        padding: 0 15px;
-        height: 32px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        color: var(--table);
-        background-color: var(--selection);
-      }
+    button,
+    input[type="submit"] {
+      width: fit-content;
+      padding: 0 15px;
+      height: 32px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      color: var(--table);
+      background-color: var(--selection);
+    }
+
+    .cancel-btn {
+      background-color: transparent;
+      color: var(--text-4);
+    }
+
+    .delete-btn {
+      background-color: #9c0000;
     }
   }
 }

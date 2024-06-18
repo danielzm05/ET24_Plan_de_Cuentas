@@ -1,51 +1,14 @@
 import { useState } from "react";
 import { NavigationMenu } from "../components/NavigationMenu";
 import { Table } from "../components/Table";
-import { Modal } from "../components/Modal";
-
-function ModifyAccountModal({ isOpen, onClose }) {
-  return (
-    <Modal isOpen={isOpen} isClose={onClose}>
-      <h3>Modificar Cuenta</h3>
-      <form className="form">
-        <label htmlFor="nombre">Nombre:</label>
-        <input type="text" name="nombre" id="nombre" className="input-data" />
-        <label htmlFor="tipo">Tipo:</label>
-        <select id="tipo" name="tipo" className="input-data">
-          <option value="Acreedor">Acreedor</option>
-          <option value="Deudor">Deudor</option>
-        </select>
-        <div className="submit-container">
-          <input type="submit" value="Modificar" />
-        </div>
-      </form>
-    </Modal>
-  );
-}
-
-function AddAccountModal({ isOpen, onClose }) {
-  return (
-    <Modal isOpen={isOpen} isClose={onClose}>
-      <h3>Nueva Cuenta</h3>
-      <form className="form">
-        <label htmlFor="nombre">Nombre:</label>
-        <input type="text" name="nombre" id="nombre" className="input-data" />
-        <label htmlFor="tipo">Tipo:</label>
-        <select id="tipo" name="tipo" className="input-data">
-          <option value="Acreedor">Acreedor</option>
-          <option value="Deudor">Deudor</option>
-        </select>
-        <div className="submit-container">
-          <input type="submit" value="Crear Cuenta" />
-        </div>
-      </form>
-    </Modal>
-  );
-}
+import { ModifyAccountModal } from "../components/Modals/ModifyAccountModal";
+import { AddAccountModal } from "../components/Modals/AddAccountModal";
+import { DeleteAccountModal } from "../components/Modals/DeleteAccountModal";
 
 export function Cuentas() {
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   return (
     <>
@@ -54,6 +17,7 @@ export function Cuentas() {
         <Table
           modify={() => setOpenModifyModal(true)}
           add={() => setOpenAddModal(true)}
+          remove={() => setOpenDeleteModal(true)}
         />
 
         <ModifyAccountModal
@@ -64,6 +28,11 @@ export function Cuentas() {
         <AddAccountModal
           isOpen={openAddModal}
           onClose={() => setOpenAddModal(false)}
+        />
+
+        <DeleteAccountModal
+          isOpen={openDeleteModal}
+          onClose={() => setOpenDeleteModal(false)}
         />
       </main>
     </>
