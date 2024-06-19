@@ -12,9 +12,10 @@ export function Cuentas() {
 
   return (
     <>
-      <NavigationMenu />
+      <NavigationMenu selected="cuentas" />
       <main>
         <Table
+          title="Mis Cuentas"
           modify={() => setOpenModifyModal(true)}
           add={() => setOpenAddModal(true)}
           remove={() => setOpenDeleteModal(true)}

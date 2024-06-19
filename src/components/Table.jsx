@@ -1,10 +1,10 @@
 import * as Icon from "react-feather";
 import "../styles/Table.css";
 
-export function Table({ modify, add, remove }) {
+export function Table({ title, modify, add, remove }) {
   return (
     <div className="table">
-      <span className="table-name">Mis Cuentas</span>
+      <span className="table-name">{title}</span>
       <ul className="table-options">
         <li onClick={modify}>
           <Icon.Edit />

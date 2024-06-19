@@ -18,6 +18,7 @@ export function AddAccountModal({ isOpen, onClose }) {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     console.log(accountInfo);
     /* Aquí debo agregar la cuenta a la Tabla */
   };
