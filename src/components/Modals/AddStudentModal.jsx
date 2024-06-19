@@ -1,5 +1,6 @@
 import { Modal } from "../Modal";
 import { useState } from "react";
+import { supabase } from "../../backend/client";
 
 export function AddStudentModal({ isOpen, onClose }) {
   const [studentInfo, setStudentInfo] = useState({
@@ -18,10 +19,19 @@ export function AddStudentModal({ isOpen, onClose }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const { user, error } = await supabase.auth.signUp({
+        email: studentInfo.email,
+        password: studentInfo.password,
+      });
 
-    console.log(studentInfo);
+      /* Agregar los demás datos a la tabla Usuario */
+      onClose();
+    } catch (error) {
+      console.error("Error al registrar y guardar el usuario:", error.message);
+    }
   };
 
   return (
@@ -34,6 +44,7 @@ export function AddStudentModal({ isOpen, onClose }) {
           name="nombre"
           id="nombre"
           className="input-data"
+          required
           onChange={handleInputChange}
         />
         <label htmlFor="apellido">Apellido:</label>
@@ -42,6 +53,7 @@ export function AddStudentModal({ isOpen, onClose }) {
           name="apellido"
           id="apellido"
           className="input-data"
+          required
           onChange={handleInputChange}
         />
         <label htmlFor="email">Email:</label>
@@ -50,6 +62,7 @@ export function AddStudentModal({ isOpen, onClose }) {
           name="email"
           id="email"
           className="input-data"
+          required
           onChange={handleInputChange}
         />
         <label htmlFor="password">Contraseña:</label>
