@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
 
     if (data.user) {
       setUser(data.user);
-      navigate("/alumnos", { replace: true });
+      navigate("/", { replace: true });
     } else {
       navigate("/login", { replace: true });
     }

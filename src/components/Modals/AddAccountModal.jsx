@@ -1,5 +1,6 @@
 import { Modal } from "../Modal";
 import { useState } from "react";
+import { supabase } from "../../backend/client";
 
 export function AddAccountModal({ isOpen, onClose }) {
   const [accountInfo, setAccountInfo] = useState({
@@ -17,10 +18,26 @@ export function AddAccountModal({ isOpen, onClose }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(accountInfo);
-    /* Aquí debo agregar la cuenta a la Tabla */
+
+    try {
+      const { data, error } = await supabase
+        .from("Cuenta")
+        .insert([
+          {
+            id_cuenta: accountInfo.codigo,
+            nombre: accountInfo.nombre,
+            tipo_cuenta: accountInfo.tipo,
+          },
+        ])
+        .select();
+
+      onClose();
+    } catch (error) {
+      console.error("Error al crear cuenta:", error.message);
+    }
   };
 
   return (
