@@ -6,6 +6,11 @@ export const AuthContext = createContext({
   user: null,
 });
 
+export const UseAuthContext = () => {
+  const context = useContext(AuthContext);
+  return context;
+};
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();

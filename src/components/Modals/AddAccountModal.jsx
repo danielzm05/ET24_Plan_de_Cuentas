@@ -1,6 +1,7 @@
 import { Modal } from "../Modal";
 import { useState } from "react";
 import { supabase } from "../../backend/client";
+import { UseAuthContext } from "../../context/AuthContext";
 
 export function AddAccountModal({ isOpen, onClose }) {
   const [accountInfo, setAccountInfo] = useState({
@@ -8,6 +9,8 @@ export function AddAccountModal({ isOpen, onClose }) {
     nombre: "",
     tipo: "",
   });
+
+  const authUser = UseAuthContext();
 
   const handleInputChange = (e) => {
     const { value, name } = e.target;
@@ -20,20 +23,24 @@ export function AddAccountModal({ isOpen, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(accountInfo);
 
     try {
-      const { data, error } = await supabase
-        .from("Cuenta")
-        .insert([
-          {
-            id_cuenta: accountInfo.codigo,
-            nombre: accountInfo.nombre,
-            tipo_cuenta: accountInfo.tipo,
-          },
-        ])
-        .select();
+      const result = await supabase.from("Cuenta").insert([
+        {
+          id_cuenta: accountInfo.codigo,
+          nombre: accountInfo.nombre,
+          tipo_cuenta: accountInfo.tipo,
+          id_user: authUser.user.id,
+        },
+      ]);
 
+      setAccountInfo({
+        codigo: "",
+        nombre: "",
+        tipo: "",
+      });
+
+      console.log(result);
       onClose();
     } catch (error) {
       console.error("Error al crear cuenta:", error.message);

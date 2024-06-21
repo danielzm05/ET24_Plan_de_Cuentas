@@ -4,6 +4,7 @@ import { Table } from "../components/Table";
 import { ModifyAccountModal } from "../components/Modals/ModifyAccountModal";
 import { AddAccountModal } from "../components/Modals/AddAccountModal";
 import { DeleteAccountModal } from "../components/Modals/DeleteAccountModal";
+import { UseAuthContext } from "../context/AuthContext";
 
 export function Cuentas() {
   const [openModifyModal, setOpenModifyModal] = useState(false);
