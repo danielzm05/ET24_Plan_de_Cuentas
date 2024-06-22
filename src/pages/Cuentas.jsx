@@ -27,7 +27,21 @@ export function Cuentas() {
           modify={() => setOpenModifyModal(true)}
           add={() => setOpenAddModal(true)}
           remove={() => setOpenDeleteModal(true)}
-        />
+        >
+          <div className="row header">
+            <span>Código</span>
+            <span>Rubro</span>
+            <span>A/D</span>
+          </div>
+
+          {accounts.map((account) => (
+            <div className="row" key={account.id_cuenta}>
+              <span>{account.id_cuenta}</span>
+              <span>{account.nombre}</span>
+              <span>{account.tipo_cuenta}</span>
+            </div>
+          ))}
+        </Table>
 
         <ModifyAccountModal
           isOpen={openModifyModal}

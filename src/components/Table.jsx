@@ -1,7 +1,7 @@
 import * as Icon from "react-feather";
 import "../styles/Table.css";
 
-export function Table({ title, modify, add, remove }) {
+export function Table({ title, children, modify, add, remove }) {
   return (
     <div className="table">
       <span className="table-name">{title}</span>
@@ -19,31 +19,7 @@ export function Table({ title, modify, add, remove }) {
           Eliminar
         </li>
       </ul>
-      <div className="table-content">
-        <div className="row header">
-          <span>Código</span>
-          <span>Rubro</span>
-          <span>A/D</span>
-        </div>
-
-        <div className="row">
-          <span>1.0.0.00.00</span>
-          <span>Banco en Nación Argentina en Pesos</span>
-          <span>Acreedor</span>
-        </div>
-
-        <div className="row">
-          <span>1.0.0.00.00</span>
-          <span>Banco en Nación Argentina en Pesos</span>
-          <span>Acreedor</span>
-        </div>
-
-        <div className="row">
-          <span>1.0.0.00.00</span>
-          <span>Banco en Nación Argentina en Pesos</span>
-          <span>Acreedor</span>
-        </div>
-      </div>
+      <div className="table-content">{children}</div>
     </div>
   );
 }
