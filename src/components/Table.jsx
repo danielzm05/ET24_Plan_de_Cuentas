@@ -1,22 +1,29 @@
 import * as Icon from "react-feather";
 import "../styles/Table.css";
 
-export function Table({ title, children, modify, add, remove }) {
+export function Table({
+  title,
+  children,
+  modify,
+  add,
+  remove,
+  isAccountSelected,
+}) {
   return (
     <div className="table">
       <span className="table-name">{title}</span>
       <ul className="table-options">
-        <li onClick={modify}>
-          <Icon.Edit />
-          Modificar
-        </li>
         <li onClick={add}>
           <Icon.PlusSquare />
           Agregar
         </li>
-        <li onClick={remove}>
+        <li onClick={remove} className={isAccountSelected ? "" : "hide-option"}>
           <Icon.XSquare />
           Eliminar
+        </li>
+        <li onClick={modify} className={isAccountSelected ? "" : "hide-option"}>
+          <Icon.Edit />
+          Modificar
         </li>
       </ul>
       <div className="table-content">{children}</div>

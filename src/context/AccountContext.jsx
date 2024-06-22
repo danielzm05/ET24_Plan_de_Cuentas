@@ -25,12 +25,12 @@ export const AccountProvider = ({ children }) => {
     setAccounts(data);
   };
 
-  const createAccount = async (codigo, nombre, tipo) => {
+  const createAccount = async (id, nombre, tipo) => {
     const { data: user } = await supabase.auth.getUser();
 
-    const { data, error } = await supabase.from("Cuenta").insert([
+    const { error } = await supabase.from("Cuenta").insert([
       {
-        id_cuenta: codigo,
+        id_cuenta: id,
         nombre: nombre,
         tipo_cuenta: tipo,
         id_user: user.user.id,
@@ -40,8 +40,23 @@ export const AccountProvider = ({ children }) => {
     if (error) throw error;
     getAccounts();
   };
+
+  const deleteAccount = async (id) => {
+    const { data: user } = await supabase.auth.getUser();
+
+    const { error } = await supabase
+      .from("Cuenta")
+      .delete()
+      .eq("id_cuenta", id)
+      .eq("id_user", user.user.id);
+
+    if (error) throw error;
+    getAccounts();
+  };
   return (
-    <AccountContext.Provider value={{ accounts, getAccounts, createAccount }}>
+    <AccountContext.Provider
+      value={{ accounts, getAccounts, createAccount, deleteAccount }}
+    >
       {children}
     </AccountContext.Provider>
   );

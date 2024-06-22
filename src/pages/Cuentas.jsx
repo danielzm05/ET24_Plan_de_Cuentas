@@ -4,18 +4,22 @@ import { Table } from "../components/Table";
 import { ModifyAccountModal } from "../components/Modals/ModifyAccountModal";
 import { AddAccountModal } from "../components/Modals/AddAccountModal";
 import { DeleteAccountModal } from "../components/Modals/DeleteAccountModal";
-import { UseAuthContext } from "../context/AuthContext";
 import { useAccounts } from "../context/AccountContext";
 
 export function Cuentas() {
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const { accounts, getAccounts } = useAccounts();
+  const [accountSelected, setAccountSelected] = useState(null);
+  const { accounts, getAccounts } = useAccounts(false);
 
   useEffect(() => {
     getAccounts();
   }, [accounts]);
+
+  const handleAccountSelected = (id) => {
+    setAccountSelected(id);
+  };
 
   return (
     <>
@@ -26,6 +30,7 @@ export function Cuentas() {
           modify={() => setOpenModifyModal(true)}
           add={() => setOpenAddModal(true)}
           remove={() => setOpenDeleteModal(true)}
+          isAccountSelected={accountSelected}
         >
           <div className="row header">
             <span>Código</span>
@@ -34,7 +39,13 @@ export function Cuentas() {
           </div>
 
           {accounts.map((account) => (
-            <div className="row" key={account.id_cuenta}>
+            <div
+              className={`row ${
+                accountSelected === account.id_cuenta ? "selected" : ""
+              }`}
+              key={account.id_cuenta}
+              onClick={() => handleAccountSelected(account.id_cuenta)}
+            >
               <span>{account.id_cuenta}</span>
               <span>{account.nombre}</span>
               <span>{account.tipo_cuenta}</span>
@@ -55,6 +66,7 @@ export function Cuentas() {
         <DeleteAccountModal
           isOpen={openDeleteModal}
           onClose={() => setOpenDeleteModal(false)}
+          accountSelected={accountSelected}
         />
       </main>
     </>

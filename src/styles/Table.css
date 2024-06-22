@@ -39,6 +39,11 @@
     stroke: var(--icon-1);
   }
 
+  .table-options li.hide-option {
+    pointer-events: none;
+    opacity: 40%;
+  }
+
   .table-content {
     display: flex;
     flex-direction: column;
@@ -55,15 +60,19 @@
       display: grid;
       align-items: center;
       grid-template-columns: 1fr 3fr 1fr;
-      cursor: pointer;
 
       span {
         padding: 0 6px;
       }
     }
 
-    .row:hover {
+    .row.selected {
+      background-color: var(--hover-2);
+    }
+
+    .row:not(.header):hover {
       background-color: var(--hover);
+      cursor: pointer;
     }
   }
 }
