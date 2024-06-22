@@ -7,7 +7,7 @@ export function AddAccountModal({ isOpen, onClose }) {
   const [accountInfo, setAccountInfo] = useState({
     codigo: "",
     nombre: "",
-    tipo: "",
+    tipo: "Acreedor",
   });
 
   const authUser = UseAuthContext();
@@ -37,7 +37,7 @@ export function AddAccountModal({ isOpen, onClose }) {
       setAccountInfo({
         codigo: "",
         nombre: "",
-        tipo: "",
+        tipo: "Acreedor",
       });
 
       console.log(result);
@@ -73,8 +73,11 @@ export function AddAccountModal({ isOpen, onClose }) {
           name="tipo"
           className="input-data"
           onChange={handleInputChange}
+          text=""
         >
-          <option value="Acreedor">Acreedor</option>
+          <option value="Acreedor" defaultValue>
+            Acreedor
+          </option>
           <option value="Deudor">Deudor</option>
         </select>
         <div className="buttons-container">
