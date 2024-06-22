@@ -24,8 +24,24 @@ export const AccountProvider = ({ children }) => {
 
     setAccounts(data);
   };
+
+  const createAccount = async (codigo, nombre, tipo) => {
+    const { data: user } = await supabase.auth.getUser();
+
+    const { data, error } = await supabase.from("Cuenta").insert([
+      {
+        id_cuenta: codigo,
+        nombre: nombre,
+        tipo_cuenta: tipo,
+        id_user: user.user.id,
+      },
+    ]);
+
+    if (error) throw error;
+    getAccounts();
+  };
   return (
-    <AccountContext.Provider value={{ accounts, getAccounts }}>
+    <AccountContext.Provider value={{ accounts, getAccounts, createAccount }}>
       {children}
     </AccountContext.Provider>
   );

@@ -12,11 +12,10 @@ export function Cuentas() {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const { accounts, getAccounts } = useAccounts();
-  console.log(accounts);
 
   useEffect(() => {
     getAccounts();
-  }, []);
+  }, [accounts]);
 
   return (
     <>
