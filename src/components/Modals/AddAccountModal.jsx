@@ -4,7 +4,7 @@ import { useAccounts } from "../../context/AccountContext";
 
 export function AddAccountModal({ isOpen, onClose }) {
   const [accountInfo, setAccountInfo] = useState({
-    codigo: "",
+    id: "",
     nombre: "",
     tipo: "Acreedor",
   });
@@ -20,12 +20,12 @@ export function AddAccountModal({ isOpen, onClose }) {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    createAccount(accountInfo.codigo, accountInfo.nombre, accountInfo.tipo);
+    createAccount(accountInfo.id, accountInfo.nombre, accountInfo.tipo);
     setAccountInfo({
-      codigo: "",
+      id: "",
       nombre: "",
       tipo: "Acreedor",
     });
@@ -37,11 +37,11 @@ export function AddAccountModal({ isOpen, onClose }) {
     <Modal isOpen={isOpen} isClose={onClose}>
       <h3>Nueva Cuenta</h3>
       <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="codigo">Código:</label>
+        <label htmlFor="id">Código:</label>
         <input
           type="number"
-          name="codigo"
-          id="codigo"
+          name="id"
+          id="id"
           className="input-data"
           onChange={handleInputChange}
         />

@@ -10,15 +10,19 @@ export function Cuentas() {
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [accountSelected, setAccountSelected] = useState(null);
-  const { accounts, getAccounts } = useAccounts(false);
+  const [accountSelected, setAccountSelected] = useState({});
+  const { accounts, getAccounts } = useAccounts();
 
   useEffect(() => {
     getAccounts();
   }, [accounts]);
 
-  const handleAccountSelected = (id) => {
-    setAccountSelected(id);
+  const handleAccountSelected = (id, nombre, tipo) => {
+    setAccountSelected({
+      id: id,
+      nombre: nombre,
+      tipo: tipo,
+    });
   };
 
   return (
@@ -30,7 +34,7 @@ export function Cuentas() {
           modify={() => setOpenModifyModal(true)}
           add={() => setOpenAddModal(true)}
           remove={() => setOpenDeleteModal(true)}
-          isAccountSelected={accountSelected}
+          isAccountSelected={accountSelected.id}
         >
           <div className="row header">
             <span>Código</span>
@@ -41,14 +45,27 @@ export function Cuentas() {
           {accounts.map((account) => (
             <div
               className={`row ${
-                accountSelected === account.id_cuenta ? "selected" : ""
+                accountSelected.id === account.id_cuenta ? "selected" : ""
               }`}
               key={account.id_cuenta}
-              onClick={() => handleAccountSelected(account.id_cuenta)}
+              onClick={() =>
+                handleAccountSelected(
+                  account.id_cuenta,
+                  account.nombre,
+                  account.tipo_cuenta
+                )
+              }
+              onDoubleClick={() => setOpenModifyModal(true)}
             >
               <span>{account.id_cuenta}</span>
               <span>{account.nombre}</span>
-              <span>{account.tipo_cuenta}</span>
+              <span
+                className={`tipo-cuenta ${
+                  account.tipo_cuenta === "Acreedor" ? "acreedor" : "deudor"
+                }`}
+              >
+                {account.tipo_cuenta}
+              </span>
             </div>
           ))}
         </Table>
@@ -56,6 +73,7 @@ export function Cuentas() {
         <ModifyAccountModal
           isOpen={openModifyModal}
           onClose={() => setOpenModifyModal(false)}
+          account={accountSelected}
         />
 
         <AddAccountModal
@@ -66,7 +84,7 @@ export function Cuentas() {
         <DeleteAccountModal
           isOpen={openDeleteModal}
           onClose={() => setOpenDeleteModal(false)}
-          accountSelected={accountSelected}
+          accountSelectedId={accountSelected.id}
         />
       </main>
     </>

@@ -59,7 +59,7 @@
       border-top: 0.01em var(--hover) solid;
       display: grid;
       align-items: center;
-      grid-template-columns: 1fr 3fr 1fr;
+      grid-template-columns: 2fr 6fr 0.5fr;
 
       span {
         padding: 0 6px;
@@ -73,6 +73,24 @@
     .row:not(.header):hover {
       background-color: var(--hover);
       cursor: pointer;
+    }
+
+    .row span.tipo-cuenta {
+      width: 80px;
+      border: 1px solid;
+      margin: 10px;
+      text-align: center;
+      border-radius: 3px;
+    }
+
+    .tipo-cuenta.acreedor {
+      color: #007c25;
+      background-color: #4dfd829c;
+    }
+
+    .tipo-cuenta.deudor {
+      color: #b30000;
+      background-color: #f06d6dad;
     }
   }
 }

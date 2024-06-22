@@ -53,9 +53,25 @@ export const AccountProvider = ({ children }) => {
     if (error) throw error;
     getAccounts();
   };
+
+  const updateAccount = async (id, nombre, tipo) => {
+    const { error } = await supabase
+      .from("Cuenta")
+      .update({ id_cuenta: id, nombre: nombre, tipo_cuenta: tipo })
+      .eq("id_cuenta", id);
+
+    if (error) throw error;
+    getAccounts();
+  };
   return (
     <AccountContext.Provider
-      value={{ accounts, getAccounts, createAccount, deleteAccount }}
+      value={{
+        accounts,
+        getAccounts,
+        createAccount,
+        deleteAccount,
+        updateAccount,
+      }}
     >
       {children}
     </AccountContext.Provider>
