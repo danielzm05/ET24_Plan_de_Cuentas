@@ -16,7 +16,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  min-width: 500px;
+  max-width: 500px;
+  min-width: 320px;
   padding: 20px;
   background-color: var(--table);
   border-radius: 20px;
