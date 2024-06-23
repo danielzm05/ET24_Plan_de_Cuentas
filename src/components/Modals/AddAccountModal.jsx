@@ -3,13 +3,14 @@ import { useState } from "react";
 import { useAccounts } from "../../context/AccountContext";
 
 export function AddAccountModal({ isOpen, onClose }) {
+  const [error, setError] = useState(false);
   const [accountInfo, setAccountInfo] = useState({
     id: "",
     nombre: "",
     tipo: "Acreedor",
   });
 
-  const { createAccount } = useAccounts();
+  const { accounts, createAccount } = useAccounts();
 
   const handleInputChange = (e) => {
     const { value, name } = e.target;
@@ -18,6 +19,10 @@ export function AddAccountModal({ isOpen, onClose }) {
       ...accountInfo,
       [name]: value,
     });
+
+    accounts.some((account) => account.id_cuenta == accountInfo.id)
+      ? setError(true)
+      : setError(false);
   };
 
   const handleSubmit = (e) => {
@@ -42,9 +47,11 @@ export function AddAccountModal({ isOpen, onClose }) {
           type="number"
           name="id"
           id="id"
-          className="input-data"
+          className={`input-data ${error ? "error" : ""}`}
           onChange={handleInputChange}
+          required
         />
+
         <label htmlFor="nombre">Nombre:</label>
         <input
           type="text"
@@ -52,6 +59,7 @@ export function AddAccountModal({ isOpen, onClose }) {
           id="nombre"
           className="input-data"
           onChange={handleInputChange}
+          required
         />
         <label htmlFor="tipo">Tipo:</label>
         <select
@@ -59,7 +67,7 @@ export function AddAccountModal({ isOpen, onClose }) {
           name="tipo"
           className="input-data"
           onChange={handleInputChange}
-          text=""
+          defaultValue={accountInfo.tipo}
         >
           <option value="Acreedor" defaultValue>
             Acreedor
@@ -67,7 +75,14 @@ export function AddAccountModal({ isOpen, onClose }) {
           <option value="Deudor">Deudor</option>
         </select>
         <div className="buttons-container">
-          <input type="submit" value="Crear Cuenta" />
+          <span className="error-message">
+            {error ? "⚠︎ Error: Código ya existente" : ""}
+          </span>
+          <input
+            type="submit"
+            value="Crear Cuenta"
+            className={error ? "hide-btn" : ""}
+          />
         </div>
       </form>
     </Modal>

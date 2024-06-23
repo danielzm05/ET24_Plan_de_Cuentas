@@ -58,17 +58,23 @@
 
     .input-data {
       height: 32px;
-      border: 0.01em solid var(--text-4);
+      border: 0.01em solid;
       color: var(--text-4);
       border-radius: 10px;
       margin-bottom: 15px;
       outline: none;
       padding: 0 8px;
     }
+
+    .input-data.error {
+      color: #c90000;
+      border: 2px solid;
+    }
   }
 
   .buttons-container {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
 
     button,
@@ -90,6 +96,16 @@
 
     .delete-btn {
       background-color: #9c0000;
+    }
+
+    .hide-btn {
+      pointer-events: none;
+      opacity: 40%;
+    }
+
+    .error-message {
+      color: #9c0000;
+      padding: 0 10px;
     }
   }
 }
