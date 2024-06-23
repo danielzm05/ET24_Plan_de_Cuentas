@@ -67,7 +67,7 @@
     }
 
     .input-data.error {
-      color: #c90000;
+      color: var(--error);
       border: 2px solid;
     }
   }
@@ -95,7 +95,7 @@
     }
 
     .delete-btn {
-      background-color: #9c0000;
+      background-color: var(--error);
     }
 
     .hide-btn {
@@ -104,7 +104,7 @@
     }
 
     .error-message {
-      color: #9c0000;
+      color: var(--error);
       padding: 0 10px;
     }
   }

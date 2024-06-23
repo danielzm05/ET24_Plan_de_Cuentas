@@ -2,6 +2,7 @@ import { useState } from "react";
 import { supabase } from "../backend/client";
 
 export function LoginForm() {
+  const [errorLogin, setErrorLogin] = useState(false);
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -20,10 +21,14 @@ export function LoginForm() {
     e.preventDefault();
 
     try {
-      await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email: formValues.email,
         password: formValues.password,
       });
+
+      if (error) {
+        setErrorLogin(true);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -49,6 +54,9 @@ export function LoginForm() {
         required
         onChange={handleInputChange}
       />
+      {errorLogin && (
+        <span className="error-message">⚠︎ Correo o contraseña incorrecta</span>
+      )}
       <input type="submit" value="Ingresar" />
     </form>
   );
