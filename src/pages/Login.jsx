@@ -1,6 +1,6 @@
 import * as Icon from "react-feather";
 import { LoginForm } from "../components/LoginForm";
-import { MeetingIllustration } from "../components/Illustrations";
+import { Wave, MeetingIllustration } from "../components/Illustrations";
 import "../styles/Login.css";
 
 export function Login() {
@@ -14,10 +14,11 @@ export function Login() {
           </span>
         </span>
         <MeetingIllustration />
+        <Wave />
       </section>
 
       <section className="login-section">
-        <h1>Bienvenido!</h1>
+        <h1>Iniciar Sesión</h1>
         <LoginForm />
       </section>
     </div>

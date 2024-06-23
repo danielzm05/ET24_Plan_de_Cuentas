@@ -1,11 +1,27 @@
 import * as React from "react";
 
+export const Wave = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1440 320"
+    {...props}
+    className="wave-illustration fade-in-left"
+  >
+    <path
+      fill="#CBBFDB"
+      fillOpacity={1}
+      d="M0,0L40,32C80,64,160,128,240,165.3C320,203,400,213,480,197.3C560,181,640,139,720,117.3C800,96,880,96,960,106.7C1040,117,1120,139,1200,128C1280,117,1360,75,1400,53.3L1440,32L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"
+    />
+  </svg>
+);
+
 export const MeetingIllustration = (props) => (
   <svg
     id="Layer_2"
     data-name="Layer 2"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 1025.744 691.221"
+    className="meeting-illustration"
     style={{
       width: "100%",
     }}
