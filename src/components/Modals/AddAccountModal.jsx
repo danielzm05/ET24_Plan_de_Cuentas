@@ -1,5 +1,5 @@
 import { Modal } from "../Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAccounts } from "../../context/AccountContext";
 
 export function AddAccountModal({ isOpen, onClose }) {
@@ -12,6 +12,12 @@ export function AddAccountModal({ isOpen, onClose }) {
 
   const { accounts, createAccount } = useAccounts();
 
+  useEffect(() => {
+    accounts.some((account) => account.id_cuenta == accountInfo.id)
+      ? setError(true)
+      : setError(false);
+  }, [accountInfo]);
+
   const handleInputChange = (e) => {
     const { value, name } = e.target;
 
@@ -19,10 +25,6 @@ export function AddAccountModal({ isOpen, onClose }) {
       ...accountInfo,
       [name]: value,
     });
-
-    accounts.some((account) => account.id_cuenta == accountInfo.id)
-      ? setError(true)
-      : setError(false);
   };
 
   const handleSubmit = (e) => {

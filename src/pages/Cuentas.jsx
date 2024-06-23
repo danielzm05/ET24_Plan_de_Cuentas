@@ -74,6 +74,7 @@ export function Cuentas() {
           isOpen={openModifyModal}
           onClose={() => setOpenModifyModal(false)}
           account={accountSelected}
+          id={accountSelected.id}
         />
 
         <AddAccountModal

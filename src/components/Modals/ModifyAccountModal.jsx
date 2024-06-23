@@ -39,15 +39,6 @@ export function ModifyAccountModal({ isOpen, onClose, account }) {
     <Modal isOpen={isOpen} isClose={onClose}>
       <h3>Modificar Cuenta</h3>
       <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="id">Código:</label>
-        <input
-          type="number"
-          name="id"
-          id="id"
-          className="input-data"
-          value={accountModified.id}
-          onChange={handleChange}
-        />
         <label htmlFor="nombre">Nombre:</label>
         <input
           type="text"
