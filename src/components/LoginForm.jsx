@@ -30,29 +30,26 @@ export function LoginForm() {
   };
 
   return (
-    <section className="login-container">
-      <h1>Bienvenido!</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Correo electrónico</label>
-        <input
-          className="input-data"
-          type="email"
-          id="email"
-          name="email"
-          required
-          onChange={handleInputChange}
-        />
-        <label htmlFor="password">Contraseña:</label>
-        <input
-          className="input-data"
-          type="password"
-          id="password"
-          name="password"
-          required
-          onChange={handleInputChange}
-        />
-        <input type="submit" value="Ingresar" />
-      </form>
-    </section>
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="email">Correo electrónico</label>
+      <input
+        className="input-data"
+        type="email"
+        id="email"
+        name="email"
+        required
+        onChange={handleInputChange}
+      />
+      <label htmlFor="password">Contraseña:</label>
+      <input
+        className="input-data"
+        type="password"
+        id="password"
+        name="password"
+        required
+        onChange={handleInputChange}
+      />
+      <input type="submit" value="Ingresar" />
+    </form>
   );
 }
