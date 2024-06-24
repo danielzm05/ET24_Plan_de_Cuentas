@@ -20,9 +20,9 @@ export const AuthProvider = ({ children }) => {
 
     if (data.user) {
       setUser(data.user);
-      navigate("/", { replace: true });
+      navigate("/cuentas", { replace: true });
     } else {
-      navigate("/login", { replace: true });
+      navigate("/", { replace: true });
     }
   };
 
