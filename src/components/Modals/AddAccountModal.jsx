@@ -5,7 +5,7 @@ import { useAccounts } from "../../context/AccountContext";
 export function AddAccountModal({ isOpen, onClose }) {
   const [error, setError] = useState(false);
   const [accountInfo, setAccountInfo] = useState({
-    id: "",
+    codigo: "",
     nombre: "",
     tipo: "Acreedor",
   });
@@ -13,7 +13,7 @@ export function AddAccountModal({ isOpen, onClose }) {
   const { accounts, createAccount } = useAccounts();
 
   useEffect(() => {
-    accounts.some((account) => account.id_cuenta == accountInfo.id)
+    accounts.some((account) => account.codigo == accountInfo.codigo)
       ? setError(true)
       : setError(false);
   }, [accountInfo]);
@@ -30,9 +30,9 @@ export function AddAccountModal({ isOpen, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    createAccount(accountInfo.id, accountInfo.nombre, accountInfo.tipo);
+    createAccount(accountInfo.codigo, accountInfo.nombre, accountInfo.tipo);
     setAccountInfo({
-      id: "",
+      codigo: "",
       nombre: "",
       tipo: "Acreedor",
     });
@@ -44,11 +44,11 @@ export function AddAccountModal({ isOpen, onClose }) {
     <Modal isOpen={isOpen} isClose={onClose}>
       <h3>Nueva Cuenta</h3>
       <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="id">Código:</label>
+        <label htmlFor="codigo">Código:</label>
         <input
           type="number"
-          name="id"
-          id="id"
+          name="codigo"
+          id="codigo"
           className={`input-data ${error ? "error" : ""}`}
           onChange={handleInputChange}
           required
