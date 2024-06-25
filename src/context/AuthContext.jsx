@@ -6,13 +6,14 @@ export const AuthContext = createContext({
   user: null,
 });
 
-export const UseAuthContext = () => {
+export const useAuthContext = () => {
   const context = useContext(AuthContext);
   return context;
 };
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userEvent, setUserEvent] = useState(null);
   const navigate = useNavigate();
 
   const checkUser = async () => {
@@ -20,7 +21,6 @@ export const AuthProvider = ({ children }) => {
 
     if (data.user) {
       setUser(data.user);
-      navigate("/cuentas", { replace: true });
     } else {
       navigate("/", { replace: true });
     }
@@ -31,7 +31,12 @@ export const AuthProvider = ({ children }) => {
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
+        setUserEvent(event);
         console.log(event);
+
+        if (event === "SIGNED_IN") {
+          navigate("/cuentas", { replace: true });
+        }
         checkUser();
       }
     );
@@ -42,6 +47,8 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, userEvent }}>
+      {children}
+    </AuthContext.Provider>
   );
 };

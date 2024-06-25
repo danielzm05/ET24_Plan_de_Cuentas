@@ -1,8 +1,11 @@
 import * as Icon from "react-feather";
 import { supabase } from "../backend/client";
+import { useNavigate } from "react-router-dom";
 import "../styles/NavigationMenu.css";
 
 export function NavigationMenu({ selected }) {
+  const navigate = useNavigate();
+
   const handleLogOut = async () => {
     await supabase.auth.signOut();
   };
@@ -16,6 +19,9 @@ export function NavigationMenu({ selected }) {
         </li>
 
         <li
+          onClick={() => {
+            navigate("/alumnos");
+          }}
           className={`section-item ${selected === "alumnos" ? "selected" : ""}`}
         >
           <Icon.User />
@@ -23,6 +29,9 @@ export function NavigationMenu({ selected }) {
         </li>
 
         <li
+          onClick={() => {
+            navigate("/cuentas");
+          }}
           className={`section-item ${selected === "cuentas" ? "selected" : ""}`}
         >
           <Icon.Table />
