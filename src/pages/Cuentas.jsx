@@ -17,9 +17,10 @@ export function Cuentas() {
     getAccounts();
   }, [accounts]);
 
-  const handleAccountSelected = (id, nombre, tipo) => {
+  const handleAccountSelected = (id, codigo, nombre, tipo) => {
     setAccountSelected({
       id: id,
+      codigo: codigo,
       nombre: nombre,
       tipo: tipo,
     });
@@ -51,13 +52,14 @@ export function Cuentas() {
               onClick={() =>
                 handleAccountSelected(
                   account.id_cuenta,
+                  account.codigo,
                   account.nombre,
                   account.tipo_cuenta
                 )
               }
               onDoubleClick={() => setOpenModifyModal(true)}
             >
-              <span>{account.id_cuenta}</span>
+              <span>{account.codigo}</span>
               <span>{account.nombre}</span>
               <span
                 className={`tipo-cuenta ${

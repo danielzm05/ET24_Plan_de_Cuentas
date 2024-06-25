@@ -4,7 +4,7 @@ import { useAccounts } from "../../context/AccountContext";
 
 export function ModifyAccountModal({ isOpen, onClose, account }) {
   const [accountModified, setAccountModified] = useState({
-    id: "",
+    codigo: "",
     nombre: "",
     tipo: "",
   });
@@ -12,6 +12,7 @@ export function ModifyAccountModal({ isOpen, onClose, account }) {
   useEffect(() => {
     setAccountModified({
       id: account.id,
+      codigo: account.codigo,
       nombre: account.nombre,
       tipo: account.tipo,
     });
@@ -28,6 +29,7 @@ export function ModifyAccountModal({ isOpen, onClose, account }) {
     e.preventDefault();
     updateAccount(
       accountModified.id,
+      accountModified.codigo,
       accountModified.nombre,
       accountModified.tipo
     );

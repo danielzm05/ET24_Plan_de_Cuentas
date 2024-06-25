@@ -16,9 +16,9 @@ export const AccountProvider = ({ children }) => {
 
     const { data, error } = await supabase
       .from("Cuenta")
-      .select("id_cuenta, nombre, tipo_cuenta")
+      .select("id_cuenta, codigo, nombre, tipo_cuenta")
       .eq("id_user", user.user.id)
-      .order("id_cuenta", { ascending: true });
+      .order("codigo", { ascending: true });
 
     if (error) throw error;
 
@@ -30,7 +30,7 @@ export const AccountProvider = ({ children }) => {
 
     const { error } = await supabase.from("Cuenta").insert([
       {
-        id_cuenta: id,
+        codigo: id,
         nombre: nombre,
         tipo_cuenta: tipo,
         id_user: user.user.id,
@@ -54,10 +54,15 @@ export const AccountProvider = ({ children }) => {
     getAccounts();
   };
 
-  const updateAccount = async (id, nombre, tipo) => {
+  const updateAccount = async (id, codigo, nombre, tipo) => {
     const { error } = await supabase
       .from("Cuenta")
-      .update({ id_cuenta: id, nombre: nombre, tipo_cuenta: tipo })
+      .update({
+        id_cuenta: id,
+        codigo: codigo,
+        nombre: nombre,
+        tipo_cuenta: tipo,
+      })
       .eq("id_cuenta", id);
 
     if (error) throw error;
