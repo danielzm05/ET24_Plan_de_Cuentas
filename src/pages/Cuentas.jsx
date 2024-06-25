@@ -11,7 +11,7 @@ export function Cuentas() {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [accountSelected, setAccountSelected] = useState({});
-  const { accounts, getAccounts } = useAccounts();
+  const { accounts, modifications, getAccounts } = useAccounts();
 
   useEffect(() => {
     getAccounts();
@@ -45,7 +45,7 @@ export function Cuentas() {
 
           {accounts.map((account) => (
             <div
-              className={`row ${
+              className={`row cuenta ${
                 accountSelected.id === account.id_cuenta ? "selected" : ""
               }`}
               key={account.id_cuenta}

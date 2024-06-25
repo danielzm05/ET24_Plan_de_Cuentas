@@ -59,11 +59,14 @@
       border-top: 0.01em var(--hover) solid;
       display: grid;
       align-items: center;
-      grid-template-columns: 2fr 6fr 0.5fr;
-
+      grid-template-columns: 2fr 6fr 2fr;
       span {
         padding: 0 6px;
       }
+    }
+
+    .row.cuenta {
+      grid-template-columns: 2fr 6fr 0.5fr;
     }
 
     .row.selected {

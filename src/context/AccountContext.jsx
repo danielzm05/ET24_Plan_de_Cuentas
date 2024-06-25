@@ -10,6 +10,16 @@ export const useAccounts = () => {
 
 export const AccountProvider = ({ children }) => {
   const [accounts, setAccounts] = useState([]);
+  const [modifications, setModifications] = useState([]);
+
+  const getModifications = async () => {
+    const { data: user } = await supabase.auth.getUser();
+    const { data, error } = await supabase.from("Modificacion").select("*");
+
+    if (error) throw error;
+
+    setModifications(data);
+  };
 
   const getAccounts = async () => {
     const { data: user } = await supabase.auth.getUser();
@@ -72,6 +82,8 @@ export const AccountProvider = ({ children }) => {
     <AccountContext.Provider
       value={{
         accounts,
+        modifications,
+        getModifications,
         getAccounts,
         createAccount,
         deleteAccount,

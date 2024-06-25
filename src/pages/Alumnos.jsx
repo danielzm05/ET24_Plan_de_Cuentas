@@ -1,21 +1,39 @@
-import { AddStudentModal } from "../components/Modals/AddStudentModal";
 import { NavigationMenu } from "../components/NavigationMenu";
 import { Table } from "../components/Table";
-import { useState } from "react";
+import { useAccounts } from "../context/AccountContext";
+import { useEffect, useState } from "react";
 
 export function Alumnos() {
-  const [openAddModal, setOpenAddModal] = useState(false);
+  const { accounts, modifications, getModifications } = useAccounts();
+
+  useEffect(() => {
+    getModifications();
+    console.log(modifications);
+  }, [accounts]);
 
   return (
     <>
       <NavigationMenu selected="alumnos" />
       <main>
-        <Table title="Alumnos" add={() => setOpenAddModal(true)} />
+        <Table
+          title="Modificaciones de cuentas"
+          showOptions={false}
+          add={() => setOpenAddModal(true)}
+        >
+          <div className="row header">
+            <span>Hora</span>
+            <span>Descripción</span>
+            <span>Fecha</span>
+          </div>
 
-        <AddStudentModal
-          isOpen={openAddModal}
-          onClose={() => setOpenAddModal(false)}
-        />
+          {modifications.map((mod) => (
+            <div className="row" key={mod.id_modificacion}>
+              <span>{mod.fecha.slice(11, 16)}</span>
+              <span>{mod.descripcion}</span>
+              <span>{mod.fecha.slice(0, 10)}</span>
+            </div>
+          ))}
+        </Table>
       </main>
     </>
   );
