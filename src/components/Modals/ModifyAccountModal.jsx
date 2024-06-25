@@ -42,7 +42,8 @@ export function ModifyAccountModal({ isOpen, onClose, account }) {
       accountModified.id,
       accountModified.codigo,
       accountModified.nombre,
-      accountModified.tipo
+      accountModified.tipo,
+      account
     );
 
     onClose();

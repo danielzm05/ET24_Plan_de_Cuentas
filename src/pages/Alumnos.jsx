@@ -20,14 +20,14 @@ export function Alumnos() {
           showOptions={false}
           add={() => setOpenAddModal(true)}
         >
-          <div className="row header">
+          <div className="row header modificacion">
             <span>Hora</span>
             <span>Descripción</span>
             <span>Fecha</span>
           </div>
 
           {modifications.map((mod) => (
-            <div className="row" key={mod.id_modificacion}>
+            <div className="row modificacion" key={mod.id_modificacion}>
               <span>{mod.fecha.slice(11, 16)}</span>
               <span>{mod.descripcion}</span>
               <span>{mod.fecha.slice(0, 10)}</span>

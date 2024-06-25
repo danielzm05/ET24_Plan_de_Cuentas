@@ -37,7 +37,7 @@ export function Cuentas() {
           remove={() => setOpenDeleteModal(true)}
           isAccountSelected={accountSelected.id}
         >
-          <div className="row header">
+          <div className="row header cuenta">
             <span>Código</span>
             <span>Rubro</span>
             <span>A/D</span>
@@ -87,7 +87,7 @@ export function Cuentas() {
         <DeleteAccountModal
           isOpen={openDeleteModal}
           onClose={() => setOpenDeleteModal(false)}
-          accountSelectedId={accountSelected.id}
+          account={accountSelected}
         />
       </main>
     </>

@@ -64,6 +64,9 @@
         padding: 0 6px;
       }
     }
+    .row.modificacion {
+      grid-template-columns: 0.5fr 6fr 1fr;
+    }
 
     .row.cuenta {
       grid-template-columns: 2fr 6fr 0.5fr;

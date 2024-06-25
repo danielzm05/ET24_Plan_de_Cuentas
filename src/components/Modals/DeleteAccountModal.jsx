@@ -1,11 +1,11 @@
 import { Modal } from "../Modal";
 import { useAccounts } from "../../context/AccountContext";
 
-export function DeleteAccountModal({ isOpen, onClose, accountSelectedId }) {
+export function DeleteAccountModal({ isOpen, onClose, account }) {
   const { deleteAccount } = useAccounts();
 
   const handleDelete = () => {
-    deleteAccount(accountSelectedId);
+    deleteAccount(account.id, account.nombre);
     onClose();
   };
 
