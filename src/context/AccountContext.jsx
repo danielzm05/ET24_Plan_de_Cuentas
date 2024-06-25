@@ -13,7 +13,10 @@ export const AccountProvider = ({ children }) => {
   const [modifications, setModifications] = useState([]);
 
   const getModifications = async () => {
-    const { data, error } = await supabase.from("Modificacion").select("*");
+    const { data, error } = await supabase
+      .from("Modificacion")
+      .select("*")
+      .order("fecha", { ascending: false });
 
     if (error) throw error;
 
