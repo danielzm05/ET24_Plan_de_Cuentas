@@ -13,28 +13,32 @@ export function Table({
   return (
     <div className="table">
       <span className="table-name">{title}</span>
-      {showOptions && (
-        <ul className="table-options">
-          <li onClick={add}>
-            <Icon.PlusSquare />
-            Agregar
-          </li>
-          <li
-            onClick={remove}
-            className={isAccountSelected ? "" : "hide-option"}
-          >
-            <Icon.XSquare />
-            Eliminar
-          </li>
-          <li
-            onClick={modify}
-            className={isAccountSelected ? "" : "hide-option"}
-          >
-            <Icon.Edit />
-            Modificar
-          </li>
-        </ul>
-      )}
+
+      <div className="table-options">
+        <input className="search-bar" type="text" placeholder="Buscar.." />
+        {showOptions && (
+          <ul>
+            <li onClick={add}>
+              <Icon.PlusSquare />
+              Agregar
+            </li>
+            <li
+              onClick={remove}
+              className={isAccountSelected ? "" : "hide-option"}
+            >
+              <Icon.XSquare />
+              Eliminar
+            </li>
+            <li
+              onClick={modify}
+              className={isAccountSelected ? "" : "hide-option"}
+            >
+              <Icon.Edit />
+              Modificar
+            </li>
+          </ul>
+        )}
+      </div>
 
       <div className="table-content">{children}</div>
     </div>

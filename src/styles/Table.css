@@ -1,4 +1,7 @@
 .table {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   padding: 30px 20px;
   background-color: var(--table);
   border-radius: 20px;
@@ -10,45 +13,60 @@
 
   .table-options {
     display: flex;
-    gap: 0 20px;
-    justify-content: end;
-    list-style: none;
-    flex-wrap: wrap;
-  }
+    justify-content: space-between;
+    gap: 10px;
+    align-items: end;
 
-  .table-options li {
-    display: flex;
-    align-items: center;
-    padding: 0 5px;
-    gap: 5px;
-    color: var(--text-2);
-    font-size: 12px;
-    font-weight: 400;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    user-select: none;
-  }
+    .search-bar {
+      width: 250px;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+      padding: 6px;
+      background-color: var(--hover);
+    }
 
-  .table-options li:hover {
-    background-color: var(--hover);
-  }
+    ul {
+      display: flex;
+      gap: 0 20px;
+      justify-content: end;
+      list-style: none;
+      flex-wrap: wrap;
+    }
 
-  .table-options li svg {
-    max-width: 18px;
-    stroke: var(--icon-1);
-  }
+    ul li {
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      gap: 5px;
+      color: var(--text-2);
+      font-size: 12px;
+      font-weight: 400;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      user-select: none;
+    }
 
-  .table-options li.hide-option {
-    pointer-events: none;
-    opacity: 40%;
+    ul li:hover {
+      background-color: var(--hover);
+    }
+
+    ul li svg {
+      max-width: 18px;
+      stroke: var(--icon-1);
+    }
+
+    ul li.hide-option {
+      pointer-events: none;
+      opacity: 40%;
+    }
   }
 
   .table-content {
     display: flex;
     flex-direction: column;
     font-size: 12px;
-    padding: 16px 0;
 
     .row.header {
       color: var(--text-2);
