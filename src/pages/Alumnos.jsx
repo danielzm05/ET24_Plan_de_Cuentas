@@ -1,9 +1,11 @@
 import { NavigationMenu } from "../components/NavigationMenu";
 import { Table } from "../components/Table";
 import { useAccounts } from "../context/AccountContext";
+import { AddStudentModal } from "../components/Modals/AddStudentModal";
 import { useEffect, useState } from "react";
 
 export function Alumnos() {
+  const [openAddModal, setOpenAddModal] = useState(false);
   const { accounts, modifications, getModifications } = useAccounts();
 
   useEffect(() => {
@@ -17,7 +19,7 @@ export function Alumnos() {
       <main>
         <Table
           title="Modificaciones de cuentas"
-          showOptions={false}
+          showOptions={true}
           add={() => setOpenAddModal(true)}
         >
           <div className="row header modificacion">
@@ -34,6 +36,11 @@ export function Alumnos() {
             </div>
           ))}
         </Table>
+
+        <AddStudentModal
+          isOpen={openAddModal}
+          onClose={() => setOpenAddModal(false)}
+        />
       </main>
     </>
   );

@@ -25,9 +25,16 @@ export function AddStudentModal({ isOpen, onClose }) {
       const { user, error } = await supabase.auth.signUp({
         email: studentInfo.email,
         password: studentInfo.password,
+        options: {
+          data: {
+            first_name: studentInfo.nombre,
+            last_name: studentInfo.apellido,
+            id_rol: 3,
+          },
+        },
       });
 
-      /* Agregar los demás datos a la tabla Usuario */
+      if (error) throw error;
       onClose();
     } catch (error) {
       console.error("Error al registrar y guardar el usuario:", error.message);
