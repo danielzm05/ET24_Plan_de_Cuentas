@@ -6,12 +6,7 @@ import { useEffect, useState } from "react";
 
 export function Alumnos() {
   const [openAddModal, setOpenAddModal] = useState(false);
-  const { accounts, modifications, getModifications } = useAccounts();
-
-  useEffect(() => {
-    getModifications();
-    console.log(modifications);
-  }, [accounts]);
+  const { modifications } = useAccounts();
 
   return (
     <>

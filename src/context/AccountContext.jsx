@@ -40,6 +40,7 @@ export const AccountProvider = ({ children }) => {
 
   const getAccounts = async () => {
     const { data: user } = await supabase.auth.getUser();
+    console.log(user);
 
     const { data, error } = await supabase
       .from("Cuenta")
