@@ -51,6 +51,7 @@ export function LoginForm() {
         type="password"
         id="password"
         name="password"
+        minLength={6}
         required
         onChange={handleInputChange}
       />
