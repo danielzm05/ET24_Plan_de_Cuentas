@@ -78,7 +78,7 @@ export function AddStudentModal({ isOpen, onClose }) {
           type="password"
           id="password"
           name="password"
-          minLength={6}
+          minLength={5}
           required
           onChange={handleInputChange}
         />
