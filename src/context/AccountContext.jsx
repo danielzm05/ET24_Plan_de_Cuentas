@@ -1,4 +1,5 @@
 import { useContext, createContext, useState } from "react";
+import { useAuthContext } from "./AuthContext";
 import { supabase } from "../backend/client";
 
 export const AccountContext = createContext();
@@ -11,6 +12,7 @@ export const useAccounts = () => {
 export const AccountProvider = ({ children }) => {
   const [accounts, setAccounts] = useState([]);
   const [modifications, setModifications] = useState([]);
+  const { user } = useAuthContext();
 
   const getModifications = async () => {
     const { data, error } = await supabase
@@ -24,12 +26,10 @@ export const AccountProvider = ({ children }) => {
   };
 
   const createModification = async (descripcion) => {
-    const { data: user } = await supabase.auth.getUser();
-
     const { error } = await supabase.from("Modificacion").insert([
       {
         descripcion: descripcion,
-        id_usuario: user.user.id,
+        id_usuario: user.id,
       },
     ]);
 
@@ -39,13 +39,10 @@ export const AccountProvider = ({ children }) => {
   };
 
   const getAccounts = async () => {
-    const { data: user } = await supabase.auth.getUser();
-    console.log(user);
-
     const { data, error } = await supabase
       .from("Cuenta")
       .select("id_cuenta, codigo, nombre, tipo_cuenta")
-      .eq("id_usuario", user.user.id)
+      .eq("id_usuario", user.id)
       .order("codigo", { ascending: true });
 
     if (error) throw error;
@@ -54,14 +51,12 @@ export const AccountProvider = ({ children }) => {
   };
 
   const createAccount = async (codigo, nombre, tipo) => {
-    const { data: user } = await supabase.auth.getUser();
-
     const { error } = await supabase.from("Cuenta").insert([
       {
         codigo: codigo,
         nombre: nombre,
         tipo_cuenta: tipo,
-        id_usuario: user.user.id,
+        id_usuario: user.id,
       },
     ]);
 
@@ -71,13 +66,11 @@ export const AccountProvider = ({ children }) => {
   };
 
   const deleteAccount = async (id, nombre) => {
-    const { data: user } = await supabase.auth.getUser();
-
     const { error } = await supabase
       .from("Cuenta")
       .delete()
       .eq("id_cuenta", id)
-      .eq("id_usuario", user.user.id);
+      .eq("id_usuario", user.id);
 
     if (error) throw error;
     getAccounts();

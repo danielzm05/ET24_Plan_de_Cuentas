@@ -11,7 +11,9 @@ export function Cuentas() {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [accountSelected, setAccountSelected] = useState({});
-  const { accounts } = useAccounts();
+  const { accounts, getAccounts } = useAccounts();
+
+  getAccounts();
 
   const handleAccountSelected = (id, codigo, nombre, tipo) => {
     setAccountSelected({
