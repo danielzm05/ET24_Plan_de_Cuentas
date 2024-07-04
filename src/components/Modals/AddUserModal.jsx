@@ -2,19 +2,20 @@ import { Modal } from "../Modal";
 import { useState } from "react";
 import { supabase } from "../../backend/client";
 
-export function AddStudentModal({ isOpen, onClose }) {
-  const [studentInfo, setStudentInfo] = useState({
+export function AddUserModal({ isOpen, onClose }) {
+  const [userInfo, setUserInfo] = useState({
     nombre: "",
     apellido: "",
     email: "",
+    rol: "3",
     password: "",
   });
 
   const handleInputChange = (e) => {
     const { value, name } = e.target;
 
-    setStudentInfo({
-      ...studentInfo,
+    setUserInfo({
+      ...userInfo,
       [name]: value,
     });
   };
@@ -23,13 +24,13 @@ export function AddStudentModal({ isOpen, onClose }) {
     e.preventDefault();
     try {
       const { user, error } = await supabase.auth.signUp({
-        email: studentInfo.email,
-        password: studentInfo.password,
+        email: userInfo.email,
+        password: userInfo.password,
         options: {
           data: {
-            first_name: studentInfo.nombre,
-            last_name: studentInfo.apellido,
-            id_rol: 3,
+            first_name: userInfo.nombre,
+            last_name: userInfo.apellido,
+            id_rol: Number(userInfo.rol),
           },
         },
       });
@@ -43,7 +44,7 @@ export function AddStudentModal({ isOpen, onClose }) {
 
   return (
     <Modal isOpen={isOpen} isClose={onClose}>
-      <h3>Agregar nuevo alumno</h3>
+      <h3>Agregar nuevo usuario</h3>
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="nombre">Nombre:</label>
         <input
@@ -63,6 +64,16 @@ export function AddStudentModal({ isOpen, onClose }) {
           required
           onChange={handleInputChange}
         />
+        <label htmlFor="rol">Rol:</label>
+        <select
+          name="rol"
+          id="rol"
+          className="input-data"
+          onChange={handleInputChange}
+        >
+          <option value="3">Alumno</option>
+          <option value="2">Profesor</option>
+        </select>
         <label htmlFor="email">Email:</label>
         <input
           type="email"
@@ -78,7 +89,7 @@ export function AddStudentModal({ isOpen, onClose }) {
           type="password"
           id="password"
           name="password"
-          minLength={5}
+          minLength={6}
           required
           onChange={handleInputChange}
         />

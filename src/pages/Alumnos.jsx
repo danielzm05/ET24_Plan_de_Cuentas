@@ -1,7 +1,7 @@
 import { NavigationMenu } from "../components/NavigationMenu";
 import { Table } from "../components/Table";
 import { useAccounts } from "../context/AccountContext";
-import { AddStudentModal } from "../components/Modals/AddStudentModal";
+import { AddUserModal } from "../components/Modals/AddUserModal";
 import { useEffect, useState } from "react";
 
 export function Alumnos() {
@@ -32,7 +32,7 @@ export function Alumnos() {
           ))}
         </Table>
 
-        <AddStudentModal
+        <AddUserModal
           isOpen={openAddModal}
           onClose={() => setOpenAddModal(false)}
         />

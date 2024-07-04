@@ -32,6 +32,7 @@ export function Cuentas() {
         <h2 className="saludo">
           Hola! {user.identities[0].identity_data.first_name}👋
         </h2>
+
         <Table
           title="Mis Cuentas"
           modify={() => setOpenModifyModal(true)}
