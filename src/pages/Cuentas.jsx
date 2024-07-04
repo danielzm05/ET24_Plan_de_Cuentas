@@ -5,6 +5,7 @@ import { ModifyAccountModal } from "../components/Modals/ModifyAccountModal";
 import { AddAccountModal } from "../components/Modals/AddAccountModal";
 import { DeleteAccountModal } from "../components/Modals/DeleteAccountModal";
 import { useAccounts } from "../context/AccountContext";
+import { useAuthContext } from "../context/AuthContext";
 
 export function Cuentas() {
   const [openModifyModal, setOpenModifyModal] = useState(false);
@@ -12,9 +13,9 @@ export function Cuentas() {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [accountSelected, setAccountSelected] = useState({});
   const { accounts, getAccounts } = useAccounts();
+  const { user } = useAuthContext();
 
   getAccounts();
-
   const handleAccountSelected = (id, codigo, nombre, tipo) => {
     setAccountSelected({
       id: id,
@@ -28,6 +29,9 @@ export function Cuentas() {
     <>
       <NavigationMenu selected="cuentas" />
       <main>
+        <h2 className="saludo">
+          Hola! {user.identities[0].identity_data.first_name}👋
+        </h2>
         <Table
           title="Mis Cuentas"
           modify={() => setOpenModifyModal(true)}

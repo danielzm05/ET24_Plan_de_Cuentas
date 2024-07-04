@@ -12,7 +12,7 @@ export function Table({
 }) {
   return (
     <div className="table">
-      <span className="table-name">{title}</span>
+      <h2 className="table-name">{title}</h2>
 
       <div className="table-options">
         <input className="search-bar" type="text" placeholder="Buscar.." />
