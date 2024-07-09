@@ -13,18 +13,33 @@ export function AddAccountModal({ isOpen, onClose }) {
   const { accounts, createAccount } = useAccounts();
 
   useEffect(() => {
-    accounts.some((account) => account.codigo == accountInfo.codigo)
+    accounts.some((account) => account.codigo === accountInfo.codigo)
       ? setError(true)
       : setError(false);
-  }, [accountInfo]);
+  }, [accountInfo, accounts]);
+
+  const formatCode = (value) => {
+    const cleanedValue = value.replace(/\D/g, ""); // Elimina caracteres no numéricos
+    const parts = cleanedValue.match(/.{1,2}/g); // Divide en grupos de 2 dígitos
+    const formatted = parts ? parts.join(".") : ""; // Junta con puntos
+    return formatted.substring(0, 14); // Limita a 14 caracteres
+  };
 
   const handleInputChange = (e) => {
     const { value, name } = e.target;
 
-    setAccountInfo({
-      ...accountInfo,
-      [name]: value,
-    });
+    if (name === "codigo") {
+      const formattedValue = formatCode(value);
+      setAccountInfo({
+        ...accountInfo,
+        [name]: formattedValue,
+      });
+    } else {
+      setAccountInfo({
+        ...accountInfo,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -46,11 +61,13 @@ export function AddAccountModal({ isOpen, onClose }) {
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="codigo">Código:</label>
         <input
-          type="number"
+          type="text"
           name="codigo"
           id="codigo"
           className={`input-data ${error ? "error" : ""}`}
           onChange={handleInputChange}
+          value={accountInfo.codigo}
+          placeHolder="00.00.00.00.00"
           required
         />
 
@@ -61,6 +78,7 @@ export function AddAccountModal({ isOpen, onClose }) {
           id="nombre"
           className="input-data"
           onChange={handleInputChange}
+          value={accountInfo.nombre}
           required
         />
         <label htmlFor="tipo">Tipo:</label>
@@ -69,11 +87,9 @@ export function AddAccountModal({ isOpen, onClose }) {
           name="tipo"
           className="input-data"
           onChange={handleInputChange}
-          defaultValue={accountInfo.tipo}
+          value={accountInfo.tipo}
         >
-          <option value="Acreedor" defaultValue>
-            Acreedor
-          </option>
+          <option value="Acreedor">Acreedor</option>
           <option value="Deudor">Deudor</option>
         </select>
         <div className="buttons-container">

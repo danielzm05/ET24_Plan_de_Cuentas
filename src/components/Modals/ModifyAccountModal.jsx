@@ -55,12 +55,13 @@ export function ModifyAccountModal({ isOpen, onClose, account }) {
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="codigo">Código:</label>
         <input
-          type="number"
+          type="text"
           name="codigo"
           id="codigo"
           value={accountModified.codigo}
           className={`input-data ${error ? "error" : ""}`}
           onChange={handleChange}
+          readOnly
         />
         <label htmlFor="nombre">Nombre:</label>
         <input
