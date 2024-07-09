@@ -67,11 +67,7 @@ export function Cuentas() {
             >
               <span>{account.codigo}</span>
               <span>{account.nombre}</span>
-              <span
-                className={`tipo-cuenta ${
-                  account.tipo_cuenta === "Acreedor" ? "acreedor" : "deudor"
-                }`}
-              >
+              <span className={`tipo-cuenta ${account.tipo_cuenta}`}>
                 {account.tipo_cuenta}
               </span>
             </div>

@@ -102,17 +102,18 @@
     .row span.tipo-cuenta {
       width: 80px;
       border: 1px solid;
+      color: transparent;
       margin: 10px;
       text-align: center;
       border-radius: 3px;
     }
 
-    .tipo-cuenta.acreedor {
+    .tipo-cuenta.Acreedor {
       color: #007c25;
       background-color: #4dfd829c;
     }
 
-    .tipo-cuenta.deudor {
+    .tipo-cuenta.Deudor {
       color: #b30000;
       background-color: #f06d6dad;
     }
