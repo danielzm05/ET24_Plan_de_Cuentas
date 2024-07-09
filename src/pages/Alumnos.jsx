@@ -1,9 +1,14 @@
+import { useEffect } from "react";
 import { NavigationMenu } from "../components/NavigationMenu";
 import { Table } from "../components/Table";
 import { useAccounts } from "../context/AccountContext";
 
 export function Alumnos() {
-  const { modifications } = useAccounts();
+  const { modifications, getModifications } = useAccounts();
+
+  useEffect(() => {
+    getModifications();
+  }, [modifications]);
 
   return (
     <>

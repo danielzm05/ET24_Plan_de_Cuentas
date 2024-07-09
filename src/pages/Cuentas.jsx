@@ -12,12 +12,13 @@ export function Cuentas() {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [accountSelected, setAccountSelected] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
   const { accounts, getAccounts } = useAccounts();
   const { user } = useAuthContext();
 
   useEffect(() => {
     getAccounts();
-  }, [accounts]);
+  }, [getAccounts]);
 
   const handleAccountSelected = (id, codigo, nombre, tipo) => {
     setAccountSelected({
@@ -28,6 +29,14 @@ export function Cuentas() {
     });
   };
 
+  const handleFilter = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredAccounts = accounts.filter((account) =>
+    account.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       <NavigationMenu selected="cuentas" />
@@ -35,13 +44,13 @@ export function Cuentas() {
         <h2 className="page-title">
           Hola! {user.identities[0].identity_data.first_name}👋
         </h2>
-
         <Table
           title="Mis Cuentas"
           modify={() => setOpenModifyModal(true)}
           add={() => setOpenAddModal(true)}
           remove={() => setOpenDeleteModal(true)}
           isAccountSelected={accountSelected.id}
+          handleSearch={handleFilter}
         >
           <div className="row header cuenta">
             <span>Código</span>
@@ -49,7 +58,7 @@ export function Cuentas() {
             <span>A/D</span>
           </div>
 
-          {accounts.map((account) => (
+          {filteredAccounts.map((account) => (
             <div
               className={`row cuenta ${
                 accountSelected.id === account.id_cuenta ? "selected" : ""

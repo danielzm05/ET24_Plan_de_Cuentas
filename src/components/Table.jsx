@@ -8,6 +8,7 @@ export function Table({
   modify,
   add,
   remove,
+  handleSearch,
   isAccountSelected,
 }) {
   return (
@@ -15,7 +16,12 @@ export function Table({
       <h2 className="table-name">{title}</h2>
 
       <div className="table-options">
-        <input className="search-bar" type="text" placeholder="Buscar.." />
+        <input
+          className="search-bar"
+          type="text"
+          placeholder="Buscar.."
+          onChange={handleSearch}
+        />
         {showOptions && (
           <ul>
             <li onClick={add}>
