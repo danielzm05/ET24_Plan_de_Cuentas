@@ -79,6 +79,7 @@ export function ModifyAccountModal({ isOpen, onClose, account }) {
           value={accountModified.tipo}
           onChange={handleChange}
         >
+          <option value={null}></option>
           <option value="Acreedor">Acreedor</option>
           <option value="Deudor">Deudor</option>
         </select>

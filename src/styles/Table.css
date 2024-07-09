@@ -81,6 +81,10 @@
       span {
         padding: 0 6px;
       }
+
+      svg {
+        max-width: 18px;
+      }
     }
     .row.modificacion {
       grid-template-columns: 0.5fr 6fr 1fr;
@@ -88,6 +92,10 @@
 
     .row.cuenta {
       grid-template-columns: 2fr 6fr 0.5fr;
+    }
+
+    .row.user {
+      grid-template-columns: 0.1fr 6fr 2fr;
     }
 
     .row.selected {
@@ -101,8 +109,6 @@
 
     .row span.tipo-cuenta {
       width: 80px;
-      border: 1px solid;
-      color: transparent;
       margin: 10px;
       text-align: center;
       border-radius: 3px;
@@ -110,11 +116,13 @@
 
     .tipo-cuenta.Acreedor {
       color: #007c25;
+      border: 1px solid;
       background-color: #4dfd829c;
     }
 
     .tipo-cuenta.Deudor {
       color: #b30000;
+      border: 1px solid;
       background-color: #f06d6dad;
     }
   }

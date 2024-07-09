@@ -4,14 +4,17 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { AccountProvider } from "./context/AccountContext.jsx";
+import { SchoolProvider } from "./context/SchoolContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <AccountProvider>
-          <App />
-        </AccountProvider>
+        <SchoolProvider>
+          <AccountProvider>
+            <App />
+          </AccountProvider>
+        </SchoolProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
