@@ -15,7 +15,10 @@ export function Cuentas() {
   const { accounts, getAccounts } = useAccounts();
   const { user } = useAuthContext();
 
-  getAccounts();
+  useEffect(() => {
+    getAccounts();
+  }, [accounts]);
+
   const handleAccountSelected = (id, codigo, nombre, tipo) => {
     setAccountSelected({
       id: id,
