@@ -32,7 +32,7 @@ export function Cuentas() {
     <>
       <NavigationMenu selected="cuentas" />
       <main>
-        <h2 className="saludo">
+        <h2 className="page-title">
           Hola! {user.identities[0].identity_data.first_name}👋
         </h2>
 

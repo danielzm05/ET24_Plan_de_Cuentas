@@ -2,6 +2,7 @@ import { Login } from "./pages/Login";
 import { NotFound } from "./pages/NotFound";
 import { Cuentas } from "./pages/Cuentas";
 import { Alumnos } from "./pages/Alumnos";
+import { Usuarios } from "./pages/Usuarios";
 import { Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuthContext } from "./context/AuthContext";
@@ -18,6 +19,7 @@ function App() {
         {user && (
           <Route element={<ProtectedRoute isAuth={user} />}>
             <Route path="/alumnos" element={<Alumnos />} />
+            <Route path="/usuarios" element={<Usuarios />} />
             <Route path="/cuentas" element={<Cuentas />} />
           </Route>
         )}

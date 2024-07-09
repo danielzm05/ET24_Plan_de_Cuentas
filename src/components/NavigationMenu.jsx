@@ -20,6 +20,18 @@ export function NavigationMenu({ selected }) {
 
         <li
           onClick={() => {
+            navigate("/usuarios");
+          }}
+          className={`section-item ${
+            selected === "usuarios" ? "selected" : ""
+          }`}
+        >
+          <Icon.User />
+          <span className="hide-item">Usuarios</span>
+        </li>
+
+        <li
+          onClick={() => {
             navigate("/alumnos");
           }}
           className={`section-item ${selected === "alumnos" ? "selected" : ""}`}
