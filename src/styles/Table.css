@@ -125,5 +125,30 @@
       border: 1px solid;
       background-color: #f06d6dad;
     }
+
+    .cursos-list {
+      display: flex;
+      justify-content: right;
+      list-style: none;
+      font-size: 16px;
+
+      li {
+        color: var(--icon-1);
+        cursor: pointer;
+        border: 1px solid var(--hover-2);
+        border-bottom: none;
+        border-radius: 5px 5px 0 0;
+        font-weight: 400;
+        padding: 0 10px;
+      }
+
+      li:hover {
+        background-color: var(--hover);
+      }
+
+      li.selected {
+        background-color: var(--hover);
+      }
+    }
   }
 }

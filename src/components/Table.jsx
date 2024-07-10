@@ -22,6 +22,7 @@ export function Table({
           placeholder="Buscar.."
           onChange={handleSearch}
         />
+
         {showOptions && (
           <ul>
             <li onClick={add}>
