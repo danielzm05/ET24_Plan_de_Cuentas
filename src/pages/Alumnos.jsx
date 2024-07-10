@@ -4,11 +4,11 @@ import { Table } from "../components/Table";
 import { useAccounts } from "../context/AccountContext";
 import { useSchoolContext } from "../context/SchoolContext";
 import { StudentTableModal } from "../components/Modals/StudentTableModal";
+import { ModificationTable } from "../components/ModificationsTable";
 
 export function Alumnos() {
   const { modifications, getModifications } = useAccounts();
   const { curses, getCurses, students, getStudents } = useSchoolContext();
-  const [searchModification, setSearchModification] = useState("");
   const [searchStudent, setSearchStudent] = useState("");
   const [openStudentTable, setOpenStudentTable] = useState(false);
   const [curseSelected, setCurseSelected] = useState(curses ? curses[0] : {});
@@ -17,6 +17,7 @@ export function Alumnos() {
   useEffect(() => {
     getModifications();
     getCurses();
+    getStudents(curseSelected.id_curso);
   }, [students]);
 
   const handleStudentSelected = (student) => {
@@ -29,18 +30,6 @@ export function Alumnos() {
     setCurseSelected(curse);
     getStudents(curse.id_curso);
   };
-
-  const handleFilterModification = (e) => {
-    setSearchModification(e.target.value);
-  };
-
-  const handleFilterStudent = (e) => {
-    setSearchStudent(e.target.value);
-  };
-
-  const filteredModifications = modifications.filter((mod) =>
-    mod.descripcion.toLowerCase().includes(searchModification.toLowerCase())
-  );
 
   const filteredStudents = students.filter(
     (student) =>
@@ -55,7 +44,7 @@ export function Alumnos() {
         <Table
           title={`Alumnos ${curseSelected ? curseSelected.nombre : ""}`}
           showOptions={false}
-          handleSearch={handleFilterStudent}
+          handleSearch={(e) => setSearchStudent(e.target.value)}
         >
           <ul className="cursos-list">
             {curses &&
@@ -93,25 +82,7 @@ export function Alumnos() {
             ))}
         </Table>
 
-        <Table
-          title="Modificaciones de cuentas"
-          showOptions={false}
-          handleSearch={handleFilterModification}
-        >
-          <div className="row header modificacion">
-            <span>Hora</span>
-            <span>Descripción</span>
-            <span>Fecha</span>
-          </div>
-
-          {filteredModifications.map((mod) => (
-            <div className="row modificacion" key={mod.id_modificacion}>
-              <span>{mod.fecha.slice(11, 16)}</span>
-              <span>{mod.descripcion}</span>
-              <span>{mod.fecha.slice(0, 10)}</span>
-            </div>
-          ))}
-        </Table>
+        <ModificationTable modifications={modifications} />
 
         <StudentTableModal
           isOpen={openStudentTable}
