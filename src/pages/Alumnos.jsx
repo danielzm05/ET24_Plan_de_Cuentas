@@ -3,18 +3,27 @@ import { NavigationMenu } from "../components/NavigationMenu";
 import { Table } from "../components/Table";
 import { useAccounts } from "../context/AccountContext";
 import { useSchoolContext } from "../context/SchoolContext";
+import { StudentTableModal } from "../components/Modals/StudentTableModal";
 
 export function Alumnos() {
-  const { accounts, modifications, getModifications } = useAccounts();
+  const { modifications, getModifications } = useAccounts();
   const { curses, getCurses, students, getStudents } = useSchoolContext();
   const [searchModification, setSearchModification] = useState("");
   const [searchStudent, setSearchStudent] = useState("");
+  const [openStudentTable, setOpenStudentTable] = useState(false);
   const [curseSelected, setCurseSelected] = useState(curses ? curses[0] : {});
+  const [studentSelected, setStudentSelected] = useState({});
 
   useEffect(() => {
     getModifications();
     getCurses();
-  }, [accounts]);
+  }, [students]);
+
+  const handleStudentSelected = (student) => {
+    setStudentSelected(student);
+    setOpenStudentTable(true);
+    console.log(student);
+  };
 
   const handleFilterCurse = (curse) => {
     setCurseSelected(curse);
@@ -72,7 +81,11 @@ export function Alumnos() {
 
           {students &&
             filteredStudents.map((student) => (
-              <div className="row modificacion" key={student.id_usuario}>
+              <div
+                className="row modificacion"
+                key={student.id_usuario}
+                onClick={() => handleStudentSelected(student)}
+              >
                 <span>{student.apellido}</span>
                 <span>{student.nombre}</span>
                 <span>{student.email}</span>
@@ -99,6 +112,12 @@ export function Alumnos() {
             </div>
           ))}
         </Table>
+
+        <StudentTableModal
+          isOpen={openStudentTable}
+          onClose={() => setOpenStudentTable(false)}
+          student={studentSelected}
+        />
       </main>
     </>
   );

@@ -22,7 +22,6 @@ export const AccountProvider = ({ children }) => {
 
     if (error) throw error;
 
-    console.log(data);
     setModifications(data);
   };
 
@@ -39,11 +38,11 @@ export const AccountProvider = ({ children }) => {
     getModifications();
   };
 
-  const getAccounts = async () => {
+  const getAccounts = async (id = user.id) => {
     const { data, error } = await supabase
       .from("Cuenta")
       .select("id_cuenta, codigo, nombre, tipo_cuenta")
-      .eq("id_usuario", user.id)
+      .eq("id_usuario", id)
       .order("codigo", { ascending: true });
 
     if (error) throw error;

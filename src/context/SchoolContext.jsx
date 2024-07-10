@@ -26,14 +26,12 @@ export const SchoolProvider = ({ children }) => {
 
   const getCurses = async () => {
     const userId = user.id;
-    console.log(userId);
 
     const { data: cursos, error } = await supabase
       .from("Curso")
       .select("nombre, id_curso, Profesor!inner(id_profesor)")
       .eq("Profesor.id_usuario", userId);
     if (error) throw error;
-    console.log(cursos);
     setCurses(cursos);
   };
 
