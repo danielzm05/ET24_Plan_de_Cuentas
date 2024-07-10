@@ -36,6 +36,7 @@ export const SchoolProvider = ({ children }) => {
   };
 
   const getStudents = async (cursoId) => {
+    if (!cursoId) return;
     const { data: alumnos, error } = await supabase
       .from("usuario")
       .select("id_usuario, nombre, apellido, email, Alumno!inner(id_curso)")

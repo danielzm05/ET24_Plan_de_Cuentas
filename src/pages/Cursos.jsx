@@ -15,16 +15,14 @@ export function Cursos() {
   const [studentSelected, setStudentSelected] = useState({});
 
   useEffect(() => {
-    getModifications();
     getCourses();
     getStudents(curseSelected?.id_curso);
   }, [students]);
 
-  const handleStudentSelected = (student) => {
-    setStudentSelected(student);
-    setOpenStudentTable(true);
-    console.log(student);
-  };
+  useEffect(() => {
+    console.log(studentSelected.id_usuario);
+    getModifications(studentSelected.id_usuario);
+  }, [studentSelected]);
 
   const handleFilterCurse = (curse) => {
     setCurseSelected(curse);
@@ -40,49 +38,58 @@ export function Cursos() {
   return (
     <>
       <NavigationMenu selected="cursos" />
-      <main>
-        <Table
-          title={`Alumnos ${curseSelected ? curseSelected.nombre : ""}`}
-          showOptions={false}
-          handleSearch={(e) => setSearchStudent(e.target.value)}
-        >
-          <ul className="cursos-list">
-            {courses &&
-              courses.map((curse) => (
-                <li
-                  onClick={() => handleFilterCurse(curse)}
-                  key={curse.id_curso}
-                  className={
-                    curseSelected?.id_curso === curse.id_curso
-                      ? "selected"
-                      : null
-                  }
+      <main className="cursos">
+        <h2 className="page-title">Mis Cursos</h2>
+        <div className="cursos-tables">
+          <Table
+            title={`Alumnos ${curseSelected ? curseSelected.nombre : ""}`}
+            showOptions={false}
+            handleSearch={(e) => setSearchStudent(e.target.value)}
+          >
+            <ul className="cursos-list">
+              {courses &&
+                courses.map((curse) => (
+                  <li
+                    onClick={() => handleFilterCurse(curse)}
+                    key={curse.id_curso}
+                    className={
+                      curseSelected?.id_curso === curse.id_curso
+                        ? "selected"
+                        : ""
+                    }
+                  >
+                    {curse.nombre}
+                  </li>
+                ))}
+            </ul>
+            <div className="row header modificacion">
+              <span>Apellido</span>
+              <span>Nombre</span>
+              <span>Email</span>
+            </div>
+
+            {students &&
+              filteredStudents.map((student) => (
+                <div
+                  className={`row modificacion ${
+                    studentSelected.id === student.id_cuenta ? "selected" : ""
+                  }`}
+                  key={student.id_usuario}
+                  onClick={() => setStudentSelected(student)}
+                  onDoubleClick={() => setOpenStudentTable(true)}
                 >
-                  {curse.nombre}
-                </li>
+                  <span>{student.apellido}</span>
+                  <span>{student.nombre}</span>
+                  <span>{student.email}</span>
+                </div>
               ))}
-          </ul>
-          <div className="row header modificacion">
-            <span>Apellido</span>
-            <span>Nombre</span>
-            <span>Email</span>
-          </div>
+          </Table>
 
-          {students &&
-            filteredStudents.map((student) => (
-              <div
-                className="row modificacion"
-                key={student.id_usuario}
-                onClick={() => handleStudentSelected(student)}
-              >
-                <span>{student.apellido}</span>
-                <span>{student.nombre}</span>
-                <span>{student.email}</span>
-              </div>
-            ))}
-        </Table>
-
-        <ModificationTable modifications={modifications} />
+          <ModificationTable
+            user={studentSelected}
+            modifications={modifications}
+          />
+        </div>
 
         <StudentTableModal
           isOpen={openStudentTable}

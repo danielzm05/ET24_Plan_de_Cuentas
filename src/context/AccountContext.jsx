@@ -14,15 +14,18 @@ export const AccountProvider = ({ children }) => {
   const [modifications, setModifications] = useState([]);
   const { user } = useAuthContext();
 
-  const getModifications = async () => {
-    const { data, error } = await supabase
-      .from("Modificacion")
-      .select("*")
-      .order("fecha", { ascending: false });
+  const getModifications = async (studentId) => {
+    if (studentId) {
+      const { data, error } = await supabase
+        .from("Modificacion")
+        .select("*")
+        .eq("id_usuario", studentId)
+        .order("fecha", { ascending: false });
 
-    if (error) throw error;
+      if (error) throw error;
 
-    setModifications(data);
+      setModifications(data);
+    }
   };
 
   const createModification = async (descripcion) => {

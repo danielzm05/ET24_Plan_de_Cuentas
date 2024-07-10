@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Table } from "./Table";
 
-export function ModificationTable({ modifications }) {
+export function ModificationTable({ user, modifications }) {
   const [searchModification, setSearchModification] = useState("");
 
   const filteredModifications = modifications.filter((mod) =>
@@ -10,7 +10,7 @@ export function ModificationTable({ modifications }) {
 
   return (
     <Table
-      title="Modificaciones de cuentas"
+      title={`Transacciones ${user.nombre ? user.nombre : ""}`}
       showOptions={false}
       handleSearch={(e) => setSearchModification(e.target.value)}
     >
