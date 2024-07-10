@@ -7,7 +7,7 @@ import { useSchoolContext } from "../context/SchoolContext";
 export function Alumnos() {
   const { accounts, modifications, getModifications } = useAccounts();
   const { curses, getCurses, students, getStudents } = useSchoolContext();
-  const [curseSelected, setCurseSelected] = useState(curses[0]);
+  const [curseSelected, setCurseSelected] = useState(curses ? curses[0] : {});
 
   useEffect(() => {
     getModifications();
@@ -23,19 +23,22 @@ export function Alumnos() {
     <>
       <NavigationMenu selected="alumnos" />
       <main>
-        <Table title={`Alumnos ${curseSelected.nombre}`} showOptions={false}>
+        <Table title={`Alumnos ${curseSelected?.nombre}`} showOptions={false}>
           <ul className="cursos-list">
-            {curses.map((curse) => (
-              <li
-                onClick={() => handleFilter(curse)}
-                key={curse.id_curso}
-                className={
-                  curseSelected.id_curso === curse.id_curso ? "selected" : null
-                }
-              >
-                {curse.nombre}
-              </li>
-            ))}
+            {curses &&
+              curses.map((curse) => (
+                <li
+                  onClick={() => handleFilter(curse)}
+                  key={curse.id_curso}
+                  className={
+                    curseSelected.id_curso === curse.id_curso
+                      ? "selected"
+                      : null
+                  }
+                >
+                  {curse.nombre}
+                </li>
+              ))}
           </ul>
           <div className="row header modificacion">
             <span>Apellido</span>
@@ -43,13 +46,14 @@ export function Alumnos() {
             <span>Email</span>
           </div>
 
-          {students.map((student) => (
-            <div className="row modificacion" key={student.id_usuario}>
-              <span>{student.apellido}</span>
-              <span>{student.nombre}</span>
-              <span>{student.email}</span>
-            </div>
-          ))}
+          {students &&
+            students.map((student) => (
+              <div className="row modificacion" key={student.id_usuario}>
+                <span>{student.apellido}</span>
+                <span>{student.nombre}</span>
+                <span>{student.email}</span>
+              </div>
+            ))}
         </Table>
 
         <Table title="Modificaciones de cuentas">

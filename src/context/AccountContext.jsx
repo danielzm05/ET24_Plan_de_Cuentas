@@ -17,11 +17,12 @@ export const AccountProvider = ({ children }) => {
   const getModifications = async () => {
     const { data, error } = await supabase
       .from("Modificacion")
-      .select("*")
+      .select("descripcion, fecha")
       .order("fecha", { ascending: false });
 
     if (error) throw error;
 
+    console.log(data);
     setModifications(data);
   };
 
