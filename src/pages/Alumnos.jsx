@@ -7,6 +7,8 @@ import { useSchoolContext } from "../context/SchoolContext";
 export function Alumnos() {
   const { accounts, modifications, getModifications } = useAccounts();
   const { curses, getCurses, students, getStudents } = useSchoolContext();
+  const [searchModification, setSearchModification] = useState("");
+  const [searchStudent, setSearchStudent] = useState("");
   const [curseSelected, setCurseSelected] = useState(curses ? curses[0] : {});
 
   useEffect(() => {
@@ -14,24 +16,46 @@ export function Alumnos() {
     getCurses();
   }, [accounts]);
 
-  const handleFilter = (curse) => {
+  const handleFilterCurse = (curse) => {
     setCurseSelected(curse);
     getStudents(curse.id_curso);
   };
+
+  const handleFilterModification = (e) => {
+    setSearchModification(e.target.value);
+  };
+
+  const handleFilterStudent = (e) => {
+    setSearchStudent(e.target.value);
+  };
+
+  const filteredModifications = modifications.filter((mod) =>
+    mod.descripcion.toLowerCase().includes(searchModification.toLowerCase())
+  );
+
+  const filteredStudents = students.filter(
+    (student) =>
+      student.nombre.toLowerCase().includes(searchStudent.toLowerCase()) ||
+      student.apellido.toLowerCase().includes(searchStudent.toLowerCase())
+  );
 
   return (
     <>
       <NavigationMenu selected="alumnos" />
       <main>
-        <Table title={`Alumnos ${curseSelected?.nombre}`} showOptions={false}>
+        <Table
+          title={`Alumnos ${curseSelected ? curseSelected.nombre : ""}`}
+          showOptions={false}
+          handleSearch={handleFilterStudent}
+        >
           <ul className="cursos-list">
             {curses &&
               curses.map((curse) => (
                 <li
-                  onClick={() => handleFilter(curse)}
+                  onClick={() => handleFilterCurse(curse)}
                   key={curse.id_curso}
                   className={
-                    curseSelected.id_curso === curse.id_curso
+                    curseSelected?.id_curso === curse.id_curso
                       ? "selected"
                       : null
                   }
@@ -47,7 +71,7 @@ export function Alumnos() {
           </div>
 
           {students &&
-            students.map((student) => (
+            filteredStudents.map((student) => (
               <div className="row modificacion" key={student.id_usuario}>
                 <span>{student.apellido}</span>
                 <span>{student.nombre}</span>
@@ -56,14 +80,18 @@ export function Alumnos() {
             ))}
         </Table>
 
-        <Table title="Modificaciones de cuentas">
+        <Table
+          title="Modificaciones de cuentas"
+          showOptions={false}
+          handleSearch={handleFilterModification}
+        >
           <div className="row header modificacion">
             <span>Hora</span>
             <span>Descripción</span>
             <span>Fecha</span>
           </div>
 
-          {modifications.map((mod) => (
+          {filteredModifications.map((mod) => (
             <div className="row modificacion" key={mod.id_modificacion}>
               <span>{mod.fecha.slice(11, 16)}</span>
               <span>{mod.descripcion}</span>
