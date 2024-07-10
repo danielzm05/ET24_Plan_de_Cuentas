@@ -11,7 +11,7 @@ export const useSchoolContext = () => {
 };
 export const SchoolProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
-  const [curses, setCurses] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [students, setStudents] = useState([]);
   const { user } = useAuthContext();
 
@@ -24,7 +24,7 @@ export const SchoolProvider = ({ children }) => {
     setUsers(systemUsers);
   };
 
-  const getCurses = async () => {
+  const getCourses = async () => {
     const userId = user.id;
 
     const { data: cursos, error } = await supabase
@@ -32,7 +32,7 @@ export const SchoolProvider = ({ children }) => {
       .select("nombre, id_curso, Profesor!inner(id_profesor)")
       .eq("Profesor.id_usuario", userId);
     if (error) throw error;
-    setCurses(cursos);
+    setCourses(cursos);
   };
 
   const getStudents = async (cursoId) => {
@@ -47,7 +47,7 @@ export const SchoolProvider = ({ children }) => {
 
   return (
     <SchoolContext.Provider
-      value={{ users, getUsers, curses, getCurses, students, getStudents }}
+      value={{ users, getUsers, courses, getCourses, students, getStudents }}
     >
       {children}
     </SchoolContext.Provider>

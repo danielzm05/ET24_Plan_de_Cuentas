@@ -8,15 +8,15 @@ import { ModificationTable } from "../components/ModificationsTable";
 
 export function Cursos() {
   const { modifications, getModifications } = useAccounts();
-  const { curses, getCurses, students, getStudents } = useSchoolContext();
+  const { courses, getCourses, students, getStudents } = useSchoolContext();
   const [searchStudent, setSearchStudent] = useState("");
   const [openStudentTable, setOpenStudentTable] = useState(false);
-  const [curseSelected, setCurseSelected] = useState(curses ? curses[0] : {});
+  const [curseSelected, setCurseSelected] = useState(courses[0]);
   const [studentSelected, setStudentSelected] = useState({});
 
   useEffect(() => {
     getModifications();
-    getCurses();
+    getCourses();
     getStudents(curseSelected?.id_curso);
   }, [students]);
 
@@ -47,8 +47,8 @@ export function Cursos() {
           handleSearch={(e) => setSearchStudent(e.target.value)}
         >
           <ul className="cursos-list">
-            {curses &&
-              curses.map((curse) => (
+            {courses &&
+              courses.map((curse) => (
                 <li
                   onClick={() => handleFilterCurse(curse)}
                   key={curse.id_curso}
