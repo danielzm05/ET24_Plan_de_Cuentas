@@ -47,10 +47,6 @@ export const AuthProvider = ({ children }) => {
       (event, session) => {
         setUserEvent(event);
         console.log(event);
-
-        if (event === "SIGNED_IN") {
-          navigate("/cuentas", { replace: true });
-        }
         checkUser();
       }
     );

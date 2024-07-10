@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../backend/client";
+import { useNavigate } from "react-router-dom";
 
 export function LoginForm() {
   const [errorLogin, setErrorLogin] = useState(false);
@@ -7,6 +8,7 @@ export function LoginForm() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { value, name } = e.target;
@@ -28,6 +30,8 @@ export function LoginForm() {
 
       if (error) {
         setErrorLogin(true);
+      } else {
+        navigate("/cuentas", { replace: true });
       }
     } catch (error) {
       console.log(error);
