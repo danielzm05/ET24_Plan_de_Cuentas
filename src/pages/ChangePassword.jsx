@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { supabase } from "../backend/client";
+
 export function ChangePassword() {
   const [newPassword, setNewPassword] = useState("");
 
