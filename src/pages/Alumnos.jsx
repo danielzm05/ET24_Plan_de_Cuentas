@@ -14,6 +14,14 @@ export function Alumnos() {
     <>
       <NavigationMenu selected="alumnos" />
       <main>
+        <Table title="Alumnos">
+          <div className="row header modificacion">
+            <span>Nombre</span>
+            <span>Apellido</span>
+            <span>Curso</span>
+          </div>
+        </Table>
+
         <Table title="Modificaciones de cuentas">
           <div className="row header modificacion">
             <span>Hora</span>

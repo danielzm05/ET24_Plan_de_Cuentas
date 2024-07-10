@@ -3,9 +3,11 @@ import { NotFound } from "./pages/NotFound";
 import { Cuentas } from "./pages/Cuentas";
 import { Alumnos } from "./pages/Alumnos";
 import { Usuarios } from "./pages/Usuarios";
+import { Ajustes } from "./pages/Ajustes";
 import { Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuthContext } from "./context/AuthContext";
+import { ChangePassword } from "./pages/ChangePassword";
 import "./App.css";
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
             <Route path="/alumnos" element={<Alumnos />} />
             <Route path="/usuarios" element={<Usuarios />} />
             <Route path="/cuentas" element={<Cuentas />} />
+            <Route path="/ajustes" element={<Ajustes />} />
+            <Route path="/contraseña" element={<ChangePassword />} />
           </Route>
         )}
       </Routes>

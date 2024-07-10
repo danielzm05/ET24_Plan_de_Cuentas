@@ -50,6 +50,16 @@ export function NavigationMenu({ selected }) {
           <span className="hide-item">Cuentas</span>
         </li>
 
+        <li
+          onClick={() => {
+            navigate("/ajustes");
+          }}
+          className={`section-item ${selected === "ajustes" ? "selected" : ""}`}
+        >
+          <Icon.Settings />
+          <span className="hide-item">Ajustes</span>
+        </li>
+
         <li className="section-item logout-btn" onClick={handleLogOut}>
           <Icon.LogOut />
           <span className="hide-item">Cerrar Sesión</span>

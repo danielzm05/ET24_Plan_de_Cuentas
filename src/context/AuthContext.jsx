@@ -26,6 +26,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const sendPasswordEmail = async () => {
+    const { data, error } = await supabase.auth.api.resetPasswordForEmail(
+      user.email,
+      {
+        redirectTo: "https://plandecuentas.netlify.app/contraseña",
+      }
+    );
+
+    if (error) throw error;
+    console.log("sending...");
+    console.log(user.email);
+  };
+
   useEffect(() => {
     checkUser();
 
@@ -47,7 +60,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, userEvent }}>
+    <AuthContext.Provider value={{ user, userEvent, sendPasswordEmail }}>
       {children}
     </AuthContext.Provider>
   );
