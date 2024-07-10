@@ -32,12 +32,12 @@ export function NavigationMenu({ selected }) {
 
         <li
           onClick={() => {
-            navigate("/alumnos");
+            navigate("/cursos");
           }}
-          className={`section-item ${selected === "alumnos" ? "selected" : ""}`}
+          className={`section-item ${selected === "cursos" ? "selected" : ""}`}
         >
-          <Icon.User />
-          <span className="hide-item">Alumnos</span>
+          <Icon.Users />
+          <span className="hide-item">Mis Cursos</span>
         </li>
 
         <li
@@ -50,7 +50,7 @@ export function NavigationMenu({ selected }) {
           <span className="hide-item">Cuentas</span>
         </li>
 
-        <li
+        {/*         <li
           onClick={() => {
             navigate("/ajustes");
           }}
@@ -58,7 +58,7 @@ export function NavigationMenu({ selected }) {
         >
           <Icon.Settings />
           <span className="hide-item">Ajustes</span>
-        </li>
+        </li> */}
 
         <li className="section-item logout-btn" onClick={handleLogOut}>
           <Icon.LogOut />

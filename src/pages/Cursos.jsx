@@ -6,7 +6,7 @@ import { useSchoolContext } from "../context/SchoolContext";
 import { StudentTableModal } from "../components/Modals/StudentTableModal";
 import { ModificationTable } from "../components/ModificationsTable";
 
-export function Alumnos() {
+export function Cursos() {
   const { modifications, getModifications } = useAccounts();
   const { curses, getCurses, students, getStudents } = useSchoolContext();
   const [searchStudent, setSearchStudent] = useState("");
@@ -17,7 +17,7 @@ export function Alumnos() {
   useEffect(() => {
     getModifications();
     getCurses();
-    getStudents(curseSelected.id_curso);
+    getStudents(curseSelected?.id_curso);
   }, [students]);
 
   const handleStudentSelected = (student) => {
@@ -39,7 +39,7 @@ export function Alumnos() {
 
   return (
     <>
-      <NavigationMenu selected="alumnos" />
+      <NavigationMenu selected="cursos" />
       <main>
         <Table
           title={`Alumnos ${curseSelected ? curseSelected.nombre : ""}`}

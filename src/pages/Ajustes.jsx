@@ -5,7 +5,7 @@ export function Ajustes() {
   const { sendPasswordEmail } = useAuthContext();
   return (
     <>
-      <NavigationMenu selected="alumnos" />
+      <NavigationMenu selected="ajustes" />
       <main>
         <h2 className="page-title">Ajustes</h2>
 
