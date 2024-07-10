@@ -22,7 +22,9 @@ export function AddUserModal({ isOpen, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+
+    console.log(userInfo);
+    /* try {
       const { user, error } = await supabase.auth.signUp({
         email: userInfo.email,
         password: userInfo.password,
@@ -39,7 +41,7 @@ export function AddUserModal({ isOpen, onClose }) {
       onClose();
     } catch (error) {
       console.error("Error al registrar y guardar el usuario:", error.message);
-    }
+    } */
   };
 
   return (
