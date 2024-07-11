@@ -18,7 +18,6 @@ export function Cuentas() {
 
   useEffect(() => {
     getAccounts();
-    console.log(userInfo);
   }, [user]);
 
   const handleAccountSelected = (id, codigo, nombre, tipo) => {

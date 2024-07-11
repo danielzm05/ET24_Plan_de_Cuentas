@@ -67,7 +67,7 @@ export function AddAccountModal({ isOpen, onClose }) {
           className={`input-data ${error ? "error" : ""}`}
           onChange={handleInputChange}
           value={accountInfo.codigo}
-          placeHolder="00.00.00.00.00"
+          placeholder="00.00.00.00.00"
           required
         />
 
