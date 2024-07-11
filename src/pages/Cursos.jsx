@@ -21,7 +21,6 @@ export function Cursos() {
   }, [students]);
 
   useEffect(() => {
-    console.log(studentSelected.id_usuario);
     getModifications(studentSelected.id_usuario);
   }, [studentSelected]);
 

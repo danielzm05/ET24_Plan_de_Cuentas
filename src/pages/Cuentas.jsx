@@ -14,11 +14,12 @@ export function Cuentas() {
   const [accountSelected, setAccountSelected] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const { accounts, getAccounts } = useAccounts();
-  const { user } = useAuthContext();
+  const { user, userInfo } = useAuthContext();
 
   useEffect(() => {
     getAccounts();
-  }, [getAccounts]);
+    console.log(userInfo);
+  }, [user]);
 
   const handleAccountSelected = (id, codigo, nombre, tipo) => {
     setAccountSelected({
@@ -42,7 +43,7 @@ export function Cuentas() {
       <NavigationMenu selected="cuentas" />
       <main>
         <h2 className="page-title">
-          Hola! {user.identities[0].identity_data.first_name}👋
+          Hola! {userInfo ? userInfo[0].nombre : ""}👋
         </h2>
         <Table
           title="Mis Cuentas"

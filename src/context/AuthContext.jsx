@@ -13,14 +13,28 @@ export const useAuthContext = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
   const [userEvent, setUserEvent] = useState(null);
   const navigate = useNavigate();
+
+  const getUserInfo = async (userId) => {
+    if (userId) {
+      const { data, error } = await supabase
+        .from("usuario")
+        .select("*")
+        .eq("id_usuario", "9a57ce93-6a8b-4803-9883-3f9f1dd75bf0");
+
+      if (error) throw error;
+      setUserInfo(data);
+    }
+  };
 
   const checkUser = async () => {
     const { data } = await supabase.auth.getUser();
 
     if (data.user) {
       setUser(data.user);
+      getUserInfo(data.user.id);
     } else {
       navigate("/", { replace: true });
     }
@@ -36,8 +50,6 @@ export const AuthProvider = ({ children }) => {
     );
 
     if (error) throw error;
-    console.log("sending...");
-    console.log(userEmail);
   };
 
   useEffect(() => {
@@ -57,7 +69,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, userEvent, sendPasswordEmail }}>
+    <AuthContext.Provider
+      value={{ user, userEvent, sendPasswordEmail, userInfo }}
+    >
       {children}
     </AuthContext.Provider>
   );

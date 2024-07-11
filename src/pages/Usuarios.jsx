@@ -10,7 +10,6 @@ export function Usuarios() {
   const { users, getUsers } = useSchoolContext();
   useState(() => {
     getUsers();
-    console.log(users);
   }, [users]);
 
   return (
