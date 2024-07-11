@@ -1,7 +1,8 @@
 import { useState } from "react";
+import * as Icon from "react-feather";
 import { Table } from "./Table";
 
-export function ModificationTable({ user, modifications }) {
+export function ModificationTable({ user, modifications, deleteAll }) {
   const [searchModification, setSearchModification] = useState("");
 
   const filteredModifications = modifications.filter((mod) =>
@@ -14,6 +15,12 @@ export function ModificationTable({ user, modifications }) {
       showOptions={false}
       handleSearch={(e) => setSearchModification(e.target.value)}
     >
+      <ul className="table-tools">
+        <li onClick={deleteAll}>
+          <Icon.Trash />
+          Eliminar
+        </li>
+      </ul>
       <div className="row header modificacion">
         <span>Hora</span>
         <span>Descripción</span>

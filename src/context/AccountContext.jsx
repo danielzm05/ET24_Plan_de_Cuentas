@@ -28,6 +28,19 @@ export const AccountProvider = ({ children }) => {
     }
   };
 
+  const deleteModifications = async (studentId) => {
+    if (studentId) {
+      const { error } = await supabase
+        .from("Modificacion")
+        .delete()
+        .eq("id_usuario", studentId);
+
+      if (error) throw error;
+
+      getModifications();
+    }
+  };
+
   const createModification = async (descripcion) => {
     const { error } = await supabase.from("Modificacion").insert([
       {
@@ -107,6 +120,7 @@ export const AccountProvider = ({ children }) => {
         accounts,
         modifications,
         getModifications,
+        deleteModifications,
         getAccounts,
         createAccount,
         deleteAccount,

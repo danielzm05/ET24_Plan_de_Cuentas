@@ -25,16 +25,16 @@
       padding: 6px;
       background-color: var(--hover);
     }
+  }
 
-    ul {
-      display: flex;
-      gap: 0 20px;
-      justify-content: end;
-      list-style: none;
-      flex-wrap: wrap;
-    }
+  .table-tools {
+    display: flex;
+    gap: 0 20px;
+    justify-content: end;
+    list-style: none;
+    flex-wrap: wrap;
 
-    ul li {
+    li {
       display: flex;
       align-items: center;
       padding: 0 5px;
@@ -48,16 +48,16 @@
       user-select: none;
     }
 
-    ul li:hover {
+    li:hover {
       background-color: var(--hover);
     }
 
-    ul li svg {
+    li svg {
       max-width: 18px;
       stroke: var(--icon-1);
     }
 
-    ul li.hide-option {
+    li.hide-option {
       pointer-events: none;
       opacity: 40%;
     }
@@ -130,7 +130,7 @@
       display: flex;
       justify-content: right;
       list-style: none;
-      font-size: 16px;
+      font-size: 14px;
 
       li {
         color: var(--icon-1);

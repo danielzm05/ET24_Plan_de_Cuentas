@@ -24,7 +24,7 @@ export function Table({
         />
 
         {showOptions && (
-          <ul>
+          <ul className="table-tools">
             <li onClick={add}>
               <Icon.PlusSquare />
               Agregar

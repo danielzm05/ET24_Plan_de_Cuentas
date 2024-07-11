@@ -7,7 +7,8 @@ import { StudentTableModal } from "../components/Modals/StudentTableModal";
 import { ModificationTable } from "../components/ModificationsTable";
 
 export function Cursos() {
-  const { modifications, getModifications } = useAccounts();
+  const { modifications, getModifications, deleteModifications } =
+    useAccounts();
   const { courses, getCourses, students, getStudents } = useSchoolContext();
   const [searchStudent, setSearchStudent] = useState("");
   const [openStudentTable, setOpenStudentTable] = useState(false);
@@ -48,17 +49,17 @@ export function Cursos() {
           >
             <ul className="cursos-list">
               {courses &&
-                courses.map((curse) => (
+                courses.map((course) => (
                   <li
-                    onClick={() => handleFilterCurse(curse)}
-                    key={curse.id_curso}
+                    onClick={() => handleFilterCurse(course)}
+                    key={course.id_curso}
                     className={
-                      curseSelected?.id_curso === curse.id_curso
+                      curseSelected?.id_curso === course.id_curso
                         ? "selected"
                         : ""
                     }
                   >
-                    {curse.nombre}
+                    {course.nombre}
                   </li>
                 ))}
             </ul>
@@ -88,6 +89,7 @@ export function Cursos() {
           <ModificationTable
             user={studentSelected}
             modifications={modifications}
+            deleteAll={() => deleteModifications(studentSelected.id_usuario)}
           />
         </div>
 
