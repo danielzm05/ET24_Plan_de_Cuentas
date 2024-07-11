@@ -71,9 +71,7 @@ export function Cursos() {
             {students &&
               filteredStudents.map((student) => (
                 <div
-                  className={`row modificacion ${
-                    studentSelected.id === student.id_cuenta ? "selected" : ""
-                  }`}
+                  className={`row modificacion`}
                   key={student.id_usuario}
                   onClick={() => setStudentSelected(student)}
                   onDoubleClick={() => setOpenStudentTable(true)}

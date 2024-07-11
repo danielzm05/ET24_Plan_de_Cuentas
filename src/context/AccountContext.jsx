@@ -78,9 +78,7 @@ export const AccountProvider = ({ children }) => {
 
     if (error) throw error;
     getAccounts();
-    createModification(
-      `${user.identities[0].identity_data.last_name} ${user.identities[0].identity_data.first_name}Creó ${nombre} (${codigo}) `
-    );
+    createModification(`Creó ${nombre} (${codigo}) `);
   };
 
   const deleteAccount = async (id, nombre) => {
@@ -92,12 +90,10 @@ export const AccountProvider = ({ children }) => {
 
     if (error) throw error;
     getAccounts();
-    createModification(
-      `${user.identities[0].identity_data.last_name} ${user.identities[0].identity_data.first_name} Eliminó ${nombre} `
-    );
+    createModification(`Eliminó ${nombre} `);
   };
 
-  const updateAccount = async (id, codigo, nombre, tipo, cuenta) => {
+  const updateAccount = async (id, codigo, nombre, tipo = "", cuenta) => {
     const { error } = await supabase
       .from("Cuenta")
       .update({
@@ -111,7 +107,7 @@ export const AccountProvider = ({ children }) => {
     if (error) throw error;
     getAccounts();
     createModification(
-      `${user.identities[0].identity_data.last_name} ${user.identities[0].identity_data.first_name} Modificó ${cuenta.nombre} (${cuenta.codigo}, ${cuenta.tipo})  a  ${nombre}  (${codigo},${tipo})`
+      `Modificó ${cuenta.nombre} (${cuenta.tipo}) a ${nombre} (${tipo})`
     );
   };
   return (

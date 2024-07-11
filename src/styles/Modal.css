@@ -16,7 +16,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 600px;
+  max-height: 80vh;
+  max-width: 70vw;
   min-width: 320px;
   padding: 20px;
   background-color: var(--table);
@@ -108,6 +109,10 @@
       color: var(--error);
       padding: 0 10px;
     }
+  }
+
+  .table {
+    overflow-y: scroll;
   }
 }
 

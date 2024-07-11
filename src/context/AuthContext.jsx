@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
       const { data, error } = await supabase
         .from("usuario")
         .select("*")
-        .eq("id_usuario", "9a57ce93-6a8b-4803-9883-3f9f1dd75bf0");
+        .eq("id_usuario", userId);
 
       if (error) throw error;
       setUserInfo(data);
