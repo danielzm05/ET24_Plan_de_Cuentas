@@ -11,22 +11,43 @@ import { ChangePassword } from "./pages/ChangePassword";
 import "./App.css";
 
 function App() {
-  const { user } = useAuthContext();
+  const { user, userInfo } = useAuthContext();
 
   return (
     <>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="*" element={<NotFound />} />
-        {user && (
-          <Route element={<ProtectedRoute isAuth={user} />}>
-            <Route path="/cursos" element={<Cursos />} />
-            <Route path="/usuarios" element={<Usuarios />} />
-            <Route path="/cuentas" element={<Cuentas />} />
-            <Route path="/ajustes" element={<Ajustes />} />
-            {/* <Route path="/contraseña" element={<ChangePassword />} /> */}
-          </Route>
-        )}
+
+        <Route
+          element={<ProtectedRoute isAuth={!!user} roles={[3, 2, 1]} userRol={userInfo?.id_rol} />}
+        >
+          <Route path="/ajustes" element={<Ajustes />} />
+          <Route path="/contraseña" element={<ChangePassword />} />
+        </Route>
+
+        <Route
+          element={
+            <ProtectedRoute
+              isAuth={!!user}
+              roles={[3, 1]}
+              userRol={userInfo?.id_rol}
+              redirectTo="/cursos"
+            />
+          }
+        >
+          <Route path="/cuentas" element={<Cuentas />} />
+        </Route>
+        <Route
+          element={<ProtectedRoute isAuth={!!user} roles={[2, 1]} userRol={userInfo?.id_rol} />}
+        >
+          <Route path="/cursos" element={<Cursos />} />
+        </Route>
+
+        <Route element={<ProtectedRoute isAuth={!!user} roles={[1]} userRol={userInfo?.id_rol} />}>
+          <Route path="/cursos" element={<Cursos />} />
+          <Route path="/usuarios" element={<Usuarios />} />
+        </Route>
       </Routes>
     </>
   );

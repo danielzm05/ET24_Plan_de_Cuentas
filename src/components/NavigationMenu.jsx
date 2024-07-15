@@ -1,11 +1,10 @@
 import * as Icon from "react-feather";
 import { supabase } from "../backend/client";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
 import "../styles/NavigationMenu.css";
 
 export function NavigationMenu({ selected }) {
-  const navigate = useNavigate();
-
   const handleLogOut = async () => {
     await supabase.auth.signOut();
   };
@@ -18,37 +17,32 @@ export function NavigationMenu({ selected }) {
           <span className="hide-item">PLAN DE CUENTAS</span>
         </li>
 
-        <li
-          onClick={() => {
-            navigate("/usuarios");
-          }}
-          className={`section-item ${
-            selected === "usuarios" ? "selected" : ""
-          }`}
+        <MenuItem
+          roles={[1]}
+          title="Usuarios"
+          name="usuarios"
+          selected={selected}
         >
           <Icon.User />
-          <span className="hide-item">Usuarios</span>
-        </li>
+        </MenuItem>
 
-        <li
-          onClick={() => {
-            navigate("/cursos");
-          }}
-          className={`section-item ${selected === "cursos" ? "selected" : ""}`}
+        <MenuItem
+          roles={[2, 1]}
+          title="Mis Cursos"
+          name="cursos"
+          selected={selected}
         >
           <Icon.Users />
-          <span className="hide-item">Mis Cursos</span>
-        </li>
+        </MenuItem>
 
-        <li
-          onClick={() => {
-            navigate("/cuentas");
-          }}
-          className={`section-item ${selected === "cuentas" ? "selected" : ""}`}
+        <MenuItem
+          roles={[3, 1]}
+          title="Cuentas"
+          name="cuentas"
+          selected={selected}
         >
           <Icon.Table />
-          <span className="hide-item">Cuentas</span>
-        </li>
+        </MenuItem>
 
         {/*         <li
           onClick={() => {
@@ -67,4 +61,25 @@ export function NavigationMenu({ selected }) {
       </ul>
     </div>
   );
+}
+
+function MenuItem({ roles, title, name, children, selected }) {
+  const navigate = useNavigate();
+  const { userInfo } = useAuthContext();
+
+  if (roles.includes(userInfo.id_rol)) {
+    return (
+      <li
+        onClick={() => {
+          navigate(`/${name}`);
+        }}
+        className={`section-item ${selected === name ? "selected" : ""}`}
+      >
+        {children}
+        <span className="hide-item">{title}</span>
+      </li>
+    );
+  } else {
+    return null;
+  }
 }

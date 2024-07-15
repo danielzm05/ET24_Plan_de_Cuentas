@@ -18,7 +18,6 @@ export function Cuentas() {
 
   useEffect(() => {
     getAccounts();
-    console.log(userInfo);
   }, [user]);
 
   const handleAccountSelected = (id, codigo, nombre, tipo) => {
@@ -43,7 +42,7 @@ export function Cuentas() {
       <NavigationMenu selected="cuentas" />
       <main>
         <h2 className="page-title">
-          Hola! {userInfo ? userInfo[0]?.nombre : ""}👋
+          Hola! {userInfo ? userInfo?.nombre : ""}👋
         </h2>
         <Table
           title="Mis Cuentas"

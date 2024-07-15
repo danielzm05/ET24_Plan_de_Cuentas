@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
         .eq("id_usuario", userId);
 
       if (error) throw error;
-      setUserInfo(data);
+      setUserInfo(data[0]);
     }
   };
 
