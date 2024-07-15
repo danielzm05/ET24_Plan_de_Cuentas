@@ -5,16 +5,9 @@ import { Table } from "./Table";
 export function ModificationTable({ user, modifications, deleteAll }) {
   const [searchModification, setSearchModification] = useState("");
 
-  const filteredModifications = modifications.filter((mod) =>
-    mod.descripcion.toLowerCase().includes(searchModification.toLowerCase())
-  );
-
+  const filteredModifications = modifications.filter((mod) => mod.descripcion.toLowerCase().includes(searchModification.toLowerCase()));
   return (
-    <Table
-      title={`Transacciones ${user.nombre ? user.nombre : ""}`}
-      showOptions={false}
-      handleSearch={(e) => setSearchModification(e.target.value)}
-    >
+    <Table title={`Transacciones ${user.nombre ? user.nombre : ""}`} showOptions={false} handleSearch={(e) => setSearchModification(e.target.value)}>
       <ul className="table-tools">
         <li onClick={deleteAll}>
           <Icon.Trash />
@@ -27,13 +20,17 @@ export function ModificationTable({ user, modifications, deleteAll }) {
         <span>Fecha</span>
       </div>
 
-      {filteredModifications.map((mod) => (
-        <div className="row modificacion" key={mod.id_modificacion}>
-          <span>{mod.fecha.slice(11, 16)}</span>
-          <span>{mod.descripcion}</span>
-          <span>{mod.fecha.slice(0, 10)}</span>
-        </div>
-      ))}
+      {filteredModifications.length === 0 ? (
+        <p>{user.nombre} no ha hecho modificaciones en su cuenta</p>
+      ) : (
+        filteredModifications.map((mod) => (
+          <div className="row modificacion" key={mod.id_modificacion}>
+            <span>{mod.fecha.slice(11, 16)}</span>
+            <span>{mod.descripcion}</span>
+            <span>{mod.fecha.slice(0, 10)}</span>
+          </div>
+        ))
+      )}
     </Table>
   );
 }

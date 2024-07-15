@@ -7,8 +7,7 @@ import { StudentTableModal } from "../components/Modals/StudentTableModal";
 import { ModificationTable } from "../components/ModificationsTable";
 
 export function Cursos() {
-  const { modifications, getModifications, deleteModifications } =
-    useAccounts();
+  const { modifications, getModifications, deleteModifications } = useAccounts();
   const { courses, getCourses, students, getStudents } = useSchoolContext();
   const [searchStudent, setSearchStudent] = useState("");
   const [openStudentTable, setOpenStudentTable] = useState(false);
@@ -24,6 +23,11 @@ export function Cursos() {
     getModifications(studentSelected.id_usuario);
   }, [studentSelected]);
 
+  const deleteStudentModifications = () => {
+    deleteModifications(studentSelected.id_usuario);
+    getModifications(studentSelected.id_usuario);
+  };
+
   const handleFilterCurse = (curse) => {
     setCurseSelected(curse);
     getStudents(curse.id_curso);
@@ -31,8 +35,7 @@ export function Cursos() {
 
   const filteredStudents = students.filter(
     (student) =>
-      student.nombre.toLowerCase().includes(searchStudent.toLowerCase()) ||
-      student.apellido.toLowerCase().includes(searchStudent.toLowerCase())
+      student.nombre.toLowerCase().includes(searchStudent.toLowerCase()) || student.apellido.toLowerCase().includes(searchStudent.toLowerCase())
   );
 
   return (
@@ -52,11 +55,7 @@ export function Cursos() {
                   <li
                     onClick={() => handleFilterCurse(course)}
                     key={course.id_curso}
-                    className={
-                      curseSelected?.id_curso === course.id_curso
-                        ? "selected"
-                        : ""
-                    }
+                    className={curseSelected?.id_curso === course.id_curso ? "selected" : ""}
                   >
                     {course.nombre}
                   </li>
@@ -83,18 +82,10 @@ export function Cursos() {
               ))}
           </Table>
 
-          <ModificationTable
-            user={studentSelected}
-            modifications={modifications}
-            deleteAll={() => deleteModifications(studentSelected.id_usuario)}
-          />
+          <ModificationTable user={studentSelected} modifications={modifications} deleteAll={deleteStudentModifications} />
         </div>
 
-        <StudentTableModal
-          isOpen={openStudentTable}
-          onClose={() => setOpenStudentTable(false)}
-          student={studentSelected}
-        />
+        <StudentTableModal isOpen={openStudentTable} onClose={() => setOpenStudentTable(false)} student={studentSelected} />
       </main>
     </>
   );
