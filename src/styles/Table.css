@@ -24,6 +24,7 @@
       border-radius: 10px;
       padding: 6px;
       background-color: var(--hover);
+      color: var(--text-1);
     }
   }
 
@@ -115,13 +116,13 @@
     }
 
     .tipo-cuenta.Acreedor {
-      color: #007c25;
+      color: var(--green);
       border: 1px solid;
       background-color: #4dfd829c;
     }
 
     .tipo-cuenta.Deudor {
-      color: #b30000;
+      color: var(--red);
       border: 1px solid;
       background-color: #f06d6dad;
     }

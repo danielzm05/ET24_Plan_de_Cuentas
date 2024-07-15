@@ -68,6 +68,6 @@
 
   .section-item.selected {
     background-color: var(--selection);
-    color: var(--background);
+    color: var(--button-text);
   }
 }

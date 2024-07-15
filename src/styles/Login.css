@@ -58,8 +58,9 @@
 
     .input-data {
       height: 32px;
-      border: 0.01em solid var(--text-4);
-      color: var(--text-4);
+      border: solid 0.01em var(--text-3);
+      background-color: var(--input);
+      color: var(--text-3);
       border-radius: 10px;
       font-size: 14px;
       margin-bottom: 30px;
@@ -68,7 +69,7 @@
     }
 
     .error-message {
-      color: var(--error);
+      color: var(--red);
     }
 
     input[type="submit"] {
@@ -79,7 +80,7 @@
       cursor: pointer;
       font-size: 16px;
       font-weight: 300;
-      color: var(--table);
+      color: var(--button-text);
       background-color: var(--selection);
     }
   }
@@ -92,8 +93,7 @@
 }
 
 .focus-in-expand {
-  -webkit-animation: focus-in-expand 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    both;
+  -webkit-animation: focus-in-expand 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: focus-in-expand 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
@@ -125,8 +125,7 @@
 }
 
 .fade-in-left {
-  -webkit-animation: fade-in-left 1.3s cubic-bezier(0.39, 0.575, 0.565, 1) 0.8s
-    both;
+  -webkit-animation: fade-in-left 1.3s cubic-bezier(0.39, 0.575, 0.565, 1) 0.8s both;
   animation: fade-in-left 1.3s cubic-bezier(0.39, 0.575, 0.565, 1) 0.8s both;
 }
 

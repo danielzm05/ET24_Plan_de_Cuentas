@@ -55,13 +55,14 @@
     gap: 5px;
 
     label {
-      color: var(--text-4);
+      color: var(--text-3);
     }
 
     .input-data {
       height: 32px;
-      border: 0.01em solid;
-      color: var(--text-4);
+      border: solid 0.01em var(--text-3);
+      background-color: var(--input);
+      color: var(--text-3);
       border-radius: 10px;
       margin-bottom: 15px;
       outline: none;
@@ -87,17 +88,16 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      color: var(--table);
       background-color: var(--selection);
+      color: var(--button-text);
     }
 
     .cancel-btn {
       background-color: transparent;
-      color: var(--text-4);
     }
 
     .delete-btn {
-      background-color: var(--error);
+      background-color: var(--red);
     }
 
     .hide-btn {
@@ -106,7 +106,7 @@
     }
 
     .error-message {
-      color: var(--error);
+      color: var(--red);
       padding: 0 10px;
     }
   }
