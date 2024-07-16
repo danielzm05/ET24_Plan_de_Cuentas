@@ -38,22 +38,17 @@ export const SchoolProvider = ({ children }) => {
     }
   };
 
-  const getTeachers = async (cursoId) => {
-    if (!cursoId) return;
-    const { data: teachers, error } = await supabase.from("Profesor").select(`*,usuario (id_usuario,nombre,apellido,email,id_rol), Curso(id_curso)`);
+  const getTeachers = async () => {
+    const { data: teachers, error } = await supabase.from("Profesor").select(`*,usuario (*), Curso(id_curso)`);
     if (error) throw error;
 
     setTeachers(teachers);
   };
 
-  const getStudents = async (cursoId) => {
-    if (!cursoId) return;
-    const { data: alumnos, error } = await supabase
-      .from("usuario")
-      .select("id_usuario, nombre, apellido, email, id_rol, Alumno!inner(id_curso)")
-      .eq("Alumno.id_curso", cursoId);
-    if (error) throw error;
+  const getStudents = async () => {
+    const { data: alumnos, error } = await supabase.from("Alumno").select("*, usuario (*)");
 
+    if (error) throw error;
     setStudents(alumnos);
   };
 

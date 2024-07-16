@@ -111,7 +111,7 @@
     }
   }
 
-  .table {
+  .table .table-content {
     overflow-y: scroll;
   }
 }

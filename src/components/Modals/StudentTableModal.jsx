@@ -12,7 +12,7 @@ export function StudentTableModal({ isOpen, onClose, student }) {
 
   return (
     <Modal isOpen={isOpen} isClose={onClose}>
-      <Table title={`Vista de ${student.nombre}`} showOptions={false}>
+      <Table title={`Cuentas de ${student?.usuario?.nombre}`} showOptions={false}>
         <div className="row header cuenta">
           <span>Código</span>
           <span>Rubro</span>
@@ -23,9 +23,7 @@ export function StudentTableModal({ isOpen, onClose, student }) {
           <div className="row cuenta" key={account.id_cuenta}>
             <span>{account.codigo}</span>
             <span>{account.nombre}</span>
-            <span className={`tipo-cuenta ${account.tipo_cuenta}`}>
-              {account.tipo_cuenta}
-            </span>
+            <span className={`tipo-cuenta ${account.tipo_cuenta}`}>{account.tipo_cuenta}</span>
           </div>
         ))}
       </Table>

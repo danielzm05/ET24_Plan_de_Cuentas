@@ -11,12 +11,12 @@ export function Cursos() {
   const { courses, getCourses, students, getStudents } = useSchoolContext();
   const [searchStudent, setSearchStudent] = useState("");
   const [openStudentTable, setOpenStudentTable] = useState(false);
-  const [curseSelected, setCurseSelected] = useState(courses[0]);
+  const [courseSelected, setCourseSelected] = useState(courses[0]);
   const [studentSelected, setStudentSelected] = useState({});
 
   useEffect(() => {
     getCourses();
-    getStudents(curseSelected?.id_curso);
+    getStudents();
   }, [students]);
 
   useEffect(() => {
@@ -28,14 +28,12 @@ export function Cursos() {
     getModifications(studentSelected.id_usuario);
   };
 
-  const handleFilterCurse = (curse) => {
-    setCurseSelected(curse);
-    getStudents(curse.id_curso);
-  };
+  const courseStudents = students.filter((student) => student.id_curso === courseSelected?.id_curso);
 
-  const filteredStudents = students.filter(
+  const filteredStudents = courseStudents.filter(
     (student) =>
-      student.nombre.toLowerCase().includes(searchStudent.toLowerCase()) || student.apellido.toLowerCase().includes(searchStudent.toLowerCase())
+      student.usuario.nombre.toLowerCase().includes(searchStudent.toLowerCase()) ||
+      student.usuario.apellido.toLowerCase().includes(searchStudent.toLowerCase())
   );
 
   return (
@@ -45,7 +43,7 @@ export function Cursos() {
         <h2 className="page-title">Mis Cursos</h2>
         <div className="cursos-tables">
           <Table
-            title={`Alumnos ${curseSelected ? curseSelected.nombre : ""}`}
+            title={`Alumnos ${courseSelected ? courseSelected.nombre : ""}`}
             showOptions={false}
             handleSearch={(e) => setSearchStudent(e.target.value)}
           >
@@ -53,9 +51,9 @@ export function Cursos() {
               {courses &&
                 courses.map((course) => (
                   <li
-                    onClick={() => handleFilterCurse(course)}
+                    onClick={() => setCourseSelected(course)}
                     key={course.id_curso}
-                    className={curseSelected?.id_curso === course.id_curso ? "selected" : ""}
+                    className={courseSelected?.id_curso === course.id_curso ? "selected" : ""}
                   >
                     {course.nombre}
                   </li>
@@ -75,9 +73,9 @@ export function Cursos() {
                   onClick={() => setStudentSelected(student)}
                   onDoubleClick={() => setOpenStudentTable(true)}
                 >
-                  <span>{student.apellido}</span>
-                  <span>{student.nombre}</span>
-                  <span>{student.email}</span>
+                  <span>{student.usuario.apellido}</span>
+                  <span>{student.usuario.nombre}</span>
+                  <span>{student.usuario.email}</span>
                 </div>
               ))}
           </Table>

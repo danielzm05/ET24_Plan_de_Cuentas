@@ -21,7 +21,7 @@ export function ModificationTable({ user, modifications, deleteAll }) {
       </div>
 
       {filteredModifications.length === 0 ? (
-        <p>{user.nombre} no ha hecho modificaciones en su cuenta</p>
+        <p>{user.usuario.nombre} no ha hecho modificaciones en sus cuentas</p>
       ) : (
         filteredModifications.map((mod) => (
           <div className="row modificacion" key={mod.id_modificacion}>

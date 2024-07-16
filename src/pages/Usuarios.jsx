@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 export function Usuarios() {
   const { courses, getCourses, students, getStudents, users, getUsers, teachers, getTeachers } = useSchoolContext();
   const [openAddModal, setOpenAddModal] = useState(false);
-  const [curseSelected, setCurseSelected] = useState(courses[0]);
+  const [courseSelected, setCourseSelected] = useState(courses[0]);
   const [searchStudent, setSearchStudent] = useState("");
 
   /*   useState(() => {
@@ -17,20 +17,17 @@ export function Usuarios() {
 
   useEffect(() => {
     getCourses();
-    getStudents(courses[0]?.id_curso);
-    getTeachers(courses[0]?.id_curso);
+    getStudents();
+    getTeachers();
   }, [users]);
 
-  const handleFilterCurse = (curse) => {
-    setCurseSelected(curse);
-    getStudents(curse.id_curso);
-  };
+  const courseStudents = students.filter((student) => student.id_curso === courseSelected?.id_curso);
+  const courseTeacher = teachers.find((teacher) => teacher.Curso.some((curso) => curso.id_curso == courseSelected.id_curso));
 
-  const courseTeacher = teachers.find((teacher) => teacher.Curso.some((curso) => curso.id_curso == curseSelected.id_curso));
-
-  const filteredStudents = students.filter(
+  const filteredStudents = courseStudents.filter(
     (student) =>
-      student.nombre.toLowerCase().includes(searchStudent.toLowerCase()) || student.apellido.toLowerCase().includes(searchStudent.toLowerCase())
+      student.usuario.nombre.toLowerCase().includes(searchStudent.toLowerCase()) ||
+      student.usuario.apellido.toLowerCase().includes(searchStudent.toLowerCase())
   );
 
   return (
@@ -40,7 +37,7 @@ export function Usuarios() {
         <h2 className="page-title">Gestionar Usuarios</h2>
 
         <Table
-          title={`Alumnos ${curseSelected ? curseSelected.nombre : ""}`}
+          title={`Alumnos ${courseSelected ? courseSelected.nombre : ""}`}
           showOptions={false}
           handleSearch={(e) => setSearchStudent(e.target.value)}
         >
@@ -48,9 +45,9 @@ export function Usuarios() {
             {courses &&
               courses.map((course) => (
                 <li
-                  onClick={() => handleFilterCurse(course)}
+                  onClick={() => setCourseSelected(course)}
                   key={course.id_curso}
-                  className={curseSelected?.id_curso === course.id_curso ? "selected" : ""}
+                  className={courseSelected?.id_curso === course.id_curso ? "selected" : ""}
                 >
                   {course.nombre}
                 </li>
@@ -77,9 +74,9 @@ export function Usuarios() {
               <div className={`row user`} key={student.id_usuario} onClick={() => setStudentSelected(student)}>
                 <span> </span>
                 <span>
-                  {student.apellido} {student.nombre}
+                  {student.usuario.apellido} {student.usuario.nombre}
                 </span>
-                <span>{student.email}</span>
+                <span>{student.usuario.email}</span>
               </div>
             ))}
         </Table>
