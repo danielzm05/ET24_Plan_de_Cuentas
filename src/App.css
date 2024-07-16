@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-/* :root {
+[data-theme="light"] {
   --background: #f2f3f6;
   --table: #ffffff;
   --selection: #3b225b;
@@ -15,9 +15,9 @@
   --error: #9c0000;
   --red: #9c0000;
   --green: #007c25;
-} */
+}
 
-:root {
+[data-theme="dark"] {
   --background: #1e1f22;
   --table: #2c2d30;
   --selection: #7745b9;
@@ -53,6 +53,7 @@ main {
   gap: 20px;
   height: 100vh;
   padding: 30px 20px 0 80px;
+  position: relative;
 }
 
 .page-title {
@@ -65,4 +66,23 @@ main {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 20px;
+}
+
+.theme-switcher {
+  z-index: 1;
+  position: absolute;
+  display: grid;
+  place-content: center;
+  top: 30px;
+  right: 20px;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+
+  svg {
+    max-width: 18px;
+    stroke: var(--icon-1);
+  }
 }

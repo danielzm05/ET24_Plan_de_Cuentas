@@ -22,7 +22,7 @@ export function Usuarios() {
   }, [users]);
 
   const courseStudents = students.filter((student) => student.id_curso === courseSelected?.id_curso);
-  const courseTeacher = teachers.find((teacher) => teacher.Curso.some((curso) => curso.id_curso == courseSelected.id_curso));
+  const courseTeacher = teachers.find((teacher) => teacher.Curso.some((curso) => curso.id_curso == courseSelected?.id_curso));
 
   const filteredStudents = courseStudents.filter(
     (student) =>

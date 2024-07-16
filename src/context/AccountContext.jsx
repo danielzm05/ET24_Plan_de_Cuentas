@@ -5,8 +5,7 @@ import { supabase } from "../backend/client";
 export const AccountContext = createContext();
 
 export const useAccounts = () => {
-  const context = useContext(AccountContext);
-  return context;
+  return useContext(AccountContext);
 };
 
 export const AccountProvider = ({ children }) => {
@@ -16,11 +15,7 @@ export const AccountProvider = ({ children }) => {
 
   const getModifications = async (studentId) => {
     if (studentId) {
-      const { data, error } = await supabase
-        .from("Modificacion")
-        .select("*")
-        .eq("id_usuario", studentId)
-        .order("fecha", { ascending: false });
+      const { data, error } = await supabase.from("Modificacion").select("*").eq("id_usuario", studentId).order("fecha", { ascending: false });
 
       if (error) throw error;
 
@@ -30,10 +25,7 @@ export const AccountProvider = ({ children }) => {
 
   const deleteModifications = async (studentId) => {
     if (studentId) {
-      const { error } = await supabase
-        .from("Modificacion")
-        .delete()
-        .eq("id_usuario", studentId);
+      const { error } = await supabase.from("Modificacion").delete().eq("id_usuario", studentId);
 
       if (error) throw error;
 
@@ -82,11 +74,7 @@ export const AccountProvider = ({ children }) => {
   };
 
   const deleteAccount = async (id, nombre) => {
-    const { error } = await supabase
-      .from("Cuenta")
-      .delete()
-      .eq("id_cuenta", id)
-      .eq("id_usuario", user.id);
+    const { error } = await supabase.from("Cuenta").delete().eq("id_cuenta", id).eq("id_usuario", user.id);
 
     if (error) throw error;
     getAccounts();
@@ -106,9 +94,7 @@ export const AccountProvider = ({ children }) => {
 
     if (error) throw error;
     getAccounts();
-    createModification(
-      `Modificó ${cuenta.nombre} (${cuenta.tipo}) a ${nombre} (${tipo})`
-    );
+    createModification(`Modificó ${cuenta.nombre} (${cuenta.tipo}) a ${nombre} (${tipo})`);
   };
   return (
     <AccountContext.Provider
