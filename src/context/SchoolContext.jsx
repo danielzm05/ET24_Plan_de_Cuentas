@@ -39,9 +39,15 @@ export const SchoolProvider = ({ children }) => {
   };
 
   const addToCourse = async (courseId, studentId) => {
-    const { data, error } = await supabase.from("Alumno").update({ id_curso: courseId }).eq("id_alumno", studentId);
+    const { error } = await supabase.from("Alumno").update({ id_curso: courseId }).eq("id_alumno", studentId);
     if (error) throw error;
     getStudents();
+  };
+
+  const deleteCourse = async (id) => {
+    const { error } = await supabase.from("Curso").delete().eq("id_curso", id);
+    if (error) throw error;
+    getCourses();
   };
 
   const getTeachers = async () => {
@@ -59,7 +65,7 @@ export const SchoolProvider = ({ children }) => {
   };
 
   return (
-    <SchoolContext.Provider value={{ users, getUsers, courses, getCourses, students, getStudents, teachers, getTeachers, addToCourse }}>
+    <SchoolContext.Provider value={{ users, getUsers, courses, getCourses, students, getStudents, teachers, getTeachers, addToCourse, deleteCourse }}>
       {children}
     </SchoolContext.Provider>
   );

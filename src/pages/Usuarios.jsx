@@ -5,10 +5,12 @@ import { useSchoolContext } from "../context/SchoolContext";
 import * as Icon from "react-feather";
 import { useState, useEffect } from "react";
 import { AddStudentModal } from "../components/Modals/AddStudentModal";
+import { DeleteCourseModal } from "../components/Modals/DeleteCourseModal";
 
 export function Usuarios() {
   const { courses, getCourses, students, getStudents, users, getUsers, teachers, getTeachers } = useSchoolContext();
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [courseSelected, setCourseSelected] = useState(courses ? courses[0] : {});
   const [searchStudent, setSearchStudent] = useState("");
 
@@ -39,9 +41,11 @@ export function Usuarios() {
         <h2 className="page-title">Gestionar Usuarios</h2>
 
         <Table
-          title={`Alumnos ${courseSelected ? courseSelected.nombre : ""}`}
+          title={`Curso: ${courseSelected ? courseSelected.nombre : ""}`}
           handleSearch={(e) => setSearchStudent(e.target.value)}
           add={() => setOpenAddModal(true)}
+          remove={() => setOpenDeleteModal(true)}
+          isAccountSelected={courseSelected}
         >
           <ul className="cursos-list">
             {courses &&
@@ -83,6 +87,7 @@ export function Usuarios() {
             ))}
         </Table>
         <AddStudentModal isOpen={openAddModal} onClose={() => setOpenAddModal(false)} course={courseSelected} />
+        <DeleteCourseModal isOpen={openDeleteModal} onClose={() => setOpenDeleteModal(false)} course={courseSelected} />
       </main>
     </>
   );

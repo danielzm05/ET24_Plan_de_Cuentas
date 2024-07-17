@@ -94,6 +94,7 @@
 
     .cancel-btn {
       background-color: transparent;
+      color: var(--text-3);
     }
 
     .delete-btn {
