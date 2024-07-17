@@ -6,11 +6,13 @@ import * as Icon from "react-feather";
 import { useState, useEffect } from "react";
 import { AddStudentModal } from "../components/Modals/AddStudentModal";
 import { DeleteCourseModal } from "../components/Modals/DeleteCourseModal";
+import { ModifyCourseModal } from "../components/Modals/ModifyCourseModal";
 
 export function Usuarios() {
   const { courses, getCourses, students, getStudents, users, getUsers, teachers, getTeachers } = useSchoolContext();
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openModifyModal, setOpenModifyModal] = useState(false);
   const [courseSelected, setCourseSelected] = useState(courses ? courses[0] : {});
   const [searchStudent, setSearchStudent] = useState("");
 
@@ -45,6 +47,7 @@ export function Usuarios() {
           handleSearch={(e) => setSearchStudent(e.target.value)}
           add={() => setOpenAddModal(true)}
           remove={() => setOpenDeleteModal(true)}
+          modify={() => setOpenModifyModal(true)}
           isAccountSelected={courseSelected}
         >
           <ul className="cursos-list">
@@ -77,7 +80,7 @@ export function Usuarios() {
 
           {students &&
             filteredStudents.map((student) => (
-              <div className={`row user`} key={student.id_usuario} onClick={() => setStudentSelected(student)}>
+              <div className={`row user`} key={student.id_usuario}>
                 <span> </span>
                 <span>
                   {student.usuario.apellido} {student.usuario.nombre}
@@ -88,6 +91,7 @@ export function Usuarios() {
         </Table>
         <AddStudentModal isOpen={openAddModal} onClose={() => setOpenAddModal(false)} course={courseSelected} />
         <DeleteCourseModal isOpen={openDeleteModal} onClose={() => setOpenDeleteModal(false)} course={courseSelected} />
+        <ModifyCourseModal isOpen={openModifyModal} onClose={() => setOpenModifyModal(false)} course={courseSelected} teacher={courseTeacher} />
       </main>
     </>
   );

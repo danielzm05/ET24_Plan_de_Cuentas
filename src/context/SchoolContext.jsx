@@ -50,6 +50,20 @@ export const SchoolProvider = ({ children }) => {
     getCourses();
   };
 
+  const updateCourse = async (courseId, courseName, teacherId) => {
+    const { error } = await supabase
+      .from("Curso")
+      .update({
+        nombre: courseName,
+        id_profesor: teacherId,
+      })
+      .eq("id_curso", courseId);
+
+    if (error) throw error;
+    getCourses();
+    getTeachers();
+  };
+
   const getTeachers = async () => {
     const { data: teachers, error } = await supabase.from("Profesor").select(`*,usuario (*), Curso(id_curso)`);
     if (error) throw error;
@@ -65,7 +79,9 @@ export const SchoolProvider = ({ children }) => {
   };
 
   return (
-    <SchoolContext.Provider value={{ users, getUsers, courses, getCourses, students, getStudents, teachers, getTeachers, addToCourse, deleteCourse }}>
+    <SchoolContext.Provider
+      value={{ users, getUsers, courses, getCourses, students, getStudents, teachers, getTeachers, addToCourse, deleteCourse, updateCourse }}
+    >
       {children}
     </SchoolContext.Provider>
   );

@@ -107,7 +107,7 @@
     }
 
     .error-message {
-      color: var(--red);
+      color: var(--error);
       padding: 0 10px;
     }
   }
