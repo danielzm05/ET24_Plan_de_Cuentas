@@ -4,11 +4,12 @@ import { AddUserModal } from "../components/Modals/AddUserModal";
 import { useSchoolContext } from "../context/SchoolContext";
 import * as Icon from "react-feather";
 import { useState, useEffect } from "react";
+import { AddStudentModal } from "../components/Modals/AddStudentModal";
 
 export function Usuarios() {
   const { courses, getCourses, students, getStudents, users, getUsers, teachers, getTeachers } = useSchoolContext();
   const [openAddModal, setOpenAddModal] = useState(false);
-  const [courseSelected, setCourseSelected] = useState(courses[0]);
+  const [courseSelected, setCourseSelected] = useState(courses ? courses[0] : {});
   const [searchStudent, setSearchStudent] = useState("");
 
   /*   useState(() => {
@@ -19,6 +20,7 @@ export function Usuarios() {
     getCourses();
     getStudents();
     getTeachers();
+    console.log(courses);
   }, [users]);
 
   const courseStudents = students.filter((student) => student.id_curso === courseSelected?.id_curso);
@@ -38,8 +40,8 @@ export function Usuarios() {
 
         <Table
           title={`Alumnos ${courseSelected ? courseSelected.nombre : ""}`}
-          showOptions={false}
           handleSearch={(e) => setSearchStudent(e.target.value)}
+          add={() => setOpenAddModal(true)}
         >
           <ul className="cursos-list">
             {courses &&
@@ -80,6 +82,7 @@ export function Usuarios() {
               </div>
             ))}
         </Table>
+        <AddStudentModal isOpen={openAddModal} onClose={() => setOpenAddModal(false)} course={courseSelected} />
       </main>
     </>
   );
@@ -112,8 +115,6 @@ export function Usuarios() {
           ))}
         </Table>
 
-        <AddUserModal
-          isOpen={openAddModal}
-          onClose={() => setOpenAddModal(false)}
-        />
+        <AddUserModal isOpen={openAddModal} onClose={() => setOpenAddModal(false)} />
+
          */
