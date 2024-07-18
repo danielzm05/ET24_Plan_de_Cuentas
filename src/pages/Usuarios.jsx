@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { AddStudentModal } from "../components/Modals/AddStudentModal";
 import { DeleteCourseModal } from "../components/Modals/DeleteCourseModal";
 import { ModifyCourseModal } from "../components/Modals/ModifyCourseModal";
+import { CreateButton } from "../components/CreateButton";
 
 export function Usuarios() {
   const { courses, getCourses, students, getStudents, users, getUsers, teachers, getTeachers } = useSchoolContext();
@@ -41,7 +42,7 @@ export function Usuarios() {
       <NavigationMenu selected="usuarios" />
       <main>
         <h2 className="page-title">Gestionar Usuarios</h2>
-
+        <CreateButton />
         <Table
           title={`Curso: ${courseSelected ? courseSelected.nombre : ""}`}
           handleSearch={(e) => setSearchStudent(e.target.value)}
