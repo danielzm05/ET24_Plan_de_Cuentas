@@ -10,18 +10,10 @@ export const useSchoolContext = () => {
   return context;
 };
 export const SchoolProvider = ({ children }) => {
-  const [users, setUsers] = useState([]);
   const [courses, setCourses] = useState([]);
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const { user, userInfo } = useAuthContext();
-
-  const getUsers = async () => {
-    const { data: systemUsers, error } = await supabase.from("usuario").select("*");
-    if (error) throw error;
-
-    setUsers(systemUsers);
-  };
 
   const getCourses = async () => {
     if (userInfo.id_rol === 1) {
@@ -42,6 +34,13 @@ export const SchoolProvider = ({ children }) => {
     const { error } = await supabase.from("Alumno").update({ id_curso: courseId }).eq("id_alumno", studentId);
     if (error) throw error;
     getStudents();
+  };
+
+  const createCourse = async (courseName, teacherId) => {
+    const { error } = await supabase.from("Curso").insert([{ nombre: courseName, id_profesor: teacherId }]);
+    if (error) throw error;
+    getCourses();
+    getTeachers();
   };
 
   const deleteCourse = async (id) => {
@@ -80,7 +79,7 @@ export const SchoolProvider = ({ children }) => {
 
   return (
     <SchoolContext.Provider
-      value={{ users, getUsers, courses, getCourses, students, getStudents, teachers, getTeachers, addToCourse, deleteCourse, updateCourse }}
+      value={{ courses, getCourses, students, getStudents, teachers, getTeachers, addToCourse, deleteCourse, updateCourse, createCourse }}
     >
       {children}
     </SchoolContext.Provider>

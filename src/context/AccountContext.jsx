@@ -34,15 +34,8 @@ export const AccountProvider = ({ children }) => {
   };
 
   const createModification = async (descripcion) => {
-    const { error } = await supabase.from("Modificacion").insert([
-      {
-        descripcion: descripcion,
-        id_usuario: user.id,
-      },
-    ]);
-
+    const { error } = await supabase.from("Modificacion").insert([{ descripcion: descripcion, id_usuario: user.id }]);
     if (error) throw error;
-
     getModifications();
   };
 

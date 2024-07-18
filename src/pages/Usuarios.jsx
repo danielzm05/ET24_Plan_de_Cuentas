@@ -1,6 +1,5 @@
 import { NavigationMenu } from "../components/NavigationMenu";
 import { Table } from "../components/Table";
-import { AddUserModal } from "../components/Modals/AddUserModal";
 import { useSchoolContext } from "../context/SchoolContext";
 import * as Icon from "react-feather";
 import { useState, useEffect } from "react";
@@ -124,7 +123,5 @@ export function Usuarios() {
             </div>
           ))}
         </Table>
-
-        <AddUserModal isOpen={openAddModal} onClose={() => setOpenAddModal(false)} />
 
          */
