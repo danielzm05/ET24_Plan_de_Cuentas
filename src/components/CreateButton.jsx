@@ -14,16 +14,14 @@ export function CreateButton() {
       <button className="create-button" onClick={() => setOpenList(!openList)}>
         <Icon.Plus /> Nuevo
       </button>
-      {openList ? (
-        <ul className={`create-list `}>
-          <li onClick={() => setOpenAddModal(true)}>
-            <Icon.User /> Usuario
-          </li>
-          <li onClick={() => setOpenCourseModal(true)}>
-            <Icon.Users /> Curso
-          </li>
-        </ul>
-      ) : null}
+      <ul className="create-list">
+        <li onClick={() => setOpenAddModal(true)}>
+          <Icon.User /> Usuario
+        </li>
+        <li onClick={() => setOpenCourseModal(true)}>
+          <Icon.Users /> Curso
+        </li>
+      </ul>
       <AddUserModal isOpen={openAddModal} onClose={() => setOpenAddModal(false)} />
       <AddCourseModal isOpen={openCourseModal} onClose={() => setOpenCourseModal(false)} />
     </div>

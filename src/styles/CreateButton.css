@@ -18,6 +18,7 @@
 }
 
 .create-list {
+  display: none;
   z-index: 1;
   width: 200px;
   border-radius: 5px;
@@ -28,6 +29,7 @@
   color: var(--text-2);
   padding: 5px;
   position: absolute;
+  box-shadow: 10px 10px 21px -12px rgba(0, 0, 0, 0.75);
   animation: fadeIn 0.3s ease-in-out;
 
   li {
@@ -48,6 +50,10 @@
   li:hover {
     background-color: var(--hover);
   }
+}
+
+.create-button:focus + .create-list {
+  display: block;
 }
 
 @keyframes fadeIn {
