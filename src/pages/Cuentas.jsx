@@ -14,11 +14,11 @@ export function Cuentas() {
   const [accountSelected, setAccountSelected] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const { accounts, getAccounts } = useAccounts();
-  const { user, userInfo } = useAuthContext();
+  const { userInfo } = useAuthContext();
 
   useEffect(() => {
     getAccounts();
-  }, [user]);
+  }, []);
 
   const handleAccountSelected = (id, codigo, nombre, tipo) => {
     setAccountSelected({

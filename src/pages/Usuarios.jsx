@@ -16,16 +16,12 @@ export function Usuarios() {
   const [courseSelected, setCourseSelected] = useState(courses ? courses[0] : {});
   const [searchStudent, setSearchStudent] = useState("");
 
-  /*   useState(() => {
-    getUsers();
-  }, [users]); */
-
   useEffect(() => {
     getCourses();
     getStudents();
     getTeachers();
-    console.log(courses);
-  }, [users]);
+    console.log("hola");
+  }, []);
 
   const courseStudents = students.filter((student) => student.id_curso === courseSelected?.id_curso);
   const courseTeacher = teachers.find((teacher) => teacher.Curso.some((curso) => curso.id_curso == courseSelected?.id_curso));

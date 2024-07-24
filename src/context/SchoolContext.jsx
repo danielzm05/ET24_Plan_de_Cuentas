@@ -17,14 +17,15 @@ export const SchoolProvider = ({ children }) => {
 
   const getCourses = async () => {
     if (userInfo.id_rol === 1) {
-      const { data: allCourses, error } = await supabase.from("Curso").select("*");
+      const { data: allCourses, error } = await supabase.from("Curso").select("*").order("nombre", { ascending: true });
       if (error) throw error;
       setCourses(allCourses);
     } else {
       const { data: courses, error } = await supabase
         .from("Curso")
         .select("nombre, id_curso, Profesor!inner(id_profesor)")
-        .eq("Profesor.id_usuario", user.id);
+        .eq("Profesor.id_usuario", user.id)
+        .order("nombre", { ascending: true });
       if (error) throw error;
       setCourses(courses);
     }
