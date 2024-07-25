@@ -1,0 +1,45 @@
+.settings-section {
+  padding: 20px;
+  border-bottom: 1px solid var(--hover);
+  h3 {
+    font-weight: 600;
+  }
+
+  form {
+    min-width: 200px;
+    max-width: 600px;
+    padding-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+
+    label {
+      font-size: 14px;
+      color: var(--text-3);
+      grid-column: 1/-1;
+    }
+
+    input[type="text"] {
+      height: 32px;
+      border: solid 2px var(--icon-1);
+      background-color: var(--table);
+      color: var(--text-3);
+      border-radius: 8px;
+      margin-bottom: 15px;
+      outline: none;
+      padding: 0 8px;
+    }
+
+    input[type="submit"] {
+      width: fit-content;
+      padding: 0 15px;
+      height: 32px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: var(--icon-1);
+      color: var(--button-text);
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}

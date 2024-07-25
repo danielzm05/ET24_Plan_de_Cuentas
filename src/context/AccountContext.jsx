@@ -1,6 +1,7 @@
 import { useContext, createContext, useState } from "react";
 import { useAuthContext } from "./AuthContext";
 import { supabase } from "../backend/client";
+import { useNavigate } from "react-router-dom";
 
 export const AccountContext = createContext();
 
@@ -11,7 +12,8 @@ export const useAccounts = () => {
 export const AccountProvider = ({ children }) => {
   const [accounts, setAccounts] = useState([]);
   const [modifications, setModifications] = useState([]);
-  const { user } = useAuthContext();
+  const { user, getUserInfo } = useAuthContext();
+  const navigate = useNavigate();
 
   const getModifications = async (studentId) => {
     if (studentId) {
@@ -89,6 +91,20 @@ export const AccountProvider = ({ children }) => {
     getAccounts();
     createModification(`Modificó ${cuenta.nombre} (${cuenta.tipo}) a ${nombre} (${tipo})`);
   };
+
+  const updateCompanyName = async (newCompanyName, id = user.id) => {
+    const { error } = await supabase
+      .from("usuario")
+      .update({
+        empresa: newCompanyName,
+      })
+      .eq("id_usuario", id);
+
+    if (error) throw error;
+    getUserInfo();
+    navigate("/cuentas");
+  };
+
   return (
     <AccountContext.Provider
       value={{
@@ -100,6 +116,7 @@ export const AccountProvider = ({ children }) => {
         createAccount,
         deleteAccount,
         updateAccount,
+        updateCompanyName,
       }}
     >
       {children}

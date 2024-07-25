@@ -41,7 +41,7 @@ export function Cuentas() {
       <main>
         <h2 className="page-title">Hola! {userInfo ? userInfo?.nombre : ""}👋</h2>
         <Table
-          title="Mis Cuentas"
+          title={`Cuentas ${userInfo?.empresa}`}
           modify={() => setOpenModifyModal(true)}
           add={() => setOpenAddModal(true)}
           remove={() => setOpenDeleteModal(true)}

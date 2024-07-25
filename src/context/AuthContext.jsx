@@ -17,12 +17,9 @@ export const AuthProvider = ({ children }) => {
   const [userEvent, setUserEvent] = useState(null);
   const navigate = useNavigate();
 
-  const getUserInfo = async (userId) => {
+  const getUserInfo = async (userId = user.id) => {
     if (userId) {
-      const { data, error } = await supabase
-        .from("usuario")
-        .select("*")
-        .eq("id_usuario", userId);
+      const { data, error } = await supabase.from("usuario").select("*").eq("id_usuario", userId);
 
       if (error) throw error;
       setUserInfo(data[0]);
@@ -42,12 +39,9 @@ export const AuthProvider = ({ children }) => {
 
   const sendPasswordEmail = async () => {
     const userEmail = await user.email;
-    const { data, error } = await supabase.auth.resetPasswordForEmail(
-      userEmail,
-      {
-        redirectTo: "https://plandecuentas.netlify.app/contraseña",
-      }
-    );
+    const { data, error } = await supabase.auth.resetPasswordForEmail(userEmail, {
+      redirectTo: "https://plandecuentas.netlify.app/contraseña",
+    });
 
     if (error) throw error;
   };
@@ -55,24 +49,16 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     checkUser();
 
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setUserEvent(event);
-        console.log(event);
-        checkUser();
-      }
-    );
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      setUserEvent(event);
+      console.log(event);
+      checkUser();
+    });
 
     return () => {
       authListener.subscription.unsubscribe();
     };
   }, []);
 
-  return (
-    <AuthContext.Provider
-      value={{ user, userEvent, sendPasswordEmail, userInfo }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ user, userEvent, sendPasswordEmail, userInfo, getUserInfo }}>{children}</AuthContext.Provider>;
 };

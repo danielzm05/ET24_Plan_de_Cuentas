@@ -20,7 +20,6 @@ export function Usuarios() {
     getCourses();
     getStudents();
     getTeachers();
-    console.log("hola");
   }, []);
 
   const courseStudents = students.filter((student) => student.id_curso === courseSelected?.id_curso);

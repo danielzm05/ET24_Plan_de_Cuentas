@@ -17,42 +17,21 @@ export function NavigationMenu({ selected }) {
           <span className="hide-item">PLAN DE CUENTAS</span>
         </li>
 
-        <MenuItem
-          roles={[1]}
-          title="Usuarios"
-          name="usuarios"
-          selected={selected}
-        >
+        <MenuItem roles={[1]} title="Usuarios" name="usuarios" selected={selected}>
           <Icon.User />
         </MenuItem>
 
-        <MenuItem
-          roles={[2, 1]}
-          title="Mis Cursos"
-          name="cursos"
-          selected={selected}
-        >
+        <MenuItem roles={[2, 1]} title="Mis Cursos" name="cursos" selected={selected}>
           <Icon.Users />
         </MenuItem>
 
-        <MenuItem
-          roles={[3, 1]}
-          title="Cuentas"
-          name="cuentas"
-          selected={selected}
-        >
+        <MenuItem roles={[3, 1]} title="Cuentas" name="cuentas" selected={selected}>
           <Icon.Table />
         </MenuItem>
 
-        {/*         <li
-          onClick={() => {
-            navigate("/ajustes");
-          }}
-          className={`section-item ${selected === "ajustes" ? "selected" : ""}`}
-        >
+        <MenuItem roles={[1, 2, 3]} title="Ajustes" name="ajustes" selected={selected}>
           <Icon.Settings />
-          <span className="hide-item">Ajustes</span>
-        </li> */}
+        </MenuItem>
 
         <li className="section-item logout-btn" onClick={handleLogOut}>
           <Icon.LogOut />
