@@ -12,7 +12,7 @@ export const useAccounts = () => {
 export const AccountProvider = ({ children }) => {
   const [accounts, setAccounts] = useState([]);
   const [modifications, setModifications] = useState([]);
-  const { user, getUserInfo } = useAuthContext();
+  const { user, userInfo, getUserInfo } = useAuthContext();
   const navigate = useNavigate();
 
   const getModifications = async (studentId) => {
@@ -20,7 +20,6 @@ export const AccountProvider = ({ children }) => {
       const { data, error } = await supabase.from("Modificacion").select("*").eq("id_usuario", studentId).order("fecha", { ascending: false });
 
       if (error) throw error;
-
       setModifications(data);
     }
   };
@@ -28,17 +27,17 @@ export const AccountProvider = ({ children }) => {
   const deleteModifications = async (studentId) => {
     if (studentId) {
       const { error } = await supabase.from("Modificacion").delete().eq("id_usuario", studentId);
-
       if (error) throw error;
-
       getModifications();
     }
   };
 
   const createModification = async (descripcion) => {
-    const { error } = await supabase.from("Modificacion").insert([{ descripcion: descripcion, id_usuario: user.id }]);
-    if (error) throw error;
-    getModifications();
+    if (userInfo.id_rol === 3) {
+      const { error } = await supabase.from("Modificacion").insert([{ descripcion: descripcion, id_usuario: user.id }]);
+      if (error) throw error;
+      getModifications();
+    }
   };
 
   const getAccounts = async (id = user.id) => {

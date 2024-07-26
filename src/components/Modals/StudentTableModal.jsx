@@ -12,7 +12,7 @@ export function StudentTableModal({ isOpen, onClose, student }) {
 
   return (
     <Modal isOpen={isOpen} isClose={onClose}>
-      <Table title={`Cuentas de ${student?.usuario?.nombre}`} showOptions={false}>
+      <Table title={`Cuentas de ${student?.usuario?.nombre}`}>
         <div className="row header cuenta">
           <span>Código</span>
           <span>Rubro</span>
