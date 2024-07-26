@@ -12,17 +12,17 @@ export function DeleteCourseModal({ isOpen, onClose, course }) {
   return (
     <Modal isOpen={isOpen} isClose={onClose}>
       <h3>Eliminar Curso {course?.nombre}</h3>
-      <span>
+      <p>
         ¿Estas seguro de eliminar el curso {course?.nombre}? <br />
         Si aceptas no podrás revertir los cambios.
-      </span>
+      </p>
 
       <div className="buttons-container">
         <button className="cancel-btn" onClick={() => onClose()}>
           Cancelar
         </button>
         <button className="delete-btn" onClick={handleDelete}>
-          Eliminar Cuenta
+          Eliminar Curso
         </button>
       </div>
     </Modal>

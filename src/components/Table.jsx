@@ -23,7 +23,7 @@ export function Table({ title, children, modify = false, add = false, remove = f
               Eliminar
             </li>
           )}
-          {remove && (
+          {modify && (
             <li onClick={modify} className={isAccountSelected ? "" : "hide-option"}>
               <Icon.Edit />
               Modificar

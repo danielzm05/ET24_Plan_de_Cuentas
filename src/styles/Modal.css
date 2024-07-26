@@ -20,7 +20,7 @@
   max-height: 90vh;
   max-width: 70vw;
   min-width: 320px;
-  padding: 15px;
+  padding: 20px;
   background-color: var(--table);
   border-radius: 20px;
   position: relative;
@@ -111,6 +111,10 @@
       color: var(--error);
       padding: 0 10px;
     }
+  }
+
+  .table {
+    padding: 0;
   }
 }
 

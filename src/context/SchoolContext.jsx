@@ -10,10 +10,19 @@ export const useSchoolContext = () => {
   return context;
 };
 export const SchoolProvider = ({ children }) => {
+  const [users, setUsers] = useState([]);
   const [courses, setCourses] = useState([]);
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const { user, userInfo } = useAuthContext();
+
+  const getUsers = async () => {
+    if (userInfo.id_rol === 1) {
+      const { data, error } = await supabase.from("usuario").select("*").order("id_rol", { ascending: true }).order("nombre", { ascending: true });
+      if (error) throw error;
+      setUsers(data);
+    }
+  };
 
   const getCourses = async () => {
     if (userInfo.id_rol === 1) {
@@ -80,7 +89,20 @@ export const SchoolProvider = ({ children }) => {
 
   return (
     <SchoolContext.Provider
-      value={{ courses, getCourses, students, getStudents, teachers, getTeachers, addToCourse, deleteCourse, updateCourse, createCourse }}
+      value={{
+        users,
+        getUsers,
+        courses,
+        getCourses,
+        students,
+        getStudents,
+        teachers,
+        getTeachers,
+        addToCourse,
+        deleteCourse,
+        updateCourse,
+        createCourse,
+      }}
     >
       {children}
     </SchoolContext.Provider>

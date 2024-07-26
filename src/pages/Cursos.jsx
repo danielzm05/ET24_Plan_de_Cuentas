@@ -47,7 +47,7 @@ export function Cursos() {
             showOptions={false}
             handleSearch={(e) => setSearchStudent(e.target.value)}
           >
-            <ul className="cursos-list">
+            <ul className="table-list">
               {courses &&
                 courses.map((course) => (
                   <li

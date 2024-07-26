@@ -132,7 +132,7 @@
       background-color: #f06d6dad;
     }
 
-    .cursos-list {
+    .table-list {
       display: flex;
       justify-content: right;
       list-style: none;

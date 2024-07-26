@@ -12,10 +12,10 @@ export function DeleteAccountModal({ isOpen, onClose, account }) {
   return (
     <Modal isOpen={isOpen} isClose={onClose}>
       <h3>Eliminar Cuenta</h3>
-      <span>
+      <p>
         ¿Estas seguro de eliminar esta cuenta? <br />
         Si aceptas no podrás revertir los cambios.
-      </span>
+      </p>
 
       <div className="buttons-container">
         <button className="cancel-btn" onClick={() => onClose()}>
