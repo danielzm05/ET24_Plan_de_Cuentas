@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 export function LoginForm() {
   const [errorLogin, setErrorLogin] = useState(false);
   const [formValues, setFormValues] = useState({
-    email: "danielzm2005@gmail.com",
-    password: "messi",
+    email: "",
+    password: "",
   });
   const navigate = useNavigate();
 
@@ -41,9 +41,9 @@ export function LoginForm() {
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="email">Correo electrónico</label>
-      <input className="input-data" type="email" id="email" name="email" required onChange={handleInputChange} value="danielzm2005@gmail.com" />
+      <input className="input-data" type="email" id="email" name="email" required onChange={handleInputChange} />
       <label htmlFor="password">Contraseña</label>
-      <input className="input-data" type="password" id="password" name="password" minLength={5} required onChange={handleInputChange} value="messi" />
+      <input className="input-data" type="password" id="password" name="password" minLength={5} required onChange={handleInputChange} />
       {errorLogin && <span className="error-message">⚠︎ Correo o contraseña incorrecta</span>}
       <input type="submit" value="Ingresar" />
     </form>

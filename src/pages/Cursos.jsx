@@ -59,23 +59,23 @@ export function Cursos() {
                   </li>
                 ))}
             </ul>
-            <div className="row header modificacion">
-              <span>Apellido</span>
-              <span>Nombre</span>
-              <span>Email</span>
+            <div className="row header user-2">
+              <span>Estudiante</span>
+              <span>Empresa</span>
             </div>
 
             {students &&
               filteredStudents.map((student) => (
                 <div
-                  className={`row modificacion`}
+                  className={`row user-2`}
                   key={student.id_usuario}
                   onClick={() => setStudentSelected(student)}
                   onDoubleClick={() => setOpenStudentTable(true)}
                 >
-                  <span>{student.usuario.apellido}</span>
-                  <span>{student.usuario.nombre}</span>
-                  <span>{student.usuario.email}</span>
+                  <span>
+                    {student.usuario.apellido} {student.usuario.nombre}
+                  </span>
+                  <span>{student.usuario.empresa}</span>
                 </div>
               ))}
           </Table>

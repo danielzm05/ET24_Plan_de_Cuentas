@@ -53,8 +53,8 @@ export function AdminCoursesTable() {
         </ul>
         <div className="row header user">
           <span>Rol</span>
-          <span>Apellido</span>
-          <span>Email</span>
+          <span>Nombre</span>
+          <span>Empresa</span>
         </div>
 
         {courseTeacher ? (
@@ -63,7 +63,7 @@ export function AdminCoursesTable() {
             <span>
               {courseTeacher.usuario.apellido} {courseTeacher.usuario.nombre}
             </span>
-            <span>{courseTeacher.usuario.email}</span>
+            <span>{courseTeacher.usuario.empresa}</span>
           </div>
         ) : null}
 
@@ -74,7 +74,7 @@ export function AdminCoursesTable() {
               <span>
                 {student.usuario.apellido} {student.usuario.nombre}
               </span>
-              <span>{student.usuario.email}</span>
+              <span>{student.usuario.empresa}</span>
             </div>
           ))}
       </Table>

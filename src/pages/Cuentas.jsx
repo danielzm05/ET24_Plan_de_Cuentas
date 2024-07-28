@@ -11,7 +11,7 @@ export function Cuentas() {
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [accountSelected, setAccountSelected] = useState({});
+  const [accountSelected, setAccountSelected] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const { accounts, getAccounts } = useAccounts();
   const { userInfo } = useAuthContext();
@@ -19,15 +19,6 @@ export function Cuentas() {
   useEffect(() => {
     getAccounts();
   }, []);
-
-  const handleAccountSelected = (id, codigo, nombre, tipo) => {
-    setAccountSelected({
-      id: id,
-      codigo: codigo,
-      nombre: nombre,
-      tipo: tipo,
-    });
-  };
 
   const handleFilter = (e) => {
     setSearchTerm(e.target.value);
@@ -45,7 +36,7 @@ export function Cuentas() {
           modify={() => setOpenModifyModal(true)}
           add={() => setOpenAddModal(true)}
           remove={() => setOpenDeleteModal(true)}
-          isAccountSelected={accountSelected.id}
+          isAccountSelected={accountSelected}
           handleSearch={handleFilter}
         >
           <div className="row header cuenta">
@@ -56,9 +47,9 @@ export function Cuentas() {
 
           {filteredAccounts.map((account) => (
             <div
-              className={`row cuenta ${accountSelected.id === account.id_cuenta ? "selected" : ""}`}
+              className={`row cuenta ${accountSelected.id_cuenta === account.id_cuenta ? "selected" : ""}`}
               key={account.id_cuenta}
-              onClick={() => handleAccountSelected(account.id_cuenta, account.codigo, account.nombre, account.tipo_cuenta)}
+              onClick={() => setAccountSelected(account)}
               onDoubleClick={() => setOpenModifyModal(true)}
             >
               <span>{account.codigo}</span>
@@ -68,7 +59,12 @@ export function Cuentas() {
           ))}
         </Table>
 
-        <ModifyAccountModal isOpen={openModifyModal} onClose={() => setOpenModifyModal(false)} account={accountSelected} id={accountSelected.id} />
+        <ModifyAccountModal
+          isOpen={openModifyModal}
+          onClose={() => setOpenModifyModal(false)}
+          account={accountSelected}
+          id={accountSelected.id_cuenta}
+        />
 
         <AddAccountModal isOpen={openAddModal} onClose={() => setOpenAddModal(false)} />
 

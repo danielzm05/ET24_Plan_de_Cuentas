@@ -5,7 +5,7 @@ export function DeleteAccountModal({ isOpen, onClose, account }) {
   const { deleteAccount } = useAccounts();
 
   const handleDelete = () => {
-    deleteAccount(account.id, account.nombre);
+    deleteAccount(account.id_cuenta, account.nombre);
     onClose();
   };
 

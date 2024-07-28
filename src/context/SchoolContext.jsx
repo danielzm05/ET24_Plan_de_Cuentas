@@ -24,6 +24,20 @@ export const SchoolProvider = ({ children }) => {
     }
   };
 
+  const updateUser = async (name, lastName, rol, userId) => {
+    const { error } = await supabase
+      .from("usuario")
+      .update({
+        nombre: name,
+        apellido: lastName,
+        id_rol: rol,
+      })
+      .eq("id_usuario", userId);
+
+    if (error) throw error;
+    getUsers();
+  };
+
   const getCourses = async () => {
     if (userInfo.id_rol === 1) {
       const { data: allCourses, error } = await supabase.from("Curso").select("*").order("nombre", { ascending: true });
@@ -92,6 +106,7 @@ export const SchoolProvider = ({ children }) => {
       value={{
         users,
         getUsers,
+        updateUser,
         courses,
         getCourses,
         students,

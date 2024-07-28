@@ -10,7 +10,7 @@ export function ModifyAccountModal({ isOpen, onClose, account }) {
 
   useEffect(() => {
     setAccountModified({
-      id: account.id,
+      id: account.id_cuenta,
       codigo: account.codigo,
       nombre: account.nombre,
       tipo: account.tipo,

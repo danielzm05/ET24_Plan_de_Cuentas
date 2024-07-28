@@ -97,7 +97,11 @@
     }
 
     .row.user {
-      grid-template-columns: 0.1fr 6fr 2fr;
+      grid-template-columns: 0.2fr 6fr 2fr;
+    }
+
+    .row.user-2 {
+      grid-template-columns: 1fr 1fr;
     }
 
     .row.student {
