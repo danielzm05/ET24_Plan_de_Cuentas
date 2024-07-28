@@ -24,7 +24,9 @@ export function Cuentas() {
     setSearchTerm(e.target.value);
   };
 
-  const filteredAccounts = accounts.filter((account) => account.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredAccounts = accounts.filter(
+    (account) => account.nombre.toLowerCase().includes(searchTerm.toLowerCase()) || account.codigo.includes(searchTerm)
+  );
 
   return (
     <>

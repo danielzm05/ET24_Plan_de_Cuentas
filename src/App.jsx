@@ -26,7 +26,7 @@ function App() {
           <Route path="/contraseña" element={<ChangePassword />} />
         </Route>
 
-        <Route element={<ProtectedRoute isAuth={!!user} roles={[3, 1]} userRol={userInfo?.id_rol} redirectTo="/cursos" />}>
+        <Route element={<ProtectedRoute isAuth={!!user} roles={[3, 2, 1]} userRol={userInfo?.id_rol} />}>
           <Route path="/cuentas" element={<Cuentas />} />
         </Route>
         <Route element={<ProtectedRoute isAuth={!!user} roles={[2, 1]} userRol={userInfo?.id_rol} />}>

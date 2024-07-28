@@ -33,7 +33,7 @@ export const AccountProvider = ({ children }) => {
   };
 
   const createModification = async (descripcion) => {
-    if (userInfo.id_rol === 3) {
+    if (userInfo.id_rol === 3 || userInfo.id_rol === 1) {
       const { error } = await supabase.from("Modificacion").insert([{ descripcion: descripcion, id_usuario: user.id }]);
       if (error) throw error;
       getModifications();
