@@ -25,7 +25,7 @@ export function NavigationMenu({ selected }) {
           <Icon.Users />
         </MenuItem>
 
-        <MenuItem roles={[3, 1]} title="Cuentas" name="cuentas" selected={selected}>
+        <MenuItem roles={[1, 2, 3]} title="Cuentas" name="cuentas" selected={selected}>
           <Icon.Table />
         </MenuItem>
 
