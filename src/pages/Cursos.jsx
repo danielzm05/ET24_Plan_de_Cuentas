@@ -7,7 +7,6 @@ import { StudentTableModal } from "../components/Modals/StudentTableModal";
 import { ModificationTable } from "../components/ModificationsTable";
 
 export function Cursos() {
-  const { modifications, getModifications, deleteModifications } = useAccounts();
   const { courses, getCourses, students, getStudents } = useSchoolContext();
   const [searchStudent, setSearchStudent] = useState("");
   const [openStudentTable, setOpenStudentTable] = useState(false);
@@ -18,15 +17,6 @@ export function Cursos() {
     getCourses();
     getStudents();
   }, []);
-
-  useEffect(() => {
-    getModifications(studentSelected.id_usuario);
-  }, [studentSelected]);
-
-  const deleteStudentModifications = () => {
-    deleteModifications(studentSelected.id_usuario);
-    getModifications(studentSelected.id_usuario);
-  };
 
   const courseStudents = students.filter((student) => student.id_curso === courseSelected?.id_curso);
 
@@ -80,7 +70,7 @@ export function Cursos() {
               ))}
           </Table>
 
-          <ModificationTable user={studentSelected} modifications={modifications} deleteAll={deleteStudentModifications} />
+          <ModificationTable user={studentSelected} />
         </div>
 
         <StudentTableModal isOpen={openStudentTable} onClose={() => setOpenStudentTable(false)} student={studentSelected} />

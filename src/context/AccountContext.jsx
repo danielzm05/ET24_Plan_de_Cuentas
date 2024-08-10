@@ -28,7 +28,7 @@ export const AccountProvider = ({ children }) => {
     if (studentId) {
       const { error } = await supabase.from("Modificacion").delete().eq("id_usuario", studentId);
       if (error) throw error;
-      getModifications();
+      getModifications(studentId);
     }
   };
 
