@@ -60,9 +60,7 @@ export function AdminCoursesTable() {
         {courseTeacher ? (
           <div className="row user" title="Profesor">
             <Icon.Award />
-            <span>
-              {courseTeacher.usuario.apellido} {courseTeacher.usuario.nombre}
-            </span>
+            <span>{`${courseTeacher.usuario.apellido} ${courseTeacher.usuario.nombre}`}</span>
             <span>{courseTeacher.usuario.empresa}</span>
           </div>
         ) : null}
@@ -71,9 +69,7 @@ export function AdminCoursesTable() {
           filteredStudents.map((student) => (
             <div className={`row user`} key={student.id_usuario}>
               <span> </span>
-              <span>
-                {student.usuario.apellido} {student.usuario.nombre}
-              </span>
+              <span>{`${student.usuario.apellido} ${student.usuario.nombre}`}</span>
               <span>{student.usuario.empresa}</span>
             </div>
           ))}

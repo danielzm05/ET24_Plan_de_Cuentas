@@ -1,5 +1,4 @@
 import { useSchoolContext } from "../../context/SchoolContext";
-import { supabase } from "../../backend/client";
 import { useState } from "react";
 import { Modal } from "../Modal";
 import { Table } from "../Table";
@@ -39,7 +38,7 @@ export function AddStudentModal({ isOpen, onClose, course }) {
               <span>
                 {student.usuario.apellido} {student.usuario.nombre}
               </span>
-              <span>{student.Curso.nombre}</span>
+              <span>{student?.Curso?.nombre}</span>
             </div>
           ))}
       </Table>
