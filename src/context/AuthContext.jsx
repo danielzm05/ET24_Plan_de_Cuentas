@@ -26,6 +26,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const sendPasswordEmail = async () => {
+    const userEmail = await user.email;
+    const { data, error } = await supabase.auth.resetPasswordForEmail(userEmail, {
+      redirectTo: "https://plandecuentas.netlify.app/contraseña",
+    });
+
+    if (error) throw error;
+  };
+
   const checkUser = async () => {
     const { data } = await supabase.auth.getUser();
 
@@ -34,16 +43,8 @@ export const AuthProvider = ({ children }) => {
       getUserInfo(data.user.id);
     } else {
       navigate("/", { replace: true });
+      setUser(null);
     }
-  };
-
-  const sendPasswordEmail = async () => {
-    const userEmail = await user.email;
-    const { data, error } = await supabase.auth.resetPasswordForEmail(userEmail, {
-      redirectTo: "https://plandecuentas.netlify.app/contraseña",
-    });
-
-    if (error) throw error;
   };
 
   useEffect(() => {

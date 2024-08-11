@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavigationMenu } from "../components/NavigationMenu";
 import { Table } from "../components/Table";
-import { useAccounts } from "../context/AccountContext";
 import { useSchoolContext } from "../context/SchoolContext";
 import { StudentTableModal } from "../components/Modals/StudentTableModal";
 import { ModificationTable } from "../components/ModificationsTable";
@@ -57,7 +56,7 @@ export function Cursos() {
             {students &&
               filteredStudents.map((student) => (
                 <div
-                  className={`row user-2`}
+                  className={`row user-2 ${studentSelected.id_usuario === student.id_usuario ? "selected" : ""}`}
                   key={student.id_usuario}
                   onClick={() => setStudentSelected(student)}
                   onDoubleClick={() => setOpenStudentTable(true)}
@@ -76,59 +75,5 @@ export function Cursos() {
         <StudentTableModal isOpen={openStudentTable} onClose={() => setOpenStudentTable(false)} student={studentSelected} />
       </main>
     </>
-  );
-}
-
-function AdminCoursesTable({
-  courseSelected,
-  e,
-  setSearchStudent,
-  courses,
-  course,
-  setCourseSelected,
-  id_curso,
-  students,
-  student,
-  setStudentSelected,
-  setOpenStudentTable,
-}) {
-  return (
-    <Table
-      title={`Alumnos ${courseSelected ? courseSelected.nombre : ""}`}
-      showOptions={false}
-      handleSearch={(e) => setSearchStudent(e.target.value)}
-    >
-      <ul className="cursos-list">
-        {courses &&
-          courses.map((course) => (
-            <li
-              onClick={() => setCourseSelected(course)}
-              key={course.id_curso}
-              className={courseSelected?.id_curso === course.id_curso ? "selected" : ""}
-            >
-              {course.nombre}
-            </li>
-          ))}
-      </ul>
-      <div className="row header modificacion">
-        <span>Apellido</span>
-        <span>Nombre</span>
-        <span>Email</span>
-      </div>
-
-      {students &&
-        filteredStudents.map((student) => (
-          <div
-            className={`row modificacion`}
-            key={student.id_usuario}
-            onClick={() => setStudentSelected(student)}
-            onDoubleClick={() => setOpenStudentTable(true)}
-          >
-            <span>{student.usuario.apellido}</span>
-            <span>{student.usuario.nombre}</span>
-            <span>{student.usuario.email}</span>
-          </div>
-        ))}
-    </Table>
   );
 }
