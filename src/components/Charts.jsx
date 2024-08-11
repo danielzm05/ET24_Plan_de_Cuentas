@@ -8,12 +8,21 @@ export function PieChartComponent() {
     { name: "Profesores", value: users.filter((user) => user.id_rol == 2).length },
     { name: "Administradores", value: users.filter((user) => user.id_rol == 1).length },
   ];
-
   return (
     <ChartContainer title={`${users.length} Usuarios en el Sistema`}>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
-          <Pie data={data} cx="50%" cy="50%" innerRadius={40} outerRadius={100} fill="#7745b9" dataKey="value" className="chart" />
+          <Pie
+            data={data}
+            isAnimationActive={true}
+            cx="50%"
+            cy="50%"
+            innerRadius={40}
+            outerRadius={100}
+            fill="#7745b9"
+            dataKey="value"
+            className="chart"
+          />
           <Tooltip />
         </PieChart>
       </ResponsiveContainer>

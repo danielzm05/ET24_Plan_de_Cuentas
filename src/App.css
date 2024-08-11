@@ -80,8 +80,11 @@ main {
 }
 
 .users-tables > * {
-  max-height: 80vh;
-  overflow: auto; /* Esto permitirá que el contenido se desplace si excede la altura máxima */
+  overflow: auto;
+}
+
+.users-tables > *:nth-child(3) {
+  grid-column: 1/-1;
 }
 
 .theme-switcher {

@@ -41,15 +41,17 @@ export const AccountProvider = ({ children }) => {
   };
 
   const getAccounts = async (id = user.id) => {
-    const { data, error } = await supabase
-      .from("Cuenta")
-      .select("id_cuenta, codigo, nombre, tipo_cuenta")
-      .eq("id_usuario", id)
-      .order("codigo", { ascending: true });
+    if (id) {
+      const { data, error } = await supabase
+        .from("Cuenta")
+        .select("id_cuenta, codigo, nombre, tipo_cuenta")
+        .eq("id_usuario", id)
+        .order("codigo", { ascending: true });
 
-    if (error) throw error;
+      if (error) throw error;
 
-    setAccounts(data);
+      setAccounts(data);
+    }
   };
 
   const createAccount = async (codigo, nombre, tipo) => {
