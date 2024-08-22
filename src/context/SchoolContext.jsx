@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import { useState } from "react";
 import { supabase } from "../backend/client";
+import { supabaseAdmin } from "../backend/client";
 import toast from "react-hot-toast";
 import { useAuthContext } from "./AuthContext";
 
@@ -23,6 +24,14 @@ export const SchoolProvider = ({ children }) => {
       if (error) throw error;
       setUsers(data);
     }
+  };
+
+  const deleteUser = async (userId) => {
+    if (!userId) return;
+    const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);
+    if (error) throw error;
+    getUsers();
+    toast.success("Usuario eliminado con éxito");
   };
 
   const updateUser = async (name, lastName, rol, userId) => {
@@ -123,6 +132,7 @@ export const SchoolProvider = ({ children }) => {
         deleteCourse,
         updateCourse,
         createCourse,
+        deleteUser,
       }}
     >
       {children}

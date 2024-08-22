@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { Table } from "./Table";
 import { useSchoolContext } from "../context/SchoolContext";
 import { ModifyUserModal } from "./Modals/ModifyUserModal";
+import { DeleteUserModal } from "./Modals/DeleteUserModal";
 import * as Icon from "react-feather";
 
 export function AdminUsersTable() {
   const { users, getUsers } = useSchoolContext();
   const [openModifyModal, setOpenModifyModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [searchUser, setSearchUser] = useState("");
   const [userSelected, setUserSelected] = useState(false);
 
@@ -23,6 +25,7 @@ export function AdminUsersTable() {
       <Table
         title="Usuarios"
         modify={() => setOpenModifyModal(true)}
+        remove={() => setOpenDeleteModal(true)}
         handleSearch={(e) => setSearchUser(e.target.value)}
         isAccountSelected={userSelected}
       >
@@ -49,6 +52,7 @@ export function AdminUsersTable() {
         ))}
       </Table>
       <ModifyUserModal isOpen={openModifyModal} onClose={() => setOpenModifyModal(false)} user={userSelected} userId={userSelected.id_usuario} />
+      <DeleteUserModal isOpen={openDeleteModal} onClose={() => setOpenDeleteModal(false)} user={userSelected} userId={userSelected.id_usuario} />
     </>
   );
 }

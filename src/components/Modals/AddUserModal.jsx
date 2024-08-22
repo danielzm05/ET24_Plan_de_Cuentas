@@ -31,7 +31,9 @@ export function AddUserModal({ isOpen, onClose }) {
         email_confirm: true,
       });
 
-      if (error) throw error;
+      if (error) {
+        toast.error(`Error al crear usuario`);
+      }
       setUserInfo({});
       getUsers();
       onClose();
