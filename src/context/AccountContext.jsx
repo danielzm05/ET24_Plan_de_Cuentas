@@ -2,6 +2,7 @@ import { useContext, createContext, useState } from "react";
 import { useAuthContext } from "./AuthContext";
 import { supabase } from "../backend/client";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export const AccountContext = createContext();
 
@@ -29,6 +30,7 @@ export const AccountProvider = ({ children }) => {
       const { error } = await supabase.from("Modificacion").delete().eq("id_usuario", studentId);
       if (error) throw error;
       getModifications(studentId);
+      toast.success("Modificaciones Eliminadas");
     }
   };
 
@@ -67,6 +69,7 @@ export const AccountProvider = ({ children }) => {
     if (error) throw error;
     getAccounts();
     createModification(`Creó ${nombre} (${codigo}) `);
+    toast.success(`${nombre} creado con éxito`);
   };
 
   const deleteAccount = async (id, nombre) => {
@@ -75,6 +78,7 @@ export const AccountProvider = ({ children }) => {
     if (error) throw error;
     getAccounts();
     createModification(`Eliminó ${nombre} `);
+    toast.success(`${nombre} eliminado con éxito`);
   };
 
   const updateAccount = async (id, codigo, nombre, tipo = "", cuenta) => {
@@ -91,6 +95,7 @@ export const AccountProvider = ({ children }) => {
     if (error) throw error;
     getAccounts();
     createModification(`Modificó ${cuenta.nombre} (${cuenta.tipo}) a ${nombre} (${tipo})`);
+    toast.success(`Cuenta modificada con éxito`);
   };
 
   const updateCompanyName = async (newCompanyName, id = user.id) => {
@@ -104,6 +109,7 @@ export const AccountProvider = ({ children }) => {
     if (error) throw error;
     getUserInfo();
     navigate("/cuentas");
+    toast.success(`Nombre de empresa actualizado`);
   };
 
   return (

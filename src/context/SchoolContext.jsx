@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import { useState } from "react";
 import { supabase } from "../backend/client";
+import toast from "react-hot-toast";
 import { useAuthContext } from "./AuthContext";
 
 export const SchoolContext = createContext();
@@ -36,6 +37,7 @@ export const SchoolProvider = ({ children }) => {
 
     if (error) throw error;
     getUsers();
+    toast.success(`${name} actualizado con éxito`);
   };
 
   const getCourses = async () => {
@@ -58,6 +60,7 @@ export const SchoolProvider = ({ children }) => {
     const { error } = await supabase.from("Alumno").update({ id_curso: courseId }).eq("id_alumno", studentId);
     if (error) throw error;
     getStudents();
+    toast.success(`Se agregó al alumno con éxito`);
   };
 
   const createCourse = async (courseName, teacherId) => {
@@ -65,12 +68,14 @@ export const SchoolProvider = ({ children }) => {
     if (error) throw error;
     getCourses();
     getTeachers();
+    toast.success(`${courseName} creado con éxito`);
   };
 
   const deleteCourse = async (id) => {
     const { error } = await supabase.from("Curso").delete().eq("id_curso", id);
     if (error) throw error;
     getCourses();
+    toast.success(`Curso eliminado con éxito`);
   };
 
   const updateCourse = async (courseId, courseName, teacherId) => {
@@ -85,6 +90,7 @@ export const SchoolProvider = ({ children }) => {
     if (error) throw error;
     getCourses();
     getTeachers();
+    toast.success(`Curso modificado con éxito`);
   };
 
   const getTeachers = async () => {

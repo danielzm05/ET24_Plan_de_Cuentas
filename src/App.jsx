@@ -9,6 +9,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuthContext } from "./context/AuthContext";
 import { ChangePassword } from "./pages/ChangePassword";
 import { ThemeSwitcher } from "./components/ThemeSwitcher";
+import { ToasterContainer } from "./components/Toaster";
 import "./App.css";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <>
+      <ToasterContainer />
       <ThemeSwitcher />
       <Routes>
         <Route path="/" element={<Login />} />

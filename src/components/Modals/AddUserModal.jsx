@@ -1,8 +1,11 @@
 import { Modal } from "../Modal";
 import { useState } from "react";
 import { supabaseAdmin } from "../../backend/client";
+import toast from "react-hot-toast";
+import { useSchoolContext } from "../../context/SchoolContext";
 
 export function AddUserModal({ isOpen, onClose }) {
+  const { getUsers } = useSchoolContext();
   const [userInfo, setUserInfo] = useState({});
 
   const handleInputChange = (e) => {
@@ -30,7 +33,9 @@ export function AddUserModal({ isOpen, onClose }) {
 
       if (error) throw error;
       setUserInfo({});
+      getUsers();
       onClose();
+      toast.success(`Usuario creado con éxito`);
     } catch (error) {
       console.error("Error al registrar y guardar el usuario:", error.message);
     }
