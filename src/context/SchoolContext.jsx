@@ -36,6 +36,11 @@ export const SchoolProvider = ({ children }) => {
     toast.success("Usuario eliminado con éxito");
   };
 
+  const createStudent = async (userId) => {
+    const { error } = await supabase.from("Alumno").insert([{ id_usuario: userId }]);
+    getStudents();
+  };
+
   const updateUser = async (name, lastName, rol, userId) => {
     const { error } = await supabase
       .from("usuario")
@@ -137,6 +142,7 @@ export const SchoolProvider = ({ children }) => {
         updateCourse,
         createCourse,
         deleteUser,
+        createStudent,
       }}
     >
       {children}

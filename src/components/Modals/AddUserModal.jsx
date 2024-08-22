@@ -21,7 +21,7 @@ export function AddUserModal({ isOpen, onClose }) {
     e.preventDefault();
 
     try {
-      const { error } = await supabaseAdmin.auth.admin.createUser({
+      const { data, error } = await supabaseAdmin.auth.admin.createUser({
         email: userInfo.email,
         password: userInfo.password,
         user_metadata: {
@@ -37,6 +37,7 @@ export function AddUserModal({ isOpen, onClose }) {
       }
       setUserInfo({});
       getUsers();
+      createStudent(data.user.id);
       onClose();
       toast.success(`Usuario creado con éxito`);
     } catch (error) {
