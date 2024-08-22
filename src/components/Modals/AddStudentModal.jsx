@@ -1,10 +1,10 @@
 import { useSchoolContext } from "../../context/SchoolContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Modal } from "../Modal";
 import { Table } from "../Table";
 
 export function AddStudentModal({ isOpen, onClose, course }) {
-  const { students, addToCourse } = useSchoolContext();
+  const { students, addToCourse, getStudents } = useSchoolContext();
   const [studentSelected, setStudentSelected] = useState({});
   const [searchStudent, setSearchStudent] = useState("");
 
@@ -13,6 +13,10 @@ export function AddStudentModal({ isOpen, onClose, course }) {
     setStudentSelected({});
     onClose();
   };
+
+  useEffect(() => {
+    getStudents();
+  }, []);
 
   const filteredStudents = students.filter(
     (student) =>

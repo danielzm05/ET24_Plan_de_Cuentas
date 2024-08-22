@@ -31,6 +31,8 @@ export const SchoolProvider = ({ children }) => {
     const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);
     if (error) throw error;
     getUsers();
+    getTeachers();
+    getStudents();
     toast.success("Usuario eliminado con éxito");
   };
 
@@ -46,6 +48,8 @@ export const SchoolProvider = ({ children }) => {
 
     if (error) throw error;
     getUsers();
+    getTeachers();
+    getStudents();
     toast.success(`${name} actualizado con éxito`);
   };
 

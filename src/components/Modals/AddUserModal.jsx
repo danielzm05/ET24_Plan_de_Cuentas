@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useSchoolContext } from "../../context/SchoolContext";
 
 export function AddUserModal({ isOpen, onClose }) {
-  const { getUsers } = useSchoolContext();
+  const { getUsers, createStudent } = useSchoolContext();
   const [userInfo, setUserInfo] = useState({});
 
   const handleInputChange = (e) => {
@@ -33,6 +33,7 @@ export function AddUserModal({ isOpen, onClose }) {
 
       if (error) {
         toast.error(`Error al crear usuario`);
+        throw error;
       }
       setUserInfo({});
       getUsers();
