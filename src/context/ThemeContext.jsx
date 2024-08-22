@@ -7,7 +7,7 @@ export const useThemeContext = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   const changeTheme = () => {
     setDarkMode((prevState) => !prevState);
