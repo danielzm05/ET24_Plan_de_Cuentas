@@ -78,7 +78,7 @@
       border-top: 0.01em var(--hover) solid;
       display: grid;
       align-items: center;
-      grid-template-columns: 2fr 6fr 2fr;
+
       span {
         padding: 0 6px;
       }
@@ -98,6 +98,10 @@
 
     .row.user {
       grid-template-columns: 0.2fr 6fr 2fr;
+    }
+
+    .row.admin-user {
+      grid-template-columns: 1fr 2fr 2fr;
     }
 
     .row.user-2 {

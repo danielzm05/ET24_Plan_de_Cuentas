@@ -20,9 +20,14 @@ export const SchoolProvider = ({ children }) => {
 
   const getUsers = async () => {
     if (userInfo.id_rol === 1) {
-      const { data, error } = await supabase.from("usuario").select("*").order("id_rol", { ascending: true }).order("nombre", { ascending: true });
+      const { data, error } = await supabase
+        .from("usuario")
+        .select("*, Rol(*)")
+        .order("id_rol", { ascending: true })
+        .order("nombre", { ascending: true });
       if (error) throw error;
       setUsers(data);
+      console.log(data);
     }
   };
 

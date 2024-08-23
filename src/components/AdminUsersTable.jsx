@@ -29,21 +29,21 @@ export function AdminUsersTable() {
         handleSearch={(e) => setSearchUser(e.target.value)}
         isAccountSelected={userSelected}
       >
-        <div className="row header user">
-          <span></span>
+        <div className="row header admin-user">
+          <span>Rol</span>
           <span>Nombre</span>
           <span>Email</span>
         </div>
 
         {filteredUser.map((user) => (
           <div
-            className={`row user ${userSelected.id_usuario === user.id_usuario ? "selected" : ""}`}
+            className={`row admin-user ${userSelected.id_usuario === user.id_usuario ? "selected" : ""}`}
             key={user.id_usuario}
             title={user.id_rol == 2 ? "Profesor" : "Alumno"}
             onClick={() => setUserSelected(user)}
             onDoubleClick={() => setOpenModifyModal(true)}
           >
-            <span>{user.id_rol == 2 ? <Icon.Award /> : null}</span>
+            <span>{user.Rol.nombre}</span>
             <span>
               {user.nombre} {user.apellido}
             </span>
