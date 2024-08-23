@@ -27,7 +27,6 @@ export const SchoolProvider = ({ children }) => {
         .order("nombre", { ascending: true });
       if (error) throw error;
       setUsers(data);
-      console.log(data);
     }
   };
 
@@ -69,13 +68,10 @@ export const SchoolProvider = ({ children }) => {
       if (error) throw error;
       setCourses(allCourses);
     } else {
-      const { data: courses, error } = await supabase
-        .from("Curso")
-        .select("nombre, id_curso, Profesor!inner(id_profesor)")
-        .eq("Profesor.id_usuario", user.id)
-        .order("nombre", { ascending: true });
+      const { data: courses, error } = await supabase.from("Profesor").select("*, Curso(*)").eq("id_usuario", user.id);
       if (error) throw error;
-      setCourses(courses);
+
+      setCourses(courses[0].Curso);
     }
   };
 

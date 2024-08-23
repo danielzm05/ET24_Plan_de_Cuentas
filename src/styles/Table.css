@@ -13,6 +13,7 @@
 
   .table-options {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     gap: 10px;
     align-items: end;
@@ -30,7 +31,7 @@
 
   .table-tools {
     display: flex;
-    gap: 0 20px;
+    gap: 0 18px;
     justify-content: end;
     list-style: none;
     flex-wrap: wrap;
@@ -38,7 +39,7 @@
     li {
       display: flex;
       align-items: center;
-      padding: 0 5px;
+      justify-content: left;
       gap: 5px;
       color: var(--text-2);
       font-size: 12px;
@@ -74,14 +75,11 @@
     }
 
     .row {
-      height: 40px;
+      min-height: 40px;
       border-top: 0.01em var(--hover) solid;
       display: grid;
       align-items: center;
-
-      span {
-        padding: 0 6px;
-      }
+      gap: 20px;
 
       svg {
         max-width: 18px;
@@ -89,11 +87,15 @@
     }
 
     .row.modificacion {
-      grid-template-columns: 0.5fr 6fr 2fr;
+      grid-template-columns: 0.5fr 2fr 1fr;
     }
 
     .row.cuenta {
-      grid-template-columns: 2fr 6fr 0.5fr;
+      grid-template-columns: 80px 3fr 0.5fr;
+
+      span:nth-child(1) {
+        text-align: end;
+      }
     }
 
     .row.user {
