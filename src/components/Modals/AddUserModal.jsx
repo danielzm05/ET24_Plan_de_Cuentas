@@ -50,9 +50,9 @@ export function AddUserModal({ isOpen, onClose }) {
       <h3>Agregar nuevo usuario</h3>
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="nombre">Nombre:</label>
-        <input type="text" name="nombre" id="nombre" className="input-data" required onChange={handleInputChange} />
+        <input type="text" name="nombre" id="nombre" className="input-data" required onChange={handleInputChange} maxLength={40} />
         <label htmlFor="apellido">Apellido:</label>
-        <input type="text" name="apellido" id="apellido" className="input-data" required onChange={handleInputChange} />
+        <input type="text" name="apellido" id="apellido" className="input-data" required onChange={handleInputChange} maxLength={40} />
 
         <label htmlFor="email">Email:</label>
         <input type="email" name="email" id="email" className="input-data" required onChange={handleInputChange} />

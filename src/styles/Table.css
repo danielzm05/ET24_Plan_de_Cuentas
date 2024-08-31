@@ -66,6 +66,8 @@
   }
 
   .table-content {
+    max-height: 80vh;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     font-size: 12px;
@@ -83,6 +85,11 @@
 
       svg {
         max-width: 18px;
+      }
+
+      span {
+        max-height: 100%;
+        overflow: hidden;
       }
     }
 
@@ -166,5 +173,25 @@
         background-color: var(--hover);
       }
     }
+  }
+}
+
+.table-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-content::-webkit-scrollbar-track {
+  background: var(--table);
+  border-radius: 3px;
+}
+
+.table-content::-webkit-scrollbar-thumb {
+  background: var(--icon-1);
+  border-radius: 3px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .table-content {
+    scrollbar-color: var(--background) var(--icon-1);
   }
 }

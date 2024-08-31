@@ -69,7 +69,7 @@ export function ModifyAccountModal({ isOpen, onClose, account }) {
           onChange={handleChange}
         />
         <label htmlFor="nombre">Nombre:</label>
-        <input type="text" name="nombre" id="nombre" className="input-data" value={accountModified.nombre} onChange={handleChange} />
+        <input type="text" name="nombre" id="nombre" className="input-data" value={accountModified.nombre} onChange={handleChange} maxLength={60} />
         <label htmlFor="tipo">Tipo:</label>
         <select id="tipo" name="tipo" className="input-data" value={accountModified.tipo} onChange={handleChange}>
           <option value={null}></option>

@@ -46,7 +46,7 @@ export function ModifyCourseModal({ isOpen, onClose, course, teacher }) {
           onChange={handleChange}
         />
         <label htmlFor="profesor">Profesor del Curso:</label>
-        <select id="profesor" name="profesor" className="input-data" value={courseModified.profesor} onChange={handleChange}>
+        <select id="profesor" name="profesor" className="input-data" value={courseModified.profesor} maxLength={20} onChange={handleChange}>
           {teachers.map((teacher) => (
             <option value={teacher.id_profesor} key={teacher.id_profesor}>
               {teacher.usuario.nombre} {teacher.usuario.apellido}

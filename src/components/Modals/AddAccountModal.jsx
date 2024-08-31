@@ -13,9 +13,7 @@ export function AddAccountModal({ isOpen, onClose }) {
   const { accounts, createAccount } = useAccounts();
 
   useEffect(() => {
-    accounts.some((account) => account.codigo === accountInfo.codigo)
-      ? setError(true)
-      : setError(false);
+    accounts.some((account) => account.codigo === accountInfo.codigo) ? setError(true) : setError(false);
   }, [accountInfo, accounts]);
 
   const formatCode = (value) => {
@@ -79,28 +77,18 @@ export function AddAccountModal({ isOpen, onClose }) {
           className="input-data"
           onChange={handleInputChange}
           value={accountInfo.nombre}
+          maxLength={60}
           required
         />
         <label htmlFor="tipo">Tipo:</label>
-        <select
-          id="tipo"
-          name="tipo"
-          className="input-data"
-          onChange={handleInputChange}
-          value={accountInfo.tipo}
-        >
+        <select id="tipo" name="tipo" className="input-data" onChange={handleInputChange} value={accountInfo.tipo}>
+          <option value={null}>-</option>
           <option value="Acreedor">Acreedor</option>
           <option value="Deudor">Deudor</option>
         </select>
         <div className="buttons-container">
-          <span className="error-message">
-            {error ? "⚠︎ Error: Código ya existente" : ""}
-          </span>
-          <input
-            type="submit"
-            value="Crear Cuenta"
-            className={error ? "hide-btn" : ""}
-          />
+          <span className="error-message">{error ? "⚠︎ Error: Código ya existente" : ""}</span>
+          <input type="submit" value="Crear Cuenta" className={error ? "hide-btn" : ""} />
         </div>
       </form>
     </Modal>
