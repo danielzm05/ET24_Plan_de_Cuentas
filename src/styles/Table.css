@@ -72,8 +72,10 @@
     flex-direction: column;
     font-size: 12px;
 
-    .row.header {
+    .row.header th {
+      font-weight: normal;
       color: var(--text-2);
+      text-align: start;
     }
 
     .row {
@@ -87,7 +89,7 @@
         max-width: 18px;
       }
 
-      span {
+      td {
         max-height: 100%;
         overflow: hidden;
       }
@@ -100,7 +102,7 @@
     .row.cuenta {
       grid-template-columns: 80px 3fr 0.5fr;
 
-      span:nth-child(1) {
+      td:nth-child(1) {
         text-align: end;
       }
     }
@@ -130,7 +132,7 @@
       cursor: pointer;
     }
 
-    .row span.tipo-cuenta {
+    .row .tipo-cuenta {
       width: 80px;
       margin: 10px;
       text-align: center;
