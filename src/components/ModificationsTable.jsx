@@ -15,33 +15,41 @@ export function ModificationTable({ user }) {
     deleteModifications(user.id_usuario);
     getModifications(user.id_usuario);
   };
+  console.log(user);
 
   const filteredModifications = modifications.filter((mod) => mod.descripcion.toLowerCase().includes(searchModification.toLowerCase()));
   return (
-    <Table title={`Transacciones ${user.nombre ? user.nombre : ""}`} handleSearch={(e) => setSearchModification(e.target.value)}>
+    <Table title={`Transacciones ${user.usuario.nombre ? user.usuario.nombre : ""}`} handleSearch={(e) => setSearchModification(e.target.value)}>
       <ul className="table-tools">
         <li onClick={deleteUserModifications}>
           <Icon.Trash />
           Eliminar
         </li>
       </ul>
-      <div className="row header modificacion">
-        <span>Hora</span>
-        <span>Descripción</span>
-        <span>Fecha</span>
-      </div>
 
-      {filteredModifications.length === 0 ? (
-        <p>{user?.usuario?.nombre} no ha hecho modificaciones en sus cuentas</p>
-      ) : (
-        filteredModifications.map((mod) => (
-          <div className="row modificacion" key={mod.id_modificacion}>
-            <span>{mod.fecha.slice(11, 16)}</span>
-            <span>{mod.descripcion}</span>
-            <span>{mod.fecha.slice(0, 10)}</span>
-          </div>
-        ))
-      )}
+      <table>
+        <thead>
+          <tr className="row header modificacion">
+            <th>Hora</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {filteredModifications.length === 0 ? (
+            <tr>{user?.usuario?.nombre} No ha hecho modificaciones en sus cuentas</tr>
+          ) : (
+            filteredModifications.map((mod) => (
+              <tr className="row modificacion" key={mod.id_modificacion}>
+                <td>{mod.fecha.slice(11, 16)}</td>
+                <td>{mod.descripcion}</td>
+                <td>{mod.fecha.slice(0, 10)}</td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
     </Table>
   );
 }

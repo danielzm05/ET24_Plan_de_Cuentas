@@ -41,28 +41,30 @@ export function Cuentas() {
           isAccountSelected={accountSelected}
           handleSearch={handleFilter}
         >
-          <thead>
-            <tr className="row header cuenta">
-              <th>Código</th>
-              <th>Rubro</th>
-              <th>A/D</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {filteredAccounts.map((account) => (
-              <tr
-                className={`row cuenta ${accountSelected.id_cuenta === account.id_cuenta ? "selected" : ""}`}
-                key={account.id_cuenta}
-                onClick={() => setAccountSelected(account)}
-                onDoubleClick={() => setOpenModifyModal(true)}
-              >
-                <td>{account.codigo}</td>
-                <td>{account.nombre}</td>
-                <td className={`tipo-cuenta ${account.tipo_cuenta}`}>{account.tipo_cuenta}</td>
+          <table>
+            <thead>
+              <tr className="row header cuenta">
+                <th>Código</th>
+                <th>Rubro</th>
+                <th>A/D</th>
               </tr>
-            ))}
-          </tbody>
+            </thead>
+
+            <tbody>
+              {filteredAccounts.map((account) => (
+                <tr
+                  className={`row cuenta ${accountSelected.id_cuenta === account.id_cuenta ? "selected" : ""}`}
+                  key={account.id_cuenta}
+                  onClick={() => setAccountSelected(account)}
+                  onDoubleClick={() => setOpenModifyModal(true)}
+                >
+                  <td>{account.codigo}</td>
+                  <td>{account.nombre}</td>
+                  <td className={`tipo-cuenta ${account.tipo_cuenta}`}>{account.tipo_cuenta}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </Table>
 
         <ModifyAccountModal

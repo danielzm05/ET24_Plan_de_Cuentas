@@ -33,7 +33,7 @@ export function Table({ title, children, modify = false, add = false, remove = f
         </ul>
       </div>
 
-      <table className="table-content">{children}</table>
+      <div className="table-content">{children}</div>
     </div>
   );
 }

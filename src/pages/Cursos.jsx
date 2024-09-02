@@ -48,25 +48,31 @@ export function Cursos() {
                   </li>
                 ))}
             </ul>
-            <div className="row header user-2">
-              <span>Estudiante</span>
-              <span>Empresa</span>
-            </div>
+            <table>
+              <thead>
+                <tr className="row header user-2">
+                  <th>Estudiante</th>
+                  <th>Empresa</th>
+                </tr>
+              </thead>
 
-            {students &&
-              filteredStudents.map((student) => (
-                <div
-                  className={`row user-2 ${studentSelected.id_usuario === student.id_usuario ? "selected" : ""}`}
-                  key={student.id_usuario}
-                  onClick={() => setStudentSelected(student)}
-                  onDoubleClick={() => setOpenStudentTable(true)}
-                >
-                  <span>
-                    {student.usuario.apellido} {student.usuario.nombre}
-                  </span>
-                  <span>{student.usuario.empresa}</span>
-                </div>
-              ))}
+              <tbody>
+                {students &&
+                  filteredStudents.map((student) => (
+                    <tr
+                      className={`row user-2 ${studentSelected.id_usuario === student.id_usuario ? "selected" : ""}`}
+                      key={student.id_usuario}
+                      onClick={() => setStudentSelected(student)}
+                      onDoubleClick={() => setOpenStudentTable(true)}
+                    >
+                      <td>
+                        {student.usuario.apellido} {student.usuario.nombre}
+                      </td>
+                      <td>{student.usuario.empresa}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
           </Table>
 
           <ModificationTable user={studentSelected} />

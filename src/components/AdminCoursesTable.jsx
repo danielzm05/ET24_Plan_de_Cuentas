@@ -54,33 +54,42 @@ export function AdminCoursesTable() {
               </li>
             ))}
         </ul>
-        <div className="row header user">
-          <span>Rol</span>
-          <span>Nombre</span>
-          <span>Empresa</span>
-        </div>
 
-        {courseTeacher ? (
-          <div className="row user" title="Profesor">
-            <Icon.Award />
-            <span>{`${courseTeacher.usuario.apellido} ${courseTeacher.usuario.nombre}`}</span>
-            <span>{courseTeacher.usuario.empresa}</span>
-          </div>
-        ) : null}
+        <table>
+          <thead>
+            <tr className="row header user">
+              <th>Rol</th>
+              <th>Nombre</th>
+              <th>Empresa</th>
+            </tr>
+          </thead>
 
-        {students &&
-          filteredStudents.map((student) => (
-            <div
-              className={`row user`}
-              key={student.id_usuario}
-              onClick={() => setStudentSelected(student)}
-              onDoubleClick={() => setOpenStudentTable(true)}
-            >
-              <span> </span>
-              <span>{`${student.usuario.apellido} ${student.usuario.nombre}`}</span>
-              <span>{student.usuario.empresa}</span>
-            </div>
-          ))}
+          <tbody>
+            {courseTeacher ? (
+              <tr className="row user" title="Profesor">
+                <td>
+                  <Icon.Award />
+                </td>
+                <td>{`${courseTeacher.usuario.apellido} ${courseTeacher.usuario.nombre}`}</td>
+                <td>{courseTeacher.usuario.empresa}</td>
+              </tr>
+            ) : null}
+
+            {students &&
+              filteredStudents.map((student) => (
+                <tr
+                  className={`row user`}
+                  key={student.id_usuario}
+                  onClick={() => setStudentSelected(student)}
+                  onDoubleClick={() => setOpenStudentTable(true)}
+                >
+                  <td> </td>
+                  <td>{`${student.usuario.apellido} ${student.usuario.nombre}`}</td>
+                  <td>{student.usuario.empresa}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </Table>
       <AddStudentModal isOpen={openAddModal} onClose={() => setOpenAddModal(false)} course={courseSelected} />
       <DeleteCourseModal isOpen={openDeleteModal} onClose={() => setOpenDeleteModal(false)} course={courseSelected} />

@@ -3,7 +3,6 @@ import { Table } from "./Table";
 import { useSchoolContext } from "../context/SchoolContext";
 import { ModifyUserModal } from "./Modals/ModifyUserModal";
 import { DeleteUserModal } from "./Modals/DeleteUserModal";
-import * as Icon from "react-feather";
 
 export function AdminUsersTable() {
   const { users, getUsers } = useSchoolContext();
@@ -29,27 +28,33 @@ export function AdminUsersTable() {
         handleSearch={(e) => setSearchUser(e.target.value)}
         isAccountSelected={userSelected}
       >
-        <div className="row header admin-user">
-          <span>Rol</span>
-          <span>Nombre</span>
-          <span>Email</span>
-        </div>
+        <table>
+          <thead>
+            <tr className="row header admin-user">
+              <th>Rol</th>
+              <th>Nombre</th>
+              <th>Email</th>
+            </tr>
+          </thead>
 
-        {filteredUser.map((user) => (
-          <div
-            className={`row admin-user ${userSelected.id_usuario === user.id_usuario ? "selected" : ""}`}
-            key={user.id_usuario}
-            title={user.id_rol == 2 ? "Profesor" : "Alumno"}
-            onClick={() => setUserSelected(user)}
-            onDoubleClick={() => setOpenModifyModal(true)}
-          >
-            <span>{user.Rol.nombre}</span>
-            <span>
-              {user.nombre} {user.apellido}
-            </span>
-            <span>{user.email}</span>
-          </div>
-        ))}
+          <tbody>
+            {filteredUser.map((user) => (
+              <tr
+                className={`row admin-user ${userSelected.id_usuario === user.id_usuario ? "selected" : ""}`}
+                key={user.id_usuario}
+                title={user.id_rol == 2 ? "Profesor" : "Alumno"}
+                onClick={() => setUserSelected(user)}
+                onDoubleClick={() => setOpenModifyModal(true)}
+              >
+                <td>{user.Rol.nombre}</td>
+                <td>
+                  {user.nombre} {user.apellido}
+                </td>
+                <td>{user.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </Table>
       <ModifyUserModal isOpen={openModifyModal} onClose={() => setOpenModifyModal(false)} user={userSelected} userId={userSelected.id_usuario} />
       <DeleteUserModal isOpen={openDeleteModal} onClose={() => setOpenDeleteModal(false)} user={userSelected} userId={userSelected.id_usuario} />

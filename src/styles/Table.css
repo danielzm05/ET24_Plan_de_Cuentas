@@ -85,13 +85,13 @@
       align-items: center;
       gap: 20px;
 
-      svg {
-        max-width: 18px;
-      }
-
       td {
         max-height: 100%;
         overflow: hidden;
+
+        svg {
+          max-width: 18px;
+        }
       }
     }
 
@@ -108,7 +108,7 @@
     }
 
     .row.user {
-      grid-template-columns: 0.2fr 6fr 2fr;
+      grid-template-columns: 20px 6fr 2fr;
     }
 
     .row.admin-user {
