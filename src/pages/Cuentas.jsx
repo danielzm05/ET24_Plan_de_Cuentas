@@ -5,6 +5,7 @@ import { ModifyAccountModal } from "../components/Modals/ModifyAccountModal";
 import { AddAccountModal } from "../components/Modals/AddAccountModal";
 import { DeleteAccountModal } from "../components/Modals/DeleteAccountModal";
 import { useAccounts } from "../context/AccountContext";
+import * as XLSX from "xlsx";
 import { useAuthContext } from "../context/AuthContext";
 
 export function Cuentas() {
@@ -28,6 +29,14 @@ export function Cuentas() {
     (account) => account.nombre.toLowerCase().includes(searchTerm.toLowerCase()) || account.codigo.includes(searchTerm)
   );
 
+  function exportTableToExcel() {
+    const table = document.getElementById("cuentas-table");
+    const worksheet = XLSX.utils.table_to_sheet(table);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Hoja1");
+    XLSX.writeFile(workbook, `Cuentas ${userInfo ? userInfo?.nombre : ""}.xlsx`);
+  }
+
   return (
     <>
       <NavigationMenu selected="cuentas" />
@@ -41,7 +50,7 @@ export function Cuentas() {
           isAccountSelected={accountSelected}
           handleSearch={handleFilter}
         >
-          <table>
+          <table id="cuentas-table">
             <thead>
               <tr className="row header cuenta">
                 <th>Código</th>
@@ -66,6 +75,7 @@ export function Cuentas() {
             </tbody>
           </table>
         </Table>
+        <button onClick={exportTableToExcel}>Excel</button>
 
         <ModifyAccountModal
           isOpen={openModifyModal}

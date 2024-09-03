@@ -15,11 +15,10 @@ export function ModificationTable({ user }) {
     deleteModifications(user.id_usuario);
     getModifications(user.id_usuario);
   };
-  console.log(user);
 
   const filteredModifications = modifications.filter((mod) => mod.descripcion.toLowerCase().includes(searchModification.toLowerCase()));
   return (
-    <Table title={`Transacciones ${user.usuario.nombre ? user.usuario.nombre : ""}`} handleSearch={(e) => setSearchModification(e.target.value)}>
+    <Table title={`Transacciones ${user.usuario ? user?.usuario?.nombre : ""}`} handleSearch={(e) => setSearchModification(e.target.value)}>
       <ul className="table-tools">
         <li onClick={deleteUserModifications}>
           <Icon.Trash />
