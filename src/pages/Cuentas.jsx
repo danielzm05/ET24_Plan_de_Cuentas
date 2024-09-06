@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { NavigationMenu } from "../components/NavigationMenu";
-import { Table } from "../components/Table";
+import { Table, TableOptions } from "../components/Table";
 import { ModifyAccountModal } from "../components/Modals/ModifyAccountModal";
 import { AddAccountModal } from "../components/Modals/AddAccountModal";
 import { DeleteAccountModal } from "../components/Modals/DeleteAccountModal";
 import { useAccounts } from "../context/AccountContext";
+import { Button } from "../components/Button";
 import * as XLSX from "xlsx";
+import * as Icon from "react-feather";
 import { useAuthContext } from "../context/AuthContext";
 
 export function Cuentas() {
@@ -42,40 +44,53 @@ export function Cuentas() {
       <NavigationMenu selected="cuentas" />
       <main>
         <h2 className="page-title">Hola! {userInfo ? userInfo?.nombre : ""}👋</h2>
-        <Table
-          title={`Cuentas ${userInfo?.empresa}`}
-          modify={() => setOpenModifyModal(true)}
-          add={() => setOpenAddModal(true)}
-          remove={() => setOpenDeleteModal(true)}
-          isAccountSelected={accountSelected}
-          handleSearch={handleFilter}
-        >
-          <table id="cuentas-table">
-            <thead>
-              <tr className="row header cuenta">
-                <th>Código</th>
-                <th>Rubro</th>
-                <th>A/D</th>
-              </tr>
-            </thead>
+        <Table title={`Cuentas ${userInfo?.empresa}`} handleSearch={handleFilter}>
+          <TableOptions handleSearch={handleFilter}>
+            <Button onClick={() => setOpenAddModal(true)}>
+              <Icon.PlusSquare />
+              Agregar
+            </Button>
+            <Button onClick={() => setOpenDeleteModal(true)} className={accountSelected ? "" : "hide-option"}>
+              <Icon.XSquare />
+              Eliminar
+            </Button>
+            <Button onClick={() => setOpenModifyModal(true)} className={accountSelected ? "" : "hide-option"}>
+              <Icon.Edit />
+              Modificar
+            </Button>
+            <Button onClick={exportTableToExcel}>
+              <Icon.Download />
+              Descargar
+            </Button>
+          </TableOptions>
 
-            <tbody>
-              {filteredAccounts.map((account) => (
-                <tr
-                  className={`row cuenta ${accountSelected.id_cuenta === account.id_cuenta ? "selected" : ""}`}
-                  key={account.id_cuenta}
-                  onClick={() => setAccountSelected(account)}
-                  onDoubleClick={() => setOpenModifyModal(true)}
-                >
-                  <td>{account.codigo}</td>
-                  <td>{account.nombre}</td>
-                  <td className={`tipo-cuenta ${account.tipo_cuenta}`}>{account.tipo_cuenta}</td>
+          <div className="table-content">
+            <table id="cuentas-table">
+              <thead>
+                <tr className="row header cuenta">
+                  <th>Código</th>
+                  <th>Rubro</th>
+                  <th>A/D</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                {filteredAccounts.map((account) => (
+                  <tr
+                    className={`row cuenta ${accountSelected.id_cuenta === account.id_cuenta ? "selected" : ""}`}
+                    key={account.id_cuenta}
+                    onClick={() => setAccountSelected(account)}
+                    onDoubleClick={() => setOpenModifyModal(true)}
+                  >
+                    <td>{account.codigo}</td>
+                    <td>{account.nombre}</td>
+                    <td className={`tipo-cuenta ${account.tipo_cuenta}`}>{account.tipo_cuenta}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </Table>
-        <button onClick={exportTableToExcel}>Excel</button>
 
         <ModifyAccountModal
           isOpen={openModifyModal}

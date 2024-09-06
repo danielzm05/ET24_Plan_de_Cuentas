@@ -1,39 +1,23 @@
 import * as Icon from "react-feather";
 import "../styles/Table.css";
+import { Button } from "./Button";
 
-export function Table({ title, children, modify = false, add = false, remove = false, handleSearch, isAccountSelected }) {
+export function Table({ title, children, modify = false, add = false, remove = false }) {
   return (
     <div className="table">
       <h2 className="table-name">{title}</h2>
 
-      <div className="table-options">
-        <input className="search-bar" type="text" placeholder="Buscar.." onChange={handleSearch} />
+      {children}
+    </div>
+  );
+}
 
-        <ul className="table-tools">
-          {add && (
-            <li onClick={add}>
-              <Icon.PlusSquare />
-              Agregar
-            </li>
-          )}
+export function TableOptions({ children, handleSearch }) {
+  return (
+    <div className="table-options">
+      <input className="search-bar" type="text" placeholder="Buscar.." onChange={handleSearch} />
 
-          {remove && (
-            <li onClick={remove} className={isAccountSelected ? "" : "hide-option"}>
-              <Icon.XSquare />
-              Eliminar
-            </li>
-          )}
-
-          {modify && (
-            <li onClick={modify} className={isAccountSelected ? "" : "hide-option"}>
-              <Icon.Edit />
-              Modificar
-            </li>
-          )}
-        </ul>
-      </div>
-
-      <div className="table-content">{children}</div>
+      <div className="table-tools">{children}</div>
     </div>
   );
 }

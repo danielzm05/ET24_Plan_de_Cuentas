@@ -36,7 +36,6 @@ function App() {
         </Route>
 
         <Route element={<ProtectedRoute isAuth={user?.aud} roles={[1]} userRol={userInfo?.id_rol} />}>
-          <Route path="/cursos" element={<Cursos />} />
           <Route path="/usuarios" element={<Usuarios />} />
         </Route>
       </Routes>

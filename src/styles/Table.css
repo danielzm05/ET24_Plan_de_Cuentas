@@ -31,35 +31,34 @@
 
   .table-tools {
     display: flex;
-    gap: 0 18px;
+
     justify-content: end;
-    list-style: none;
     flex-wrap: wrap;
 
-    li {
+    button {
       display: flex;
+      padding: 0 8px;
       align-items: center;
       justify-content: left;
-      gap: 5px;
       color: var(--text-2);
       font-size: 12px;
       font-weight: 400;
       border-radius: 5px;
-      cursor: pointer;
+      background: var(--table);
       transition: all 0.2s ease-in-out;
       user-select: none;
     }
 
-    li:hover {
+    button:hover {
       background-color: var(--hover);
     }
 
-    li svg {
+    button svg {
       max-width: 18px;
       stroke: var(--icon-1);
     }
 
-    li.hide-option {
+    button.hide-option {
       pointer-events: none;
       opacity: 40%;
     }

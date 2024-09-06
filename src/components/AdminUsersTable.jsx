@@ -1,8 +1,10 @@
+import * as Icon from "react-feather";
 import { useEffect, useState } from "react";
-import { Table } from "./Table";
+import { Table, TableOptions } from "./Table";
 import { useSchoolContext } from "../context/SchoolContext";
 import { ModifyUserModal } from "./Modals/ModifyUserModal";
 import { DeleteUserModal } from "./Modals/DeleteUserModal";
+import { Button } from "./Button";
 
 export function AdminUsersTable() {
   const { users, getUsers } = useSchoolContext();
@@ -21,40 +23,46 @@ export function AdminUsersTable() {
 
   return (
     <>
-      <Table
-        title="Usuarios"
-        modify={() => setOpenModifyModal(true)}
-        remove={() => setOpenDeleteModal(true)}
-        handleSearch={(e) => setSearchUser(e.target.value)}
-        isAccountSelected={userSelected}
-      >
-        <table>
-          <thead>
-            <tr className="row header admin-user">
-              <th>Rol</th>
-              <th>Nombre</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {filteredUser.map((user) => (
-              <tr
-                className={`row admin-user ${userSelected.id_usuario === user.id_usuario ? "selected" : ""}`}
-                key={user.id_usuario}
-                title={user.id_rol == 2 ? "Profesor" : "Alumno"}
-                onClick={() => setUserSelected(user)}
-                onDoubleClick={() => setOpenModifyModal(true)}
-              >
-                <td>{user.Rol.nombre}</td>
-                <td>
-                  {user.nombre} {user.apellido}
-                </td>
-                <td>{user.email}</td>
+      <Table title="Usuarios">
+        <TableOptions handleSearch={(e) => setSearchUser(e.target.value)}>
+          <Button onClick={() => setOpenDeleteModal(true)} className={userSelected ? "" : "hide-option"}>
+            <Icon.XSquare />
+            Eliminar
+          </Button>
+          <Button onClick={() => setOpenModifyModal(true)} className={userSelected ? "" : "hide-option"}>
+            <Icon.Edit />
+            Modificar
+          </Button>
+        </TableOptions>
+        <div className="table-content">
+          <table>
+            <thead>
+              <tr className="row header admin-user">
+                <th>Rol</th>
+                <th>Nombre</th>
+                <th>Email</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {filteredUser.map((user) => (
+                <tr
+                  className={`row admin-user ${userSelected.id_usuario === user.id_usuario ? "selected" : ""}`}
+                  key={user.id_usuario}
+                  title={user.id_rol == 2 ? "Profesor" : "Alumno"}
+                  onClick={() => setUserSelected(user)}
+                  onDoubleClick={() => setOpenModifyModal(true)}
+                >
+                  <td>{user.Rol.nombre}</td>
+                  <td>
+                    {user.nombre} {user.apellido}
+                  </td>
+                  <td>{user.email}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </Table>
       <ModifyUserModal isOpen={openModifyModal} onClose={() => setOpenModifyModal(false)} user={userSelected} userId={userSelected.id_usuario} />
       <DeleteUserModal isOpen={openDeleteModal} onClose={() => setOpenDeleteModal(false)} user={userSelected} userId={userSelected.id_usuario} />
