@@ -37,7 +37,7 @@
 
     button {
       display: flex;
-      padding: 0 8px;
+      padding: 0 6px;
       align-items: center;
       justify-content: left;
       color: var(--text-2);

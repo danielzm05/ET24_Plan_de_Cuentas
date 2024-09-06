@@ -82,7 +82,7 @@ export function AddAccountModal({ isOpen, onClose }) {
         />
         <label htmlFor="tipo">Tipo:</label>
         <select id="tipo" name="tipo" className="input-data" onChange={handleInputChange} value={accountInfo.tipo}>
-          <option value={null}>-</option>
+          <option value={""}></option>
           <option value="Acreedor">Acreedor</option>
           <option value="Deudor">Deudor</option>
         </select>

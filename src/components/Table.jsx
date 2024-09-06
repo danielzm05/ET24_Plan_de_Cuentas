@@ -1,8 +1,6 @@
-import * as Icon from "react-feather";
 import "../styles/Table.css";
-import { Button } from "./Button";
 
-export function Table({ title, children, modify = false, add = false, remove = false }) {
+export function Table({ title, children }) {
   return (
     <div className="table">
       <h2 className="table-name">{title}</h2>
