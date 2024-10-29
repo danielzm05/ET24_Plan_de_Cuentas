@@ -15,7 +15,7 @@
 .modal {
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow: hidden;
   gap: 10px;
   max-height: 90vh;
   max-width: 70vw;

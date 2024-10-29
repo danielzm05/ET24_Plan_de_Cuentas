@@ -4,7 +4,6 @@ export function Table({ title, children }) {
   return (
     <div className="table">
       <h2 className="table-name">{title}</h2>
-
       {children}
     </div>
   );
