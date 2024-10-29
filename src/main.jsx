@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { AccountProvider } from "./context/AccountContext.jsx";
 import { SchoolProvider } from "./context/SchoolContext.jsx";
+import { LedgerProvider } from "./context/LedgerContext.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <ThemeProvider>
           <SchoolProvider>
             <AccountProvider>
-              <App />
+              <LedgerProvider>
+                <App />
+              </LedgerProvider>
             </AccountProvider>
           </SchoolProvider>
         </ThemeProvider>

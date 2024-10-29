@@ -4,6 +4,7 @@ import { Cuentas } from "./pages/Cuentas";
 import { Cursos } from "./pages/Cursos";
 import { Usuarios } from "./pages/Usuarios";
 import { Ajustes } from "./pages/Ajustes";
+import { Ledger } from "./pages/Ledger";
 import { Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuthContext } from "./context/AuthContext";
@@ -30,6 +31,7 @@ function App() {
 
         <Route element={<ProtectedRoute isAuth={user?.aud} roles={[3, 2, 1]} userRol={userInfo?.id_rol} />}>
           <Route path="/cuentas" element={<Cuentas />} />
+          <Route path="/libro-diario" element={<Ledger />} />
         </Route>
         <Route element={<ProtectedRoute isAuth={user?.aud} roles={[2, 1]} userRol={userInfo?.id_rol} />}>
           <Route path="/cursos" element={<Cursos />} />

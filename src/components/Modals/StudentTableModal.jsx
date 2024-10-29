@@ -14,19 +14,24 @@ export function StudentTableModal({ isOpen, onClose, student }) {
     <Modal isOpen={isOpen} isClose={onClose}>
       <Table title={`Cuentas de ${student?.usuario?.nombre}`}>
         <div className="table-content">
-          <div className="row header cuenta">
-            <span>Código</span>
-            <span>Rubro</span>
-            <span>A/D</span>
-          </div>
-
-          {accounts.map((account) => (
-            <div className="row cuenta" key={account.id_cuenta}>
-              <span>{account.codigo}</span>
-              <span>{account.nombre}</span>
-              <span className={`tipo-cuenta ${account.tipo_cuenta}`}>{account.tipo_cuenta}</span>
-            </div>
-          ))}
+          <table>
+            <thead>
+              <tr className="row header cuenta">
+                <th>Código</th>
+                <th>Rubro</th>
+                <th>A/D</th>
+              </tr>
+            </thead>
+            <tbody>
+              {accounts.map((account) => (
+                <tr className="row cuenta" key={account.id_cuenta}>
+                  <td>{account.codigo}</td>
+                  <td>{account.nombre}</td>
+                  <td className={`tipo-cuenta ${account.tipo_cuenta}`}>{account.tipo_cuenta}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </Table>
     </Modal>

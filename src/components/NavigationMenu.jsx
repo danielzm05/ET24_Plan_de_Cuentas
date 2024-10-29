@@ -29,6 +29,10 @@ export function NavigationMenu({ selected }) {
           <Icon.Table />
         </MenuItem>
 
+        <MenuItem roles={[1, 2, 3]} title="Libro Diario" name="libro-diario" selected={selected}>
+          <Icon.BookOpen />
+        </MenuItem>
+
         <MenuItem roles={[1, 2, 3]} title="Ajustes" name="ajustes" selected={selected}>
           <Icon.Settings />
         </MenuItem>
