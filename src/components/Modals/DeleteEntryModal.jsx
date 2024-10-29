@@ -1,21 +1,19 @@
 import { Modal } from "../Modal";
-import { useSchoolContext } from "../../context/SchoolContext";
+import { useLedgerContext } from "../../context/LedgerContext";
 
-export function DeleteUserModal({ isOpen, onClose, user, userId }) {
-  const { deleteUser } = useSchoolContext();
+export function DeleteEntryModal({ isOpen, onClose, entry }) {
+  const { deleteEntry } = useLedgerContext();
 
   const handleDelete = () => {
-    deleteUser(user.id_usuario);
+    deleteEntry(entry.id_asiento);
     onClose();
   };
 
   return (
     <Modal isOpen={isOpen} isClose={onClose}>
-      <h3>
-        Eliminar a {user?.nombre} {user?.apellido}
-      </h3>
+      <h3>Eliminar Asiento</h3>
       <p>
-        ¿Estas seguro de eliminar a {user?.nombre} {user?.apellido}? <br />
+        ¿Estas seguro de eliminar este asiento contable? <br />
         Si aceptas no podrás revertir los cambios.
       </p>
 
@@ -24,7 +22,7 @@ export function DeleteUserModal({ isOpen, onClose, user, userId }) {
           Cancelar
         </button>
         <button className="delete-btn" onClick={handleDelete}>
-          Eliminar Usuario
+          Eliminar Asiento
         </button>
       </div>
     </Modal>
