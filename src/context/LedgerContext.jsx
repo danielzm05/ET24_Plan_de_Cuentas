@@ -23,17 +23,8 @@ export const LedgerProvider = ({ children }) => {
     }
   };
 
-  const createEntry = async (newEntry) => {
-    console.log(newEntry);
-    const { error } = await supabase.from("Asiento").insert([
-      {
-        fecha: newEntry.fecha,
-        debe: newEntry.debe ? newEntry.debe : null,
-        haber: newEntry.haber ? newEntry.haber : null,
-        id_cuenta: newEntry.id_cuenta,
-        id_usuario: user.id,
-      },
-    ]);
+  const createEntry = async (items) => {
+    const { error } = await supabase.from("Asiento").insert(items);
 
     if (error) throw error;
 
