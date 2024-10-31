@@ -1,4 +1,5 @@
 import * as Icon from "react-feather";
+import * as XLSX from "xlsx";
 import { Table, TableOptions } from "../Table";
 import { Button } from "../Button";
 import { useState } from "react";
@@ -14,6 +15,15 @@ export function LedgerTable({ entries }) {
   const handleFilter = (e) => {
     setSearchTerm(e.target.value.toLowerCase());
   };
+
+  function exportTableToExcel() {
+    const table = document.getElementById("libro-table");
+    const worksheet = XLSX.utils.table_to_sheet(table);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Hoja1");
+    XLSX.writeFile(workbook, `Libro Diario.xlsx`);
+  }
+
   const filteredEntries = entries.filter(
     (entry) =>
       entry.Cuenta.nombre.toLowerCase().includes(searchTerm) ||
@@ -25,6 +35,10 @@ export function LedgerTable({ entries }) {
     <>
       <Table title="Libro Diario">
         <TableOptions handleSearch={handleFilter}>
+          <Button onClick={exportTableToExcel} title="Descargar en una planilla">
+            <Icon.Download />
+            Descargar
+          </Button>
           <Button onClick={() => setOpenAddModal(true)}>
             <Icon.PlusSquare />
             Agregar
@@ -36,7 +50,7 @@ export function LedgerTable({ entries }) {
         </TableOptions>
 
         <div className="table-content">
-          <table id="cuentas-table">
+          <table id="libro-table">
             <thead>
               <tr className="row header asiento">
                 <th>Fecha</th>
