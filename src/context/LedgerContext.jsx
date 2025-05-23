@@ -15,7 +15,7 @@ export const LedgerProvider = ({ children }) => {
 
   const getEntries = async (id = user.id) => {
     if (id) {
-      const { data, error } = await supabase.from("Asiento").select("*, Cuenta(*)").eq("id_usuario", id).order("fecha", { ascending: true });
+      const { data, error } = await supabase.from("asiento").select("*, Cuenta(*)").eq("id_usuario", id).order("fecha", { ascending: true });
 
       if (error) throw error;
 
@@ -24,7 +24,7 @@ export const LedgerProvider = ({ children }) => {
   };
 
   const createEntry = async (items) => {
-    const { error } = await supabase.from("Asiento").insert(items);
+    const { error } = await supabase.from("asiento").insert(items);
 
     if (error) throw error;
 
@@ -33,7 +33,7 @@ export const LedgerProvider = ({ children }) => {
   };
 
   const deleteEntry = async (id) => {
-    const { error } = await supabase.from("Asiento").delete().eq("id_asiento", id).eq("id_usuario", user.id);
+    const { error } = await supabase.from("asiento").delete().eq("id_asiento", id).eq("id_usuario", user.id);
 
     if (error) throw error;
     getEntries();

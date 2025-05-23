@@ -64,11 +64,11 @@ export const SchoolProvider = ({ children }) => {
 
   const getCourses = async () => {
     if (userInfo.id_rol === 1) {
-      const { data: allCourses, error } = await supabase.from("Curso").select("*").order("nombre", { ascending: true });
+      const { data: allCourses, error } = await supabase.from("curso").select("*").order("nombre", { ascending: true });
       if (error) throw error;
       setCourses(allCourses);
     } else {
-      const { data: courses, error } = await supabase.from("Profesor").select("*, Curso(*)").eq("id_usuario", user.id);
+      const { data: courses, error } = await supabase.from("profesor").select("*, curso(*)").eq("id_usuario", user.id);
       if (error) throw error;
 
       setCourses(courses[0].Curso);
@@ -83,7 +83,7 @@ export const SchoolProvider = ({ children }) => {
   };
 
   const createCourse = async (courseName, teacherId) => {
-    const { error } = await supabase.from("Curso").insert([{ nombre: courseName, id_profesor: teacherId }]);
+    const { error } = await supabase.from("curso").insert([{ nombre: courseName, id_profesor: teacherId }]);
     if (error) throw error;
     getCourses();
     getTeachers();
@@ -91,7 +91,7 @@ export const SchoolProvider = ({ children }) => {
   };
 
   const deleteCourse = async (id) => {
-    const { error } = await supabase.from("Curso").delete().eq("id_curso", id);
+    const { error } = await supabase.from("curso").delete().eq("id_curso", id);
     if (error) throw error;
     getCourses();
     toast.success(`Curso eliminado con éxito`);
@@ -113,14 +113,14 @@ export const SchoolProvider = ({ children }) => {
   };
 
   const getTeachers = async () => {
-    const { data: teachers, error } = await supabase.from("Profesor").select(`*,usuario (*), Curso(id_curso)`);
+    const { data: teachers, error } = await supabase.from("Profesor").select(`*,usuario (*), curso(id_curso)`);
     if (error) throw error;
 
     setTeachers(teachers);
   };
 
   const getStudents = async () => {
-    const { data: alumnos, error } = await supabase.from("Alumno").select("*, usuario (*), Curso(nombre)");
+    const { data: alumnos, error } = await supabase.from("Alumno").select("*, usuario (*), curso(nombre)");
 
     if (error) throw error;
     setStudents(alumnos);

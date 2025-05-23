@@ -18,7 +18,7 @@ export const AccountProvider = ({ children }) => {
 
   const getModifications = async (studentId) => {
     if (studentId) {
-      const { data, error } = await supabase.from("Modificacion").select("*").eq("id_usuario", studentId).order("fecha", { ascending: false });
+      const { data, error } = await supabase.from("modificacion").select("*").eq("id_usuario", studentId).order("fecha", { ascending: false });
 
       if (error) throw error;
       setModifications(data);
@@ -27,7 +27,7 @@ export const AccountProvider = ({ children }) => {
 
   const deleteModifications = async (studentId) => {
     if (studentId) {
-      const { error } = await supabase.from("Modificacion").delete().eq("id_usuario", studentId);
+      const { error } = await supabase.from("modificacion").delete().eq("id_usuario", studentId);
       if (error) throw error;
       getModifications(studentId);
       toast.success("Modificaciones Eliminadas");
@@ -36,7 +36,7 @@ export const AccountProvider = ({ children }) => {
 
   const createModification = async (descripcion) => {
     if (userInfo.id_rol === 3 || userInfo.id_rol === 1) {
-      const { error } = await supabase.from("Modificacion").insert([{ descripcion: descripcion, id_usuario: user.id }]);
+      const { error } = await supabase.from("modificacion").insert([{ descripcion: descripcion, id_usuario: user.id }]);
       if (error) throw error;
       getModifications();
     }
@@ -45,7 +45,7 @@ export const AccountProvider = ({ children }) => {
   const getAccounts = async (id = user.id) => {
     if (id) {
       const { data, error } = await supabase
-        .from("Cuenta")
+        .from("cuenta")
         .select("id_cuenta, codigo, nombre, tipo_cuenta")
         .eq("id_usuario", id)
         .order("codigo", { ascending: true });
@@ -57,7 +57,7 @@ export const AccountProvider = ({ children }) => {
   };
 
   const createAccount = async (codigo, nombre, tipo) => {
-    const { error } = await supabase.from("Cuenta").insert([
+    const { error } = await supabase.from("cuenta").insert([
       {
         codigo: codigo,
         nombre: nombre,
@@ -73,7 +73,7 @@ export const AccountProvider = ({ children }) => {
   };
 
   const deleteAccount = async (id, nombre) => {
-    const { error } = await supabase.from("Cuenta").delete().eq("id_cuenta", id).eq("id_usuario", user.id);
+    const { error } = await supabase.from("cuenta").delete().eq("id_cuenta", id).eq("id_usuario", user.id);
 
     if (error) throw error;
     getAccounts();
@@ -83,7 +83,7 @@ export const AccountProvider = ({ children }) => {
 
   const updateAccount = async (id, codigo, nombre, tipo = "", cuenta) => {
     const { error } = await supabase
-      .from("Cuenta")
+      .from("cuenta")
       .update({
         id_cuenta: id,
         codigo: codigo,

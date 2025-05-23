@@ -24,22 +24,26 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="*" element={<NotFound />} />
 
-        <Route element={<ProtectedRoute isAuth={user?.aud} roles={[3, 2, 1]} userRol={userInfo?.id_rol} />}>
+      {user && userInfo && (
+        <>
+        <Route element={<ProtectedRoute isAuth={user?.aud} roles={[3, 2, 1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
           <Route path="/ajustes" element={<Ajustes />} />
           <Route path="/contraseña" element={<ChangePassword />} />
-        </Route>
-
-        <Route element={<ProtectedRoute isAuth={user?.aud} roles={[3, 2, 1]} userRol={userInfo?.id_rol} />}>
           <Route path="/cuentas" element={<Cuentas />} />
           <Route path="/libro-diario" element={<Ledger />} />
         </Route>
-        <Route element={<ProtectedRoute isAuth={user?.aud} roles={[2, 1]} userRol={userInfo?.id_rol} />}>
+
+        <Route element={<ProtectedRoute isAuth={user?.aud} roles={[2, 1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
           <Route path="/cursos" element={<Cursos />} />
         </Route>
 
-        <Route element={<ProtectedRoute isAuth={user?.aud} roles={[1]} userRol={userInfo?.id_rol} />}>
+        <Route element={<ProtectedRoute isAuth={user?.aud} roles={[1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
           <Route path="/usuarios" element={<Usuarios />} />
         </Route>
+      </>
+      )}
+
+        
       </Routes>
     </>
   );

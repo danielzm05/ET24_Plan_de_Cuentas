@@ -19,10 +19,11 @@ export const AuthProvider = ({ children }) => {
 
   const getUserInfo = async (userId = user.id) => {
     if (userId) {
-      const { data, error } = await supabase.from("usuario").select("*").eq("id_usuario", userId);
+      const { data, error } = await supabase.from("usuario").select("*, usuario_rol (*)").eq("id_usuario", userId);
 
       if (error) throw error;
       setUserInfo(data[0]);
+      console.log(data[0]);
     }
   };
 
@@ -37,13 +38,13 @@ export const AuthProvider = ({ children }) => {
 
   const checkUser = async () => {
     const { data } = await supabase.auth.getUser();
-
     if (data.user) {
       setUser(data.user);
       getUserInfo(data.user.id);
+
     } else {
-      navigate("/", { replace: true });
       setUser(null);
+      setUserInfo(null);
     }
   };
 
@@ -52,7 +53,6 @@ export const AuthProvider = ({ children }) => {
 
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       setUserEvent(event);
-      console.log(event);
       checkUser();
     });
 
