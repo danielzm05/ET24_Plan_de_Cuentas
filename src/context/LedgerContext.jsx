@@ -13,27 +13,26 @@ export const LedgerProvider = ({ children }) => {
   const [entries, setEntries] = useState([]);
   const { user } = useAuthContext();
 
-  const getEntries = async (id = user.id) => {
-    if (id) {
-      const { data, error } = await supabase.from("asiento").select("*, Cuenta(*)").eq("id_usuario", id).order("fecha", { ascending: true });
+  const getEntries = async () => {
+    if (user) {
+      const { data, error } = await supabase.from("asiento").select("*, cuenta(*)").eq("id_usuario", user.id).order("fecha", { ascending: true });
 
+      console.log(data)
       if (error) throw error;
-
       setEntries(data);
     }
   };
 
   const createEntry = async (items) => {
     const { error } = await supabase.from("asiento").insert(items);
-
     if (error) throw error;
 
     toast.success("Asiento creado con éxito");
     getEntries();
   };
 
-  const deleteEntry = async (id) => {
-    const { error } = await supabase.from("asiento").delete().eq("id_asiento", id).eq("id_usuario", user.id);
+  const deleteEntry = async (id_asiento) => {
+    const { error } = await supabase.from("asiento").delete().eq("id_asiento", id_asiento).eq("id_usuario", user.id);
 
     if (error) throw error;
     getEntries();

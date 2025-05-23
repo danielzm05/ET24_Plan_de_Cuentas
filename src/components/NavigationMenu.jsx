@@ -1,13 +1,11 @@
 import * as Icon from "react-feather";
-import { supabase } from "../backend/client";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import "../styles/NavigationMenu.css";
 
 export function NavigationMenu({ selected }) {
-  const handleLogOut = async () => {
-    await supabase.auth.signOut();
-  };
+  const { logOut } = useAuthContext();
+  const { userInfo } = useAuthContext();
 
   return (
     <div className="navigation-menu">
@@ -17,27 +15,27 @@ export function NavigationMenu({ selected }) {
           <span className="hide-item">PLAN DE CUENTAS</span>
         </li>
 
-        <MenuItem roles={[1]} title="Usuarios" name="usuarios" selected={selected}>
+        <MenuItem roles={[1]} title="Usuarios" name="usuarios" selected={selected} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)}>
           <Icon.User />
         </MenuItem>
 
-        <MenuItem roles={[2, 1]} title="Mis Cursos" name="cursos" selected={selected}>
+        <MenuItem roles={[2, 1]} title="Mis Cursos" name="cursos" selected={selected} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)}>
           <Icon.Users />
         </MenuItem>
 
-        <MenuItem roles={[1, 2, 3]} title="Cuentas" name="cuentas" selected={selected}>
+        <MenuItem roles={[1, 2, 3]} title="Cuentas" name="cuentas" selected={selected} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)}>
           <Icon.Table />
         </MenuItem>
 
-        <MenuItem roles={[1, 2, 3]} title="Libro Diario" name="libro-diario" selected={selected}>
+        <MenuItem roles={[1, 2, 3]} title="Libro Diario" name="libro-diario" selected={selected} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)}>
           <Icon.BookOpen />
         </MenuItem>
 
-        <MenuItem roles={[1, 2, 3]} title="Ajustes" name="ajustes" selected={selected}>
+        <MenuItem roles={[1, 2, 3]} title="Ajustes" name="ajustes" selected={selected} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)}>
           <Icon.Settings />
         </MenuItem>
 
-        <li className="section-item logout-btn" onClick={handleLogOut}>
+        <li className="section-item logout-btn" onClick={logOut}>
           <Icon.LogOut />
           <span className="hide-item">Cerrar Sesión</span>
         </li>
@@ -46,11 +44,10 @@ export function NavigationMenu({ selected }) {
   );
 }
 
-function MenuItem({ roles, title, name, children, selected }) {
+function MenuItem({ roles, title, name, children, selected, userRol=[]}) {
   const navigate = useNavigate();
-  const { userInfo } = useAuthContext();
 
-  if (roles.includes(userInfo.id_rol)) {
+  if (roles.some((role) => userRol.includes(role))) {
     return (
       <li
         onClick={() => {

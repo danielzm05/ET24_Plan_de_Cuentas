@@ -31,7 +31,6 @@ export function AddEntryModal({ isOpen, onClose }) {
         haber: parseFloat(item.haber) || 0,
       }));
 
-      console.log(formattedItems);
       createEntry(formattedItems);
       setItems([{ fecha: "", descripcion: "", id_cuenta: "", debe: 0, haber: 0 }]);
       onClose();

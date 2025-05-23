@@ -26,8 +26,8 @@ export function LedgerTable({ entries }) {
 
   const filteredEntries = entries.filter(
     (entry) =>
-      entry.Cuenta.nombre.toLowerCase().includes(searchTerm) ||
-      entry.Cuenta.codigo.includes(searchTerm) ||
+      entry.cuenta.nombre.toLowerCase().includes(searchTerm) ||
+      entry.cuenta.codigo.includes(searchTerm) ||
       entry.descripcion.toLowerCase().includes(searchTerm)
   );
 
@@ -70,8 +70,8 @@ export function LedgerTable({ entries }) {
                   onClick={() => setEntrySelected(entry)}
                 >
                   <td>{entry.fecha}</td>
-                  <td>{entry.Cuenta.codigo}</td>
-                  <td>{entry.Cuenta.nombre}</td>
+                  <td>{entry.cuenta.codigo}</td>
+                  <td>{entry.cuenta.nombre}</td>
                   <td>{entry.descripcion}</td>
                   <td>{entry.debe ? `$${entry.debe}` : ""}</td>
                   <td>{entry.haber ? `$${entry.haber}` : ""}</td>
