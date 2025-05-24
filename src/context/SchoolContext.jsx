@@ -12,82 +12,23 @@ export const useSchoolContext = () => {
   return context;
 };
 export const SchoolProvider = ({ children }) => {
-  const [users, setUsers] = useState([]);
   const [courses, setCourses] = useState([]);
-  const [students, setStudents] = useState([]);
-  const [teachers, setTeachers] = useState([]);
   const { user, userInfo } = useAuthContext();
 
-  const getUsers = async () => {
-    if (userInfo.id_rol === 1) {
-      const { data, error } = await supabase
-        .from("usuario")
-        .select("*, Rol(*)")
-        .order("id_rol", { ascending: true })
-        .order("nombre", { ascending: true });
-      if (error) throw error;
-      setUsers(data);
-    }
-  };
-
-  const deleteUser = async (userId) => {
-    if (!userId) return;
-    const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);
+  const createCourse = async (courseName) => {
+    const { error } = await supabase.from("curso").insert([{ nombre: courseName, id_profesor: user.id }]);
+    
     if (error) throw error;
-    getUsers();
-    getTeachers();
-    getStudents();
-    toast.success("Usuario eliminado con éxito");
-  };
-
-  const createStudent = async (userId) => {
-    const { error } = await supabase.from("Alumno").insert([{ id_usuario: userId }]);
-    getStudents();
-  };
-
-  const updateUser = async (name, lastName, rol, userId) => {
-    const { error } = await supabase
-      .from("usuario")
-      .update({
-        nombre: name,
-        apellido: lastName,
-        id_rol: rol,
-      })
-      .eq("id_usuario", userId);
-
-    if (error) throw error;
-    getUsers();
-    getTeachers();
-    getStudents();
-    toast.success(`${name} actualizado con éxito`);
+    getCourses();
+    toast.success(`${courseName} creado con éxito`);
   };
 
   const getCourses = async () => {
-    if (userInfo.id_rol === 1) {
-      const { data: allCourses, error } = await supabase.from("curso").select("*").order("nombre", { ascending: true });
-      if (error) throw error;
-      setCourses(allCourses);
-    } else {
-      const { data: courses, error } = await supabase.from("profesor").select("*, curso(*)").eq("id_usuario", user.id);
-      if (error) throw error;
+    const { data, error } = await supabase.from("curso").select("*").order("nombre", { ascending: true });
 
-      setCourses(courses[0].Curso);
-    }
-  };
-
-  const addToCourse = async (courseId, studentId) => {
-    const { error } = await supabase.from("Alumno").update({ id_curso: courseId }).eq("id_alumno", studentId);
     if (error) throw error;
-    getStudents();
-    toast.success(`Se agregó al alumno con éxito`);
-  };
-
-  const createCourse = async (courseName, teacherId) => {
-    const { error } = await supabase.from("curso").insert([{ nombre: courseName, id_profesor: teacherId }]);
-    if (error) throw error;
-    getCourses();
-    getTeachers();
-    toast.success(`${courseName} creado con éxito`);
+    setCourses(data);
+    console.log(data);
   };
 
   const deleteCourse = async (id) => {
@@ -107,43 +48,19 @@ export const SchoolProvider = ({ children }) => {
       .eq("id_curso", courseId);
 
     if (error) throw error;
-    getCourses();
-    getTeachers();
+    /*     getCourses();
+    getTeachers(); */
     toast.success(`Curso modificado con éxito`);
-  };
-
-  const getTeachers = async () => {
-    const { data: teachers, error } = await supabase.from("Profesor").select(`*,usuario (*), curso(id_curso)`);
-    if (error) throw error;
-
-    setTeachers(teachers);
-  };
-
-  const getStudents = async () => {
-    const { data: alumnos, error } = await supabase.from("Alumno").select("*, usuario (*), curso(nombre)");
-
-    if (error) throw error;
-    setStudents(alumnos);
   };
 
   return (
     <SchoolContext.Provider
       value={{
-        users,
-        getUsers,
-        updateUser,
         courses,
         getCourses,
-        students,
-        getStudents,
-        teachers,
-        getTeachers,
-        addToCourse,
         deleteCourse,
         updateCourse,
         createCourse,
-        deleteUser,
-        createStudent,
       }}
     >
       {children}

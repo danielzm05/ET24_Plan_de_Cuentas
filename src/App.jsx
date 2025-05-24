@@ -1,7 +1,7 @@
 import { Login } from "./pages/Login";
 import { NotFound } from "./pages/NotFound";
 import { Cuentas } from "./pages/Cuentas";
-import { Cursos } from "./pages/Cursos";
+import { CoursesPage } from "./pages/Courses";
 import { Usuarios } from "./pages/Usuarios";
 import { Ajustes } from "./pages/Ajustes";
 import { Ledger } from "./pages/Ledger";
@@ -24,26 +24,24 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="*" element={<NotFound />} />
 
-      {user && userInfo && (
-        <>
-        <Route element={<ProtectedRoute isAuth={user?.aud} roles={[3, 2, 1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
-          <Route path="/ajustes" element={<Ajustes />} />
-          <Route path="/contraseña" element={<ChangePassword />} />
-          <Route path="/cuentas" element={<Cuentas />} />
-          <Route path="/libro-diario" element={<Ledger />} />
-        </Route>
+        {user && userInfo && (
+          <>
+            <Route element={<ProtectedRoute isAuth={user?.aud} roles={[3, 2, 1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
+              <Route path="/ajustes" element={<Ajustes />} />
+              <Route path="/contraseña" element={<ChangePassword />} />
+              <Route path="/cuentas" element={<Cuentas />} />
+              <Route path="/libro-diario" element={<Ledger />} />
+            </Route>
 
-        <Route element={<ProtectedRoute isAuth={user?.aud} roles={[2, 1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
-          <Route path="/cursos" element={<Cursos />} />
-        </Route>
+            <Route element={<ProtectedRoute isAuth={user?.aud} roles={[2, 1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
+              <Route path="/cursos" element={<CoursesPage />} />
+            </Route>
 
-        <Route element={<ProtectedRoute isAuth={user?.aud} roles={[1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
-          <Route path="/usuarios" element={<Usuarios />} />
-        </Route>
-      </>
-      )}
-
-        
+            <Route element={<ProtectedRoute isAuth={user?.aud} roles={[1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
+              <Route path="/usuarios" element={<Usuarios />} />
+            </Route>
+          </>
+        )}
       </Routes>
     </>
   );

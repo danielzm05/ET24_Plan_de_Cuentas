@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Modal } from "../Modal";
 import { useSchoolContext } from "../../context/SchoolContext";
 
 export function AddCourseModal({ isOpen, onClose }) {
-  const { courses, teachers, createCourse } = useSchoolContext();
-  const [error, setError] = useState(false);
+  const { createCourse } = useSchoolContext();
   const [newCourse, setNewCourse] = useState();
 
   const handleChange = (e) => {
@@ -12,17 +11,9 @@ export function AddCourseModal({ isOpen, onClose }) {
     setNewCourse({ ...newCourse, [name]: value });
   };
 
-  useEffect(() => {
-    if (courses.some((crse) => crse.nombre === newCourse?.nombre)) {
-      setError(true);
-    } else {
-      setError(false);
-    }
-  }, [newCourse?.nombre]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    createCourse(newCourse.nombre, newCourse.profesor);
+    createCourse(newCourse.nombre);
     setNewCourse({});
     onClose();
   };
@@ -36,25 +27,14 @@ export function AddCourseModal({ isOpen, onClose }) {
           type="text"
           name="nombre"
           id="nombre"
-          className={`input-data ${error ? "error" : ""}`}
+          className={"input-data"}
           onChange={handleChange}
           required
+          minLength={3}
           maxLength={20}
         />
-        <label htmlFor="profesor">Profesor del Curso:</label>
-        <select id="profesor" name="profesor" defaultValue="" className="input-data" onChange={handleChange} required>
-          <option disabled value="">
-            Selecciona un profesor
-          </option>
-          {teachers.map((teacher) => (
-            <option value={teacher.id_profesor} key={teacher.id_profesor}>
-              {teacher.usuario.nombre} {teacher.usuario.apellido}
-            </option>
-          ))}
-        </select>
         <div className="buttons-container">
-          {error ? <span className="error-message">⚠︎ Error: Ya existe un curso con ese nombre</span> : null}
-          <input type="submit" value="Crear Curso" className={error ? "hide-btn" : ""} />
+          <input type="submit" value="Crear Curso" />
         </div>
       </form>
     </Modal>

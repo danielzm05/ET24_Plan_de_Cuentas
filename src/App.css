@@ -56,15 +56,6 @@ main {
   position: relative;
 }
 
-button {
-  border: 0;
-  outline: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
 .page-title {
   font-size: 22px;
   font-weight: 600;

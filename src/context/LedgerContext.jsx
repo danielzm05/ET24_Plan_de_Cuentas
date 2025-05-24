@@ -17,7 +17,6 @@ export const LedgerProvider = ({ children }) => {
     if (user) {
       const { data, error } = await supabase.from("asiento").select("*, cuenta(*)").eq("id_usuario", user.id).order("fecha", { ascending: true });
 
-      console.log(data)
       if (error) throw error;
       setEntries(data);
     }
