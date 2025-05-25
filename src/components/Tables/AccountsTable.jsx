@@ -67,14 +67,16 @@ export function AccountsTable({ accounts }) {
             <tbody>
               {filteredAccounts.map((account) => (
                 <tr
-                  className={`row cuenta ${accountSelected.id_cuenta === account.id_cuenta ? "selected" : ""}`}
+                  className={` ${accountSelected.id_cuenta === account.id_cuenta ? "selected" : ""}`}
                   key={account.id_cuenta}
                   onClick={() => setAccountSelected(account)}
                   onDoubleClick={() => setOpenModifyModal(true)}
                 >
                   <td>{account.codigo}</td>
                   <td>{account.nombre}</td>
-                  <td className={`tipo-cuenta ${account.tipo_cuenta}`}>{account.tipo_cuenta}</td>
+                  <td>
+                    <span className={`tipo-cuenta ${account.tipo_cuenta}`}>{account.tipo_cuenta}</span>
+                  </td>
                 </tr>
               ))}
             </tbody>

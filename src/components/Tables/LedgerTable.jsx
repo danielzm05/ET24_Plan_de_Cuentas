@@ -54,7 +54,7 @@ export function LedgerTable({ entries }) {
             <thead>
               <tr className="row header asiento">
                 <th>Fecha</th>
-                <th>Codigo</th>
+                <th>Código</th>
                 <th>Cuenta</th>
                 <th>Descripción</th>
                 <th>Debe</th>

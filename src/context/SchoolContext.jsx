@@ -33,7 +33,6 @@ export const SchoolProvider = ({ children }) => {
 
     const { data, error } = await query;
     if (error) throw error;
-    console.log(data)
     setCourses(data);
   };
 

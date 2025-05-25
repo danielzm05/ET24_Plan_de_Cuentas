@@ -70,10 +70,16 @@
     flex-direction: column;
     font-size: 12px;
 
-    & .row {
-      min-height: 35px;
-      border-top: 0.01em var(--hover) solid;
+    table,
+    th,
+    td {
+      border: 0.01em var(--hover) solid;
+      border-collapse: collapse;
+    }
+
+    & tr {
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       place-content: center;
 
       & th {
@@ -84,12 +90,12 @@
 
       & td,
       th {
+        min-height: 100%;
         text-wrap: nowrap;
-        padding: 0 10px;
+        padding: 5px 10px;
       }
 
       & td {
-        max-height: 100%;
         overflow: hidden;
 
         & svg {
@@ -98,59 +104,21 @@
       }
     }
 
-    & .row.modificacion {
-      min-width: 500px;
-      grid-template-columns: 0.5fr 2fr 1fr;
+    & tbody tr:hover:not(.selected) {
+      cursor: pointer;
+      background-color: var(--hover);
     }
 
-    & .row.cuenta {
-      min-width: 800px;
-      grid-template-columns: 100px 3fr 0.5fr;
-
-      & td:nth-child(1) {
-        text-align: end;
-      }
-    }
-
-    & .row.asiento {
-      min-width: 900px;
-      grid-template-columns: 0.6fr 0.8fr 1.5fr 2fr 1fr 1fr;
-
-      & td:nth-child(5),
-      td:nth-child(6) {
-        border-left: 1px solid var(--hover);
-      }
-    }
-
-    & .row.user {
-      grid-template-columns: 30px 6fr 2fr;
-    }
-
-    & .row.admin-user {
-      grid-template-columns: 1fr 2fr 2fr;
-    }
-
-    & .row.user-2 {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    & .row.student {
-      grid-template-columns: 4fr 1fr;
-    }
-
-    & .row.selected {
+    & tr.selected {
       background-color: var(--hover-2);
     }
 
-    & .row:not(.header):hover {
-      background-color: var(--hover);
-      cursor: pointer;
-    }
-
-    & .row .tipo-cuenta {
-      width: 80px;
+    & tr td .tipo-cuenta {
+      display: inline-block;
+      width: 5rem;
       text-align: center;
       border-radius: 3px;
+      padding: 0 8px;
     }
 
     & .tipo-cuenta.Acreedor {
