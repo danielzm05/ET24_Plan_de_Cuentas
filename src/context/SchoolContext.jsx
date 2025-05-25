@@ -25,7 +25,7 @@ export const SchoolProvider = ({ children }) => {
   };
 
   const getCourses = async (id) => {
-    let query = supabase.from("curso").select("*").order("id_curso", { ascending: true }).eq("id_profesor", user.id);
+    let query = supabase.from("curso").select("*, curso_alumno(*, usuario(*))").order("id_curso", { ascending: true }).eq("id_profesor", user.id);
     
     if (id) {
       query = query.eq("id_curso", id);
@@ -33,6 +33,7 @@ export const SchoolProvider = ({ children }) => {
 
     const { data, error } = await query;
     if (error) throw error;
+    console.log(data)
     setCourses(data);
   };
 

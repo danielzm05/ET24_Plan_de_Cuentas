@@ -15,10 +15,6 @@ export function NavigationMenu({ selected }) {
           <span className="hide-item">PLAN DE CUENTAS</span>
         </li>
 
-        <MenuItem roles={[1]} title="Usuarios" name="usuarios" selected={selected} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)}>
-          <Icon.User />
-        </MenuItem>
-
         <MenuItem roles={[2, 1]} title="Mis Cursos" name="cursos" selected={selected} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)}>
           <Icon.Users />
         </MenuItem>

@@ -3,7 +3,6 @@ import { NotFound } from "./pages/NotFound";
 import { Cuentas } from "./pages/Cuentas";
 import { CoursesPage } from "./pages/Courses";
 import { CoursePage } from "./pages/CoursePage";
-import { Usuarios } from "./pages/Usuarios";
 import { Ajustes } from "./pages/Ajustes";
 import { Ledger } from "./pages/Ledger";
 import { Routes, Route } from "react-router-dom";
@@ -37,10 +36,6 @@ function App() {
             <Route element={<ProtectedRoute isAuth={user?.aud} roles={[2, 1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
               <Route path="/cursos" element={<CoursesPage />} />
               <Route path="/cursos/:id_curso" element={<CoursePage />}></Route>
-            </Route>
-
-            <Route element={<ProtectedRoute isAuth={user?.aud} roles={[1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
-              <Route path="/usuarios" element={<Usuarios />} />
             </Route>
           </>
         )}
