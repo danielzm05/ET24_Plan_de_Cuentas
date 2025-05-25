@@ -9,19 +9,4 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-
-  & .course-card {
-    border-radius: 14px;
-    padding: 10px;
-    background-color: var(--table);
-
-    & .course-name {
-      font-weight: 600;
-    }
-  }
-
-  & .course-card:hover {
-    cursor: pointer;
-    background-color: var(--hover);
-  }
 }

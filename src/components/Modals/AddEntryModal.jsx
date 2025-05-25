@@ -1,7 +1,7 @@
 import * as Icon from "react-feather";
 import { Modal } from "../Modal";
 import { useState, useEffect } from "react";
-import { Button } from "../Button";
+import { Button } from "../UI/Button";
 import { useAccounts } from "../../context/AccountContext";
 import { useLedgerContext } from "../../context/LedgerContext";
 import toast from "react-hot-toast";

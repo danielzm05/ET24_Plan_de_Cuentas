@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { NavigationMenu } from "../components/NavigationMenu";
 import { useSchoolContext } from "../context/SchoolContext";
 import { AddCourseModal } from "../components/Modals/AddCourseModal";
-import { Button } from "../components/Button";
+import { CourseCard } from "../components/UI/CourseCard";
+import { Button } from "../components/UI/Button";
 import * as Icon from "react-feather";
 import "../styles/pages/CoursesPage.css";
 
@@ -24,9 +25,7 @@ export function CoursesPage() {
         <div className="courses-container">
           {courses?.length > 0
             ? courses.map((course) => (
-                <div key={course.id_curso} className="course-card">
-                  <h4 className="course-name">{course.nombre}</h4>
-                </div>
+                <CourseCard key={course.id_curso} id={course.id_curso} name={course.nombre} className="course-card"/>
               ))
             : null}
         </div>

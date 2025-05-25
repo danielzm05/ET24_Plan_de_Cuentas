@@ -6,7 +6,7 @@ import { useSchoolContext } from "../context/SchoolContext";
 import { StudentTableModal } from "./Modals/StudentTableModal";
 import { useState, useEffect } from "react";
 import { Table, TableOptions } from "./Table";
-import { Button } from "./Button";
+import { Button } from "./UI/Button";
 
 export function AdminCoursesTable() {
   const { courses, getCourses, students, getStudents, teachers, getTeachers } = useSchoolContext();

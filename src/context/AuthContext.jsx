@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
   const [userEvent, setUserEvent] = useState(null);
+  const navigate = useNavigate();
 
   const getUserInfo = async (userId = user.id) => {
     if (userId) {
@@ -37,6 +38,7 @@ export const AuthProvider = ({ children }) => {
   const logOut = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
+    navigate("/");
     setUser(null);
   };
 

@@ -5,7 +5,7 @@ import { useAuthContext } from "../context/AuthContext";
 export function ChangeCompanyName() {
   const { userInfo } = useAuthContext();
   const { updateCompanyName } = useAccounts();
-  const [name, setName] = useState(userInfo?.empresa);
+  const [name, setName] = useState(userInfo.empresa ? userInfo.empresa : "");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

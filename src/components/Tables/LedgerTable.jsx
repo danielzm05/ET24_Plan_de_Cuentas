@@ -1,7 +1,7 @@
 import * as Icon from "react-feather";
 import * as XLSX from "xlsx";
 import { Table, TableOptions } from "../Table";
-import { Button } from "../Button";
+import { Button } from "../UI/Button";
 import { useState } from "react";
 import { AddEntryModal } from "../Modals/AddEntryModal";
 import { DeleteEntryModal } from "../Modals/DeleteEntryModal";

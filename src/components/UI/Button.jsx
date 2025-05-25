@@ -1,4 +1,4 @@
-import "../styles/Button.css";
+import "../../styles/UI/Button.css";
 
 export function Button({ children, className, onClick }) {
   return (

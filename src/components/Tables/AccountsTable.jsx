@@ -5,7 +5,7 @@ import { ModifyAccountModal } from "../Modals/ModifyAccountModal";
 import { AddAccountModal } from "../Modals/AddAccountModal";
 import { DeleteAccountModal } from "../Modals/DeleteAccountModal";
 import { useAuthContext } from "../../context/AuthContext";
-import { Button } from "../Button";
+import { Button } from "../UI/Button";
 import { useState } from "react";
 
 export function AccountsTable({ accounts }) {

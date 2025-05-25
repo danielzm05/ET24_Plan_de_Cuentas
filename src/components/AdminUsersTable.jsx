@@ -4,7 +4,7 @@ import { Table, TableOptions } from "./Table";
 import { useSchoolContext } from "../context/SchoolContext";
 import { ModifyUserModal } from "./Modals/ModifyUserModal";
 import { DeleteUserModal } from "./Modals/DeleteUserModal";
-import { Button } from "./Button";
+import { Button } from "./UI/Button";
 
 export function AdminUsersTable() {
   const { users, getUsers } = useSchoolContext();

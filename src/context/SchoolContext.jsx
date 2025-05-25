@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import { useState } from "react";
 import { supabase } from "../backend/client";
-import { supabaseAdmin } from "../backend/client";
+import {useNavigate} from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuthContext } from "./AuthContext";
 
@@ -13,7 +13,8 @@ export const useSchoolContext = () => {
 };
 export const SchoolProvider = ({ children }) => {
   const [courses, setCourses] = useState([]);
-  const { user, userInfo } = useAuthContext();
+  const { user } = useAuthContext();
+  const navigate = useNavigate()
 
   const createCourse = async (courseName) => {
     const { error } = await supabase.from("curso").insert([{ nombre: courseName, id_profesor: user.id }]);
@@ -23,17 +24,22 @@ export const SchoolProvider = ({ children }) => {
     toast.success(`${courseName} creado con éxito`);
   };
 
-  const getCourses = async () => {
-    const { data, error } = await supabase.from("curso").select("*").order("nombre", { ascending: true });
+  const getCourses = async (id) => {
+    let query = supabase.from("curso").select("*").order("id_curso", { ascending: true }).eq("id_profesor", user.id);
+    
+    if (id) {
+      query = query.eq("id_curso", id);
+    }
 
+    const { data, error } = await query;
     if (error) throw error;
     setCourses(data);
-    console.log(data);
   };
 
   const deleteCourse = async (id) => {
     const { error } = await supabase.from("curso").delete().eq("id_curso", id);
     if (error) throw error;
+    navigate("/cursos");
     getCourses();
     toast.success(`Curso eliminado con éxito`);
   };

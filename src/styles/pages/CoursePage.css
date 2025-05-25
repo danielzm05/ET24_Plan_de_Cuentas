@@ -1,0 +1,6 @@
+.delete-course-btn {
+  padding: 10px;
+  background-color: var(--table);
+  color: var(--text-2);
+  border-radius: 14px;
+}
