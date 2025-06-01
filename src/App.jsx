@@ -22,6 +22,7 @@ function App() {
       <ThemeSwitcher />
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/registrarse" element={<SignUpPage />} />
         <Route path="*" element={<NotFound />} />
 
         {user && userInfo && (

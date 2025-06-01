@@ -42,6 +42,25 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const signUp = async (nombre, apellido,  email, password) => {
+    const { error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: {
+          nombre: nombre,
+          apellido: apellido,
+        },
+      },
+    });
+
+    if (error) {
+      toast.error("Hubo un error al registrarse. Intente nuevamente");
+      throw error;
+    }
+    return { success: true, email: email };
+  };
+
   const checkUser = async () => {
     const { data } = await supabase.auth.getUser();
     if (data.user) {
@@ -67,5 +86,5 @@ export const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  return <AuthContext.Provider value={{ user, userEvent, sendPasswordEmail, userInfo, getUserInfo, logOut }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, userEvent, sendPasswordEmail, userInfo, getUserInfo, signUp, logOut }}>{children}</AuthContext.Provider>;
 };
