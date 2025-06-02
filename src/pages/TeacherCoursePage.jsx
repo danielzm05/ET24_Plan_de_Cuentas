@@ -8,20 +8,27 @@ import { Table } from "../components/Table";
 import * as Icon from "react-feather";
 import "../styles/pages/CoursePage.css";
 
-export function CoursePage() {
-  const { courses, getCourses } = useSchoolContext();
+export function TeacherCoursePage() {
+  const { courses, getTeacherCourses } = useSchoolContext();
   const { id_curso } = useParams();
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    getCourses(id_curso);
+    getTeacherCourses(id_curso);
   }, []);
 
   return (
     <>
       <NavigationMenu selected="cursos" />
+
       <main>
-        <h1>Curso: {courses[0].nombre}</h1>
+        <div className="course-header">
+          <h1>Curso: {courses[0]?.nombre}</h1>
+          <p>
+            Código de Ingreso: <span className="course-code">{courses[0]?.codigo}</span>
+          </p>
+        </div>
+
         <Button className={"delete-course-btn"} onClick={() => setShowModal(true)}>
           <Icon.Trash /> Eliminar Curso
         </Button>

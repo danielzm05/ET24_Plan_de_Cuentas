@@ -1,3 +1,20 @@
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-1);
+  padding-top: 30px;
+
+  & p {
+    color: var(--text-2);
+    & .course-code {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--selection);
+    }
+  }
+}
+
 .delete-course-btn {
   padding: 10px;
   background-color: var(--table);
