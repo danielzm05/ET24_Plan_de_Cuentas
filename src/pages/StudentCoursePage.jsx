@@ -21,7 +21,6 @@ export function StudentCoursePage() {
       <main>
         <div className="course-header">
           <h1>Curso: {courses[0]?.curso.nombre}</h1>
-          <p>Prof.</p>
         </div>
       </main>
     </>

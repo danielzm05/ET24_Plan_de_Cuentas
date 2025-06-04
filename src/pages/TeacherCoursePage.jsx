@@ -19,7 +19,7 @@ export function TeacherCoursePage() {
 
   return (
     <>
-      <NavigationMenu selected="cursos" />
+      <NavigationMenu selected="mis-cursos" />
 
       <main>
         <div className="course-header">

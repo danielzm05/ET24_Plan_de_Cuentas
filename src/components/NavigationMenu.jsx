@@ -14,8 +14,11 @@ export function NavigationMenu({ selected }) {
           <Icon.Book />
           <span className="hide-item">PLAN DE CUENTAS</span>
         </li>
+        <MenuItem roles={[3, 1]} title="Mis Cursos" name="cursos" selected={selected} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)}>
+          <Icon.Users />
+        </MenuItem>
 
-        <MenuItem roles={[2, 1]} title="Mis Cursos" name="cursos" selected={selected} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)}>
+        <MenuItem roles={[2, 1]} title="Mis Cursos" name="mis-cursos" selected={selected} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)}>
           <Icon.Users />
         </MenuItem>
 

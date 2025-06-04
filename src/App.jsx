@@ -12,6 +12,7 @@ import { useAuthContext } from "./context/AuthContext";
 import { ChangePassword } from "./pages/ChangePassword";
 import { ThemeSwitcher } from "./components/ThemeSwitcher";
 import { ToasterContainer } from "./components/Toaster";
+
 import "./App.css";
 import { StudentCoursePage } from "./pages/StudentCoursePage";
 
@@ -36,10 +37,10 @@ function App() {
               <Route path="/libro-diario" element={<Ledger />} />
             </Route>
 
-{/*             <Route element={<ProtectedRoute isAuth={user?.aud} roles={[2, 1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
-              <Route path="/cursos" element={<TeacherCoursesPage />} />
-              <Route path="/cursos/:id_curso" element={<TeacherCoursePage />}></Route>
-            </Route> */}
+            <Route element={<ProtectedRoute isAuth={user?.aud} roles={[2, 1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
+              <Route path="/mis-cursos" element={<TeacherCoursesPage />} />
+              <Route path="/mis-cursos/:id_curso" element={<TeacherCoursePage />}></Route>
+            </Route>
 
             <Route element={<ProtectedRoute isAuth={user?.aud} roles={[3, 1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
               <Route path="/cursos" element={<StudentCoursesPage />} />

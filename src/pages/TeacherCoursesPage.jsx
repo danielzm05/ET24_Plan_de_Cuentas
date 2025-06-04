@@ -17,16 +17,18 @@ export function TeacherCoursesPage() {
 
   return (
     <>
-      <NavigationMenu selected="cursos" />
+      <NavigationMenu selected="mis-cursos" />
       <main className="cursos">
         <h2 className="page-title">Mis Cursos</h2>
         <Button className="add-course-btn" onClick={() => setShowModal(true)}>
           <Icon.Plus /> Crear Curso
         </Button>
         <div className="courses-container">
-          {courses?.length > 0
-            ? courses.map((course) => <CourseCard key={course.id_curso} id={course.id_curso} name={course.nombre} className="course-card" />)
-            : <p>Crea tu primer curso para comenzar.</p>}
+          {courses?.length > 0 ? (
+            courses.map((course) => <CourseCard key={course.id_curso} id={course.id_curso} link={'mis-cursos'} name={course.nombre} className="course-card" />)
+          ) : (
+            <p>Crea tu primer curso para comenzar.</p>
+          )}
         </div>
       </main>
       <AddCourseModal isOpen={showModal} onClose={() => setShowModal(false)} />

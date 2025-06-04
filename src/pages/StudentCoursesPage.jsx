@@ -25,7 +25,9 @@ export function StudentCoursesPage() {
         </Button>
         <div className="courses-container">
           {courses?.length > 0 ? (
-            courses.map((course) => <CourseCard key={course.id_curso} id={course.id_curso} name={course.curso.nombre} className="course-card" />)
+            courses.map((course) => (
+              <CourseCard key={course.id_curso} id={course.id_curso} link={"cursos"} name={course.curso.nombre} className="course-card" />
+            ))
           ) : (
             <p>No te has unido a ningún curso</p>
           )}
