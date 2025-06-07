@@ -83,6 +83,19 @@
       color: var(--button-text);
       background-color: var(--selection);
     }
+
+    .register-link{
+      margin-top: 20px;
+      color: var(--text-3);
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.3s;
+
+      &:hover {
+        color: var(--text-1);
+      }
+    }
   }
 }
 

@@ -16,7 +16,7 @@ export function Cuentas() {
     <>
       <NavigationMenu selected="cuentas" />
       <main>
-        <h2 className="page-title">Hola! {userInfo ? userInfo?.nombre : ""}👋</h2>
+        <h2 className="page-title">Hola {userInfo ? userInfo?.nombre : ""}👋! </h2>
         <AccountsTable accounts={accounts} />
       </main>
     </>

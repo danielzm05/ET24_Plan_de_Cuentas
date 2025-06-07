@@ -1,6 +1,7 @@
 import { useEffect, useState, createContext, useContext } from "react";
 import { supabase } from "../backend/client";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 export const AuthContext = createContext({
   user: null,
@@ -19,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
   const getUserInfo = async (userId = user.id) => {
     if (userId) {
-      const { data, error } = await supabase.from("usuario").select("*, usuario_rol (*)").eq("id_usuario", userId);
+      const { data, error } = await supabase.from("usuario").select("*").eq("id_usuario", userId);
 
       if (error) throw error;
       setUserInfo(data[0]);
@@ -28,7 +29,7 @@ export const AuthProvider = ({ children }) => {
 
   const sendPasswordEmail = async () => {
     const userEmail = await user.email;
-    const { data, error } = await supabase.auth.resetPasswordForEmail(userEmail, {
+    const { error } = await supabase.auth.resetPasswordForEmail(userEmail, {
       redirectTo: "https://plandecuentas.netlify.app/contraseña",
     });
 
@@ -42,22 +43,25 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const signUp = async (nombre, apellido,  email, password) => {
-    const { error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-      options: {
-        data: {
-          nombre: nombre,
-          apellido: apellido,
+  const signUp = async (nombre, apellido, email, password, role) => {
+    const { error } = await supabase.auth
+      .signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            nombre: nombre,
+            apellido: apellido,
+            rol: role,
+          },
         },
-      },
-    });
+      })
 
     if (error) {
       toast.error("Hubo un error al registrarse. Intente nuevamente");
       throw error;
     }
+
     return { success: true, email: email };
   };
 
@@ -66,7 +70,6 @@ export const AuthProvider = ({ children }) => {
     if (data.user) {
       setUser(data.user);
       getUserInfo(data.user.id);
-
     } else {
       setUser(null);
       setUserInfo(null);
@@ -86,5 +89,7 @@ export const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  return <AuthContext.Provider value={{ user, userEvent, sendPasswordEmail, userInfo, getUserInfo, signUp, logOut }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, userEvent, sendPasswordEmail, userInfo, getUserInfo, signUp, logOut }}>{children}</AuthContext.Provider>
+  );
 };

@@ -34,7 +34,7 @@ export function AccountsTable({ accounts }) {
 
   return (
     <>
-      <Table title={`Cuentas ${userInfo?.empresa}`} handleSearch={handleFilter}>
+      <Table title={`Cuentas ${userInfo.empresa? userInfo.empresa : ""}`} handleSearch={handleFilter}>
         <TableOptions handleSearch={handleFilter}>
           <Button onClick={exportTableToExcel} title="Descargar en una planilla">
             <Icon.Download />

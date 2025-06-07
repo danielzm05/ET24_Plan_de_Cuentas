@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../backend/client";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export function LoginForm() {
   const [errorLogin, setErrorLogin] = useState(false);
@@ -55,6 +55,7 @@ export function LoginForm() {
       />
       {errorLogin && <span className="error-message">⚠︎ Correo o contraseña incorrecta</span>}
       <input type="submit" value="Ingresar" />
+      <Link to="/registrarse" className="register-link">¿No tienes cuenta? Regístrate.</Link>
     </form>
   );
 }

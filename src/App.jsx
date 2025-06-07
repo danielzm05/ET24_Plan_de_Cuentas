@@ -15,6 +15,7 @@ import { ToasterContainer } from "./components/Toaster";
 
 import "./App.css";
 import { StudentCoursePage } from "./pages/StudentCoursePage";
+import { SignUp } from "./pages/SignUp";
 
 function App() {
   const { user, userInfo } = useAuthContext();
@@ -25,24 +26,24 @@ function App() {
       <ThemeSwitcher />
       <Routes>
         <Route path="/" element={<Login />} />
-
+        <Route path="/registrarse" element={<SignUp />} />
         <Route path="*" element={<NotFound />} />
 
         {user && userInfo && (
           <>
-            <Route element={<ProtectedRoute isAuth={user?.aud} roles={[3, 2, 1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
+            <Route element={<ProtectedRoute isAuth={user?.aud} roles={[3, 2, 1]} userRol={userInfo?.rol} />}>
               <Route path="/ajustes" element={<Ajustes />} />
               <Route path="/contraseña" element={<ChangePassword />} />
               <Route path="/cuentas" element={<Cuentas />} />
               <Route path="/libro-diario" element={<Ledger />} />
             </Route>
 
-            <Route element={<ProtectedRoute isAuth={user?.aud} roles={[2, 1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
+            <Route element={<ProtectedRoute isAuth={user?.aud} roles={[2, 1]} userRol={userInfo?.rol} />}>
               <Route path="/mis-cursos" element={<TeacherCoursesPage />} />
               <Route path="/mis-cursos/:id_curso" element={<TeacherCoursePage />}></Route>
             </Route>
 
-            <Route element={<ProtectedRoute isAuth={user?.aud} roles={[3, 1]} userRol={userInfo?.usuario_rol.map((rol) => rol.id_rol)} />}>
+            <Route element={<ProtectedRoute isAuth={user?.aud} roles={[3, 1]} userRol={userInfo?.rol} />}>
               <Route path="/cursos" element={<StudentCoursesPage />} />
               <Route path="/cursos/:id_curso" element={<StudentCoursePage />}></Route>
             </Route>
