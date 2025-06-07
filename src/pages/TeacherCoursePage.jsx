@@ -9,13 +9,18 @@ import * as Icon from "react-feather";
 import "../styles/pages/CoursePage.css";
 
 export function TeacherCoursePage() {
-  const { courses, getTeacherCourses } = useSchoolContext();
+  const { courses, getTeacherCourses, deleteCourseStudent } = useSchoolContext();
   const { id_curso } = useParams();
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     getTeacherCourses(id_curso);
+    console.log(courses);
   }, []);
+
+  const deleteStudent = async (id_student) => {
+    deleteCourseStudent(id_student, id_curso);
+  };
 
   return (
     <>
@@ -41,22 +46,21 @@ export function TeacherCoursePage() {
                   <th>Estudiante</th>
                   <th>Empresa</th>
                   <th>Ver</th>
-                  <th>Eliminar</th>
+                  <th onClick={deleteStudent}>Eliminar</th>
                 </tr>
               </thead>
-
               <tbody>
                 {courses &&
-                  courses[0].curso_alumno.map((student) => (
-                    <tr className="row user-2" key={student.usuario.id_usuario}>
+                  courses[0]?.curso_alumno?.map((student) => (
+                    <tr className="row user-2" key={student.usuario?.id_usuario}>
                       <td>
-                        {student.usuario.apellido} {student.usuario.nombre}
+                        {student.usuario?.apellido} {student.usuario?.nombre}
                       </td>
-                      <td>{student.usuario.empresa}</td>
+                      <td>{student.usuario?.empresa}</td>
                       <td>
                         <Icon.Eye />
                       </td>
-                      <td>
+                      <td onClick={() => deleteStudent(student.usuario?.id_usuario)}>
                         <Icon.Trash />
                       </td>
                     </tr>

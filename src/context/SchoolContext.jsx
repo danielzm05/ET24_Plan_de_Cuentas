@@ -60,6 +60,13 @@ export const SchoolProvider = ({ children }) => {
     setCourses(data);
   };
 
+  const deleteCourseStudent = async (id_student, id_course) => {
+    const { error } = await supabase.from("curso_alumno").delete().eq("id_usuario", id_student).eq("id_curso", id_course);
+    if (error) throw error;
+    getTeacherCourses();
+    toast.success(`Estudiante eliminado del curso con éxito`);
+  };
+
   const getTeacherCourses = async (id) => {
     let query = supabase.from("curso").select("*, curso_alumno(*, usuario(*))").order("id_curso", { ascending: true }).eq("id_profesor", user.id);
 
@@ -70,29 +77,16 @@ export const SchoolProvider = ({ children }) => {
     const { data, error } = await query;
     if (error) throw error;
     setCourses(data);
+    console.log(data);
   };
 
   const deleteCourse = async (id) => {
     const { error } = await supabase.from("curso").delete().eq("id_curso", id);
     if (error) throw error;
-    navigate("/cursos");
-    getCourses();
+
+    navigate("/mis-cursos");
+    getTeacherCourses();
     toast.success(`Curso eliminado con éxito`);
-  };
-
-  const updateCourse = async (courseId, courseName, teacherId) => {
-    const { error } = await supabase
-      .from("Curso")
-      .update({
-        nombre: courseName,
-        id_profesor: teacherId,
-      })
-      .eq("id_curso", courseId);
-
-    if (error) throw error;
-    /*     getCourses();
-    getTeachers(); */
-    toast.success(`Curso modificado con éxito`);
   };
 
   return (
@@ -102,9 +96,9 @@ export const SchoolProvider = ({ children }) => {
         getTeacherCourses,
         getStudentCourses,
         deleteCourse,
-        updateCourse,
         createCourse,
         joinCourse,
+        deleteCourseStudent,
       }}
     >
       {children}
