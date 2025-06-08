@@ -28,7 +28,7 @@ export const SchoolProvider = ({ children }) => {
       throw error;
     }
 
-    const { error: joinError } = await supabase.from("curso_alumno").insert([{ id_curso: data.id_curso, id_alumno: user.id }]);
+    const { error: joinError } = await supabase.from("curso_alumno").insert([{ id_curso: data.id_curso, id_usuario: user.id }]);
 
     if (joinError) {
       toast.error("No se pudo unirse al curso");
@@ -49,7 +49,7 @@ export const SchoolProvider = ({ children }) => {
   };
 
   const getStudentCourses = async (id) => {
-    let query = supabase.from("curso_alumno").select("*, curso(*)").eq("id_alumno", user.id).order("id_curso", { ascending: true });
+    let query = supabase.from("curso_alumno").select("*, curso(*)").eq("id_usuario", user.id).order("id_curso", { ascending: true });
 
     if (id) {
       query = query.eq("id_curso", id);
@@ -77,7 +77,6 @@ export const SchoolProvider = ({ children }) => {
     const { data, error } = await query;
     if (error) throw error;
     setCourses(data);
-    console.log(data);
   };
 
   const deleteCourse = async (id) => {

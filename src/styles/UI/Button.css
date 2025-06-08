@@ -4,6 +4,10 @@
   align-items: center;
   gap: 4px;
   cursor: pointer;
+  background: transparent;
+  color: var(--text-1);
+  border-radius: 5px;
+  padding: 0 5px;
   transition: all 0.3s ease-in-out;
   max-width: fit-content;
   outline: 0;

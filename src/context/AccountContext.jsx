@@ -43,17 +43,15 @@ export const AccountProvider = ({ children }) => {
   };
 
   const getAccounts = async (id = user.id) => {
-    if (id) {
-      const { data, error } = await supabase
-        .from("cuenta")
-        .select("id_cuenta, codigo, nombre, tipo_cuenta")
-        .eq("id_usuario", id)
-        .order("codigo", { ascending: true });
+    const { data, error } = await supabase
+      .from("cuenta")
+      .select("id_cuenta, codigo, nombre, tipo_cuenta")
+      .eq("id_usuario", id)
+      .order("codigo", { ascending: true });
 
-      if (error) throw error;
+    if (error) throw error;
 
-      setAccounts(data);
-    }
+    setAccounts(data);
   };
 
   const createAccount = async (codigo, nombre, tipo) => {
@@ -77,7 +75,7 @@ export const AccountProvider = ({ children }) => {
 
     if (error) throw error;
     getAccounts();
-    createModification(`Eliminó ${nombre} `);
+    createModification(`Eliminó ${nombre}`);
     toast.success(`${nombre} eliminado con éxito`);
   };
 

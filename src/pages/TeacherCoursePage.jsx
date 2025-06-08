@@ -1,4 +1,3 @@
-import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { NavigationMenu } from "../components/NavigationMenu";
 import { useSchoolContext } from "../context/SchoolContext";
@@ -7,6 +6,7 @@ import { Button } from "../components/UI/Button";
 import { Table } from "../components/Table";
 import * as Icon from "react-feather";
 import "../styles/pages/CoursePage.css";
+import { useParams, Link } from "react-router-dom";
 
 export function TeacherCoursePage() {
   const { courses, getTeacherCourses, deleteCourseStudent } = useSchoolContext();
@@ -15,7 +15,6 @@ export function TeacherCoursePage() {
 
   useEffect(() => {
     getTeacherCourses(id_curso);
-    console.log(courses);
   }, []);
 
   const deleteStudent = async (id_student) => {
@@ -58,10 +57,14 @@ export function TeacherCoursePage() {
                       </td>
                       <td>{student.usuario?.empresa}</td>
                       <td>
-                        <Icon.Eye />
+                        <Link to={`/estudiante/${student.usuario?.id_usuario}`} replace={true}>
+                          <Icon.Eye />
+                        </Link>
                       </td>
-                      <td onClick={() => deleteStudent(student.usuario?.id_usuario)}>
-                        <Icon.Trash />
+                      <td>
+                        <Button onClick={() => deleteStudent(student.usuario?.id_usuario)}>
+                          <Icon.Trash />
+                        </Button>
                       </td>
                     </tr>
                   ))}

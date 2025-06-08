@@ -6,7 +6,7 @@ import { useState } from "react";
 import { AddEntryModal } from "../Modals/AddEntryModal";
 import { DeleteEntryModal } from "../Modals/DeleteEntryModal";
 
-export function LedgerTable({ entries }) {
+export function LedgerTable({ entries, options}) {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -39,6 +39,9 @@ export function LedgerTable({ entries }) {
             <Icon.Download />
             Descargar
           </Button>
+          {options && 
+          (
+          <>
           <Button onClick={() => setOpenAddModal(true)}>
             <Icon.PlusSquare />
             Agregar
@@ -47,6 +50,10 @@ export function LedgerTable({ entries }) {
             <Icon.XSquare />
             Eliminar
           </Button>
+          </>
+        
+        )}
+          
         </TableOptions>
 
         <div className="table-content">

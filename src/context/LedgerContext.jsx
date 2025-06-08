@@ -13,9 +13,9 @@ export const LedgerProvider = ({ children }) => {
   const [entries, setEntries] = useState([]);
   const { user } = useAuthContext();
 
-  const getEntries = async () => {
+  const getEntries = async (id = user.id) => {
     if (user) {
-      const { data, error } = await supabase.from("asiento").select("*, cuenta(*)").eq("id_usuario", user.id).order("fecha", { ascending: true });
+      const { data, error } = await supabase.from("asiento").select("*, cuenta(*)").eq("id_usuario", id).order("fecha", { ascending: true });
 
       if (error) throw error;
       setEntries(data);

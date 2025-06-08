@@ -12,7 +12,7 @@ import { useAuthContext } from "./context/AuthContext";
 import { ChangePassword } from "./pages/ChangePassword";
 import { ThemeSwitcher } from "./components/ThemeSwitcher";
 import { ToasterContainer } from "./components/Toaster";
-
+import {StudentView} from "./pages/StudentView";
 import "./App.css";
 import { StudentCoursePage } from "./pages/StudentCoursePage";
 import { SignUp } from "./pages/SignUp";
@@ -41,6 +41,7 @@ function App() {
             <Route element={<ProtectedRoute isAuth={user?.aud} roles={[2, 1]} userRol={userInfo?.rol} />}>
               <Route path="/mis-cursos" element={<TeacherCoursesPage />} />
               <Route path="/mis-cursos/:id_curso" element={<TeacherCoursePage />}></Route>
+              <Route path="/estudiante/:id_estudiante" element={<StudentView />}></Route>
             </Route>
 
             <Route element={<ProtectedRoute isAuth={user?.aud} roles={[3, 1]} userRol={userInfo?.rol} />}>
