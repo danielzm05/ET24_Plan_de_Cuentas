@@ -33,7 +33,7 @@ export function SignUp() {
             <div className="role-options">
               <label>
                 Alumno
-                <input type="radio" name="rol" value={3} required checked onChange={handleInputChange} />
+                <input type="radio" name="rol" value={3} required onChange={handleInputChange} />
               </label>
               <label>
                 Profesor

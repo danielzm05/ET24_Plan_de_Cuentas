@@ -8,7 +8,7 @@ import { useAuthContext } from "../../context/AuthContext";
 import { Button } from "../UI/Button";
 import { useState } from "react";
 
-export function AccountsTable({ accounts }) {
+export function AccountsTable({ title, accounts, options=true}) {
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -34,24 +34,28 @@ export function AccountsTable({ accounts }) {
 
   return (
     <>
-      <Table title={`Cuentas ${userInfo.empresa? userInfo.empresa : ""}`} handleSearch={handleFilter}>
+      <Table title={title} handleSearch={handleFilter}>
         <TableOptions handleSearch={handleFilter}>
           <Button onClick={exportTableToExcel} title="Descargar en una planilla">
             <Icon.Download />
             Descargar
           </Button>
-          <Button onClick={() => setOpenAddModal(true)}>
-            <Icon.PlusSquare />
-            Agregar
-          </Button>
-          <Button onClick={() => setOpenDeleteModal(true)} className={accountSelected ? "" : "hide-option"}>
-            <Icon.XSquare />
-            Eliminar
-          </Button>
-          <Button onClick={() => setOpenModifyModal(true)} className={accountSelected ? "" : "hide-option"}>
-            <Icon.Edit />
-            Modificar
-          </Button>
+          {options && (
+            <>
+              <Button onClick={() => setOpenAddModal(true)}>
+                <Icon.PlusSquare />
+                Agregar
+              </Button>
+              <Button onClick={() => setOpenDeleteModal(true)} className={accountSelected ? "" : "hide-option"}>
+                <Icon.XSquare />
+                Eliminar
+              </Button>
+              <Button onClick={() => setOpenModifyModal(true)} className={accountSelected ? "" : "hide-option"}>
+                <Icon.Edit />
+                Modificar
+              </Button>
+            </>
+          )}
         </TableOptions>
 
         <div className="table-content">

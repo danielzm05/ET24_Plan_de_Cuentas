@@ -6,7 +6,7 @@ import { useState } from "react";
 import { AddEntryModal } from "../Modals/AddEntryModal";
 import { DeleteEntryModal } from "../Modals/DeleteEntryModal";
 
-export function LedgerTable({ entries, options}) {
+export function LedgerTable({ entries, options = true }) {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -39,21 +39,18 @@ export function LedgerTable({ entries, options}) {
             <Icon.Download />
             Descargar
           </Button>
-          {options && 
-          (
-          <>
-          <Button onClick={() => setOpenAddModal(true)}>
-            <Icon.PlusSquare />
-            Agregar
-          </Button>
-          <Button onClick={() => setOpenDeleteModal(true)} className={entrySelected ? "" : "hide-option"}>
-            <Icon.XSquare />
-            Eliminar
-          </Button>
-          </>
-        
-        )}
-          
+          {options && (
+            <>
+              <Button onClick={() => setOpenAddModal(true)}>
+                <Icon.PlusSquare />
+                Agregar
+              </Button>
+              <Button onClick={() => setOpenDeleteModal(true)} className={entrySelected ? "" : "hide-option"}>
+                <Icon.XSquare />
+                Eliminar
+              </Button>
+            </>
+          )}
         </TableOptions>
 
         <div className="table-content">

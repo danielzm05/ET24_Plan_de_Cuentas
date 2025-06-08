@@ -22,7 +22,7 @@ export function NavigationMenu({ selected }) {
           <Icon.Users />
         </MenuItem>
 
-        <MenuItem roles={[1, 2, 3]} title="Cuentas" name="cuentas" selected={selected} userRol={userInfo?.rol}>
+        <MenuItem roles={[1, 2, 3]} title="Plan de cuentas" name="cuentas" selected={selected} userRol={userInfo?.rol}>
           <Icon.Table />
         </MenuItem>
 
