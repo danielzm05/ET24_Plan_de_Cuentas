@@ -55,7 +55,7 @@ export function SignUp() {
           </label>
           <label htmlFor="password">
             Contraseña:
-            <input type="password" className="input-data" name="password" required onChange={handleInputChange} />
+            <input type="password" className="input-data" name="password" minLength={5} required onChange={handleInputChange} />
           </label>
 
           <input type="submit" value="Registrarse" />
